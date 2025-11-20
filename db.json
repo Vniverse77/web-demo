@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "googleId": "109108470466588793688",
+      "name": "no1linuxuser",
+      "email": "no1linuxuser@gmail.com",
+      "verified": true,
+      "downloads": [
+        "placeholder.png"
+      ]
+    },
+    {
+      "googleId": "102869888087506456727",
+      "name": "BERDIMUHAMMET YSLAMOV",
+      "email": "berdimuhammet.yslamov@ogr.gelisim.edu.tr",
+      "verified": true,
+      "downloads": [
+        "placeholder.png"
+      ]
+    }
+  ]
+}

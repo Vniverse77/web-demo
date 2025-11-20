@@ -3,6 +3,7 @@
   "version": "1.2.9",
   "main": "script.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +17,11 @@
     "url": "https://github.com/Code-Creator-man/web-demo/issues"
   },
   "homepage": "https://github.com/Code-Creator-man/web-demo#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0"
+  }
 }

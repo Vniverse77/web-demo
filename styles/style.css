@@ -1,13 +1,13 @@
 /* empty for now bcuz, I dont need */
 :where([class^="ri-"])::before { content: "\f3c2"; }
       body {
-      font-family: 'Inter', sans-serif;
-      background-color: #000000;
-      color: #E2E8F0;
+      font-family: 'JetBrains Mono Nerd Font', monospace;
+      background-color: #0A2342;
+      color: #E0E0E0;
       overflow-x: hidden;
       }
       .gradient-text {
-      background: linear-gradient(90deg, #b635f1, #7c05bd);
+      background: linear-gradient(90deg, #0A2342, #0B6E4F);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -20,7 +20,7 @@
       }
       .card-hover:hover {
       transform: translateY(-5px);
-      box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.3);
+      box-shadow: 0 10px 25px -5px rgba(11, 110, 79, 0.3);
       }
       .custom-cursor {
       width: 20px;
