@@ -1,9 +1,10 @@
 {
   "name": "web-demo",
   "version": "1.2.9",
+  "type": "module",
   "main": "script.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node server.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,7 +25,6 @@
     "express": "^5.1.0",
     "express-session": "^1.18.2",
     "jsonwebtoken": "^9.0.2",
-    "lowdb": "^7.0.1",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0"
   }
