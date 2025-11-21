@@ -19,8 +19,12 @@
   "homepage": "https://github.com/Code-Creator-man/web-demo#readme",
   "description": "",
   "dependencies": {
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.0",
     "express": "^5.1.0",
     "express-session": "^1.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "lowdb": "^7.0.1",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0"
   }
