@@ -1,5 +1,8 @@
 {
+
   "users": [
+
+
     {
       "googleId": "109108470466588793688",
       "name": "no1linuxuser",
@@ -17,7 +20,8 @@
       "verified": true,
       "downloads": [
         "placeholder.png"
-      ]
+      ],
+      "photo": "https://lh3.googleusercontent.com/a/ACg8ocK3aBzZyCMuJ7PR7fBoNxXfLarZZr_eMsKMC6nuhFRW_O1f95Q=s96-c"
     },
     {
       "googleId": "116959960855234781225",
