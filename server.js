@@ -30,10 +30,10 @@ app.use(passport.session());
 
 // Passport Google OAuth Strategy
 passport.use(new GoogleStrategy({
-    clientID: GOOGLE_CLIENT_ID,
-    clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: 'http://localhost:3000/auth/google/callback'
-  },
+  clientID: GOOGLE_CLIENT_ID,
+  clientSecret: GOOGLE_CLIENT_SECRET,
+  callbackURL: 'http://localhost:3000/auth/google/callback'
+},
   async (accessToken, refreshToken, profile, done) => {
     try {
       const data = await fs.readFile('db.json', 'utf8');
@@ -154,65 +154,65 @@ app.get('/api/download/:itemId', async (req, res) => {
 
 // Admin Database
 eval(`import('lowdb')`).then(({ Low, JSONFileSync }) => {
-    const adapter = new JSONFileSync('admin-db.json');
-    const db = new Low(adapter);
-    db.read();
-    db.data = db.data || { admins: [] };
+  const adapter = new JSONFileSync('admin-db.json');
+  const db = new Low(adapter);
+  db.read();
+  db.data = db.data || { admins: [] };
+  db.write();
+
+
+  // Create a default admin user if one doesn't exist
+  if (!db.data.admins.find(admin => admin.username === 'admin')) {
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync('admin', salt);
+    db.data.admins.push({ username: 'admin', password: hashedPassword });
     db.write();
+  }
 
+  const JWT_SECRET = 'your_jwt_secret'; // Replace with a strong secret
 
-    // Create a default admin user if one doesn't exist
-    if (!db.data.admins.find(admin => admin.username === 'admin')) {
-        const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = bcrypt.hashSync('admin', salt);
-        db.data.admins.push({ username: 'admin', password: hashedPassword });
-        db.write();
+  // Admin login route
+  app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+    const admin = db.data.admins.find(admin => admin.username === username);
+
+    if (admin && bcrypt.compareSync(password, admin.password)) {
+      const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '1h' });
+      res.json({ token });
+    } else {
+      res.status(401).send('Invalid credentials');
     }
-
-    const JWT_SECRET = 'your_jwt_secret'; // Replace with a strong secret
-
-    // Admin login route
-    app.post('/login', (req, res) => {
-        const { username, password } = req.body;
-        const admin = db.data.admins.find(admin => admin.username === username);
-
-        if (admin && bcrypt.compareSync(password, admin.password)) {
-            const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '1h' });
-            res.json({ token });
-        } else {
-            res.status(401).send('Invalid credentials');
-        }
-    });
-
-    // Middleware to verify token
-    const verifyToken = (req, res, next) => {
-        const token = req.headers['authorization'];
-        if (token) {
-            jwt.verify(token, JWT_SECRET, (err, decoded) => {
-                if (err) {
-                    return res.status(401).send('Invalid token');
-                }
-                req.decoded = decoded;
-                next();
-            });
-        } else {
-            res.status(401).send('No token provided');
-        }
-    };
-
-    // Protected admin route
-    app.get('/api/admin/users', verifyToken, async (req, res) => {
-        try {
-            const data = await fs.readFile('db.json', 'utf8');
-            const db = JSON.parse(data);
-            res.json(db.users);
-        } catch (error) {
-            res.status(500).send('An error occurred.');
-        }
-    });
-
-    app.listen(port, () => {
-      console.log(`Server listening at http://localhost:${port}`);
-    });
-
   });
+
+  // Middleware to verify token
+  const verifyToken = (req, res, next) => {
+    const token = req.headers['authorization'];
+    if (token) {
+      jwt.verify(token, JWT_SECRET, (err, decoded) => {
+        if (err) {
+          return res.status(401).send('Invalid token');
+        }
+        req.decoded = decoded;
+        next();
+      });
+    } else {
+      res.status(401).send('No token provided');
+    }
+  };
+
+  // Protected admin route
+  app.get('/api/admin/users', verifyToken, async (req, res) => {
+    try {
+      const data = await fs.readFile('db.json', 'utf8');
+      const db = JSON.parse(data);
+      res.json(db.users);
+    } catch (error) {
+      res.status(500).send('An error occurred.');
+    }
+  });
+
+  app.listen(port, () => {
+    console.log(`Server listening at http://localhost:${port}`);
+  });
+
+});

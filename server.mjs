@@ -47,6 +47,7 @@ passport.use(new GoogleStrategy({
           googleId: profile.id,
           name: profile.displayName,
           email: profile.emails[0].value,
+          photo: profile.photos[0].value,
           verified: true, // Google authenticated users are considered verified
           downloads: []
         };
@@ -56,6 +57,7 @@ passport.use(new GoogleStrategy({
         // Update user's name/email if it changed in Google
         user.name = profile.displayName;
         user.email = profile.emails[0].value;
+        user.photo = profile.photos[0].value;
         user.verified = true;
         await fs.writeFile('db.json', JSON.stringify(db, null, 2));
       }
@@ -107,6 +109,13 @@ app.get('/download-success', (req, res) => {
   }
 });
 
+app.get('/api/user', (req, res) => {
+    if (req.isAuthenticated()) {
+        res.json(req.user);
+    } else {
+        res.status(401).json({ message: 'Not authenticated' });
+    }
+});
 
 // Endpoint to handle contact form submission (now redirects to Google login)
 app.post('/api/contact', (req, res) => {
@@ -216,6 +225,11 @@ app.get('/api/admin/users', verifyToken, async (req, res) => {
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
+
+
+
+
+
 
 
 

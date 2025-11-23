@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body class="bg-black text-gray-200 flex items-center justify-center min-h-screen">
+    <div class="bg-[#1E293B] p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 class="text-2xl font-bold text-center text-white mb-8">Login or Sign Up</h2>
+        <div class="space-y-4">
+            <form action="/login" method="post">
+                <div class="space-y-4">
+                    <input type="email" name="username" placeholder="Email" class="w-full px-4 py-2 rounded-lg bg-[#0F172A] text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary">
+                    <input type="password" name="password" placeholder="Password" class="w-full px-4 py-2 rounded-lg bg-[#0F172A] text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary">
+                    <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-button font-medium transition-all duration-300">Login with Email</button>
+                </div>
+            </form>
+            <div class="flex items-center justify-center space-x-4">
+                <span class="h-px bg-gray-600 w-full"></span>
+                <span class="text-gray-500">OR</span>
+                <span class="h-px bg-gray-600 w-full"></span>
+            </div>
+            <div class="space-y-4">
+                <a href="/auth/google" class="w-full flex items-center justify-center bg-[#4285F4] hover:bg-[#357AE8] text-white px-6 py-3 rounded-button font-medium transition-all duration-300">
+                    <i class="ri-google-fill mr-2"></i>
+                    <span>Login with Google</span>
+                </a>
+                <a href="/auth/github" class="w-full flex items-center justify-center bg-[#333] hover:bg-[#444] text-white px-6 py-3 rounded-button font-medium transition-all duration-300">
+                    <i class="ri-github-fill mr-2"></i>
+                    <span>Login with GitHub</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

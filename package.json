@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Code-Creator-man/web-demo.git"
+    "url": "git+https://github.com/Vniverse77/web-demo.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Code-Creator-man/web-demo/issues"
+    "url": "https://github.com/Vniverse77/web-demo/issues"
   },
-  "homepage": "https://github.com/Code-Creator-man/web-demo#readme",
+  "homepage": "https://github.com/Vniverse77/web-demo#readme",
   "description": "",
   "dependencies": {
     "bcrypt": "^6.0.0",
@@ -26,6 +26,8 @@
     "express-session": "^1.18.2",
     "jsonwebtoken": "^9.0.2",
     "passport": "^0.7.0",
-    "passport-google-oauth20": "^2.0.0"
+    "passport-github2": "^0.1.12",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-local": "^1.0.0"
   }
 }
