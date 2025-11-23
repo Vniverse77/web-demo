@@ -3,6 +3,7 @@ const fs = require('fs').promises;
 const session = require('express-session');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const GitHubStrategy = require('passport-github2').Strategy;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const app = express();
@@ -11,6 +12,10 @@ const port = 3000;
 // Google OAuth Credentials (replace with your actual credentials)
 const GOOGLE_CLIENT_ID = '87432178367-7tpk4lhkd0fr12eqstbjkq3t5jvieo16.apps.googleusercontent.com';
 const GOOGLE_CLIENT_SECRET = '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';
+
+// GitHub OAuth Credentials (replace with your actual credentials)
+const GITHUB_CLIENT_ID = 'YOUR_GITHUB_CLIENT_ID'; // Replace with your GitHub Client ID
+const GITHUB_CLIENT_SECRET = 'YOUR_GITHUB_CLIENT_SECRET'; // Replace with your GitHub Client Secret
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -65,20 +70,53 @@ passport.use(new GoogleStrategy({
   }
 ));
 
+// Passport GitHub Strategy
+passport.use(new GitHubStrategy({
+  clientID: GITHUB_CLIENT_ID,
+  clientSecret: GITHUB_CLIENT_SECRET,
+  callbackURL: 'http://localhost:3000/auth/github/callback'
+},
+  async (accessToken, refreshToken, profile, done) => {
+    try {
+      const data = await fs.readFile('db.json', 'utf8');
+      const db = JSON.parse(data);
+
+      let user = db.users.find(u => u.githubId === profile.id);
+
+      if (!user) {
+        user = {
+          githubId: profile.id,
+          name: profile.displayName || profile.username,
+          email: profile.emails ? profile.emails[0].value : null,
+          photo: profile.photos ? profile.photos[0].value : null,
+          verified: true, // GitHub authenticated users are considered verified
+          downloads: []
+        };
+        db.users.push(user);
+        await fs.writeFile('db.json', JSON.stringify(db, null, 2));
+      } else {
+        // Update user's info if it changed in GitHub
+        user.name = profile.displayName || profile.username;
+        user.email = profile.emails ? profile.emails[0].value : null;
+        user.photo = profile.photos ? profile.photos[0].value : null;
+        user.verified = true;
+        await fs.writeFile('db.json', JSON.stringify(db, null, 2));
+      }
+      return done(null, user);
+    } catch (error) {
+      return done(error, null);
+    }
+  }
+));
+
+
 // Serialize and deserialize user for session management
 passport.serializeUser((user, done) => {
-  done(null, user.googleId);
+  done(null, user);
 });
 
-passport.deserializeUser(async (id, done) => {
-  try {
-    const data = await fs.readFile('db.json', 'utf8');
-    const db = JSON.parse(data);
-    const user = db.users.find(u => u.googleId === id);
-    done(null, user);
-  } catch (error) {
-    done(error, null);
-  }
+passport.deserializeUser((user, done) => {
+  done(null, user);
 });
 
 // Google OAuth routes
@@ -91,6 +129,41 @@ app.get('/auth/google/callback',
     // Successful authentication, redirect to a success page or directly download
     res.redirect('/download-success'); // We'll create this page
   });
+
+// GitHub OAuth routes
+app.get('/auth/github',
+  passport.authenticate('github', { scope: ['user:email'] }));
+
+app.get('/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/' }),
+  (req, res) => {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
+// API endpoint to get current user information
+app.get('/api/user', (req, res) => {
+  if (req.isAuthenticated()) {
+    // Only send necessary user information, not the whole user object
+    const user = {
+      id: req.user.googleId || req.user.githubId, // Use appropriate ID
+      name: req.user.name,
+      email: req.user.email,
+      photo: req.user.photo || null // Include photo if available
+    };
+    res.json(user);
+  } else {
+    res.status(401).json({ message: 'Not authenticated' });
+  }
+});
+
+// Logout route
+app.get('/logout', (req, res, next) => {
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    res.redirect('/');
+  });
+});
 
 // A simple page to show after successful Google login
 app.get('/download-success', (req, res) => {
