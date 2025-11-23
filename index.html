@@ -1194,6 +1194,7 @@ I will start. #Blender3D #Tutorial
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
+            <div class="py-6"></div>
             <form id="contact-form" class="space-y-6">
               <p class="text-gray-400 text-center">To download the file, please log in with your Google account:</p>
               <button
@@ -1201,10 +1202,11 @@ I will start. #Blender3D #Tutorial
                 id="google-login-btn"
                 class="bg-[#4285F4] hover:bg-[#357AE8] text-white px-6 py-3 rounded-button font-medium transition-all duration-300 w-full whitespace-nowrap flex items-center justify-center"
               >
-                <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google logo" class="mr-2">
+                <i class="ri-google-fill mr-2"></i>
                 Login with Google
               </button>
             </form>
+            <div class="my-4"></div> <!-- Added space here -->
             <div class="max-w-sm mx-auto">
               <div class="space-y-4">
                 <button
@@ -1755,11 +1757,11 @@ I will start. #Blender3D #Tutorial
               loadingScreen.style.opacity = "0";
               setTimeout(function () {
                 loadingScreen.style.display = "none";
-              }, 500);
-            }, 500);
+              }, 50); // Changed from 100 to 50
+            }, 50); // Changed from 100 to 50
           }
           loadingBar.style.width = progress + "%";
-        }, 200);
+        }, 50); // Changed from 200 to 50
       });
     </script>
     <!-- Modified Dev Notification Script -->
