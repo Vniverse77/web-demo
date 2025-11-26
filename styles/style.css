@@ -224,3 +224,129 @@
 .hero-image {
   background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
 }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .header-effect {
+    animation: none;
+  }
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  #home .flex-col {
+    text-align: center;
+  }
+  #home .md\:flex-row {
+    flex-direction: column;
+  }
+  #home .md\:w-1\/2 {
+    width: 100%;
+  }
+  #home .md\:mb-0 {
+    margin-bottom: 2.5rem;
+  }
+  #home .hero-image {
+    margin: 0 auto;
+  }
+  .grid-cols-1 {
+    grid-template-columns: 1fr;
+  }
+  .md\:grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+  .lg\:grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+  .lg\:grid-cols-4 {
+    grid-template-columns: 1fr;
+  }
+  .md\:grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+  .sm\:grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+  .flex.space-x-4 {
+    justify-content: center;
+  }
+  .text-4xl {
+    font-size: 2.5rem;
+  }
+  .md\:text-6xl {
+    font-size: 3rem;
+  }
+  .text-2xl {
+    font-size: 1.5rem;
+  }
+  .md\:text-3xl {
+    font-size: 1.75rem;
+  }
+  .login-signup-buttons {
+    display: none;
+  }
+  .flex-wrap {
+    justify-content: center;
+  }
+  .lg\:grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+  .footer .grid-cols-1 {
+    text-align: center;
+  }
+  .footer .md\:grid-cols-2, .footer .lg\:grid-cols-4 {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .footer .flex-wrap {
+    justify-content: center;
+  }
+  .footer .md\:text-left {
+    text-align: center;
+  }
+  .footer .md\:flex-row {
+    flex-direction: column;
+  }
+  .footer .md\:mb-0 {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .text-4xl {
+    font-size: 2rem;
+  }
+  .md\:text-6xl {
+    font-size: 2.5rem;
+  }
+  .text-2xl {
+    font-size: 1.25rem;
+  }
+  .md\:text-3xl {
+    font-size: 1.5rem;
+  }
+  .px-6 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .py-3 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .w-80 {
+    width: 16rem;
+  }
+  .h-80 {
+    height: 16rem;
+  }
+  .md\:w-96 {
+    width: 18rem;
+  }
+  .md\:h-96 {
+    height: 18rem;
+  }
+}
