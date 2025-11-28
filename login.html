@@ -1,21 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <script src="https://cdn.tailwindcss.com/3.4.16"></script>
     <link rel="stylesheet" href="styles/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet" />
 </head>
+
 <body class="bg-black text-gray-200 flex items-center justify-center min-h-screen">
-    <div class="bg-[#1E293B] p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 class="text-2xl font-bold text-center text-white mb-8">Login or Sign Up</h2>
-        <div class="space-y-4">
-            <form action="/login" method="post">
+    <div class="bg-[#1E293B] p-8 rounded-lg shadow-lg w-full max-w-md relative">
+        <a href="/" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </a>
+        <div class="flex justify-center mb-8">
+            <button id="loginTab"
+                class="text-xl font-bold text-white border-b-2 border-primary px-4 py-2 focus:outline-none">Log
+                In</button>
+            <button id="signupTab"
+                class="text-xl font-bold text-gray-500 border-b-2 border-transparent px-4 py-2 focus:outline-none hover:text-gray-300">Sign
+                Up</button>
+        </div>
+
+        <!-- Login Form -->
+        <div id="loginForm" class="space-y-4">
+            <form action="/login-user" method="post">
                 <div class="space-y-4">
-                    <input type="email" name="username" placeholder="Email" class="w-full px-4 py-2 rounded-lg bg-[#0F172A] text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary">
-                    <input type="password" name="password" placeholder="Password" class="w-full px-4 py-2 rounded-lg bg-[#0F172A] text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary">
-                    <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-button font-medium transition-all duration-300">Login with Email</button>
+                    <input type="email" name="username" placeholder="Email" required
+                        class="w-full px-4 py-2 rounded-lg bg-[#0F172A] text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary">
+                    <input type="password" name="password" placeholder="Password" required
+                        class="w-full px-4 py-2 rounded-lg bg-[#0F172A] text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary">
+                    <button type="submit"
+                        class="w-full bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-button font-medium transition-all duration-300">Login</button>
                 </div>
             </form>
             <div class="flex items-center justify-center space-x-4">
@@ -24,16 +45,94 @@
                 <span class="h-px bg-gray-600 w-full"></span>
             </div>
             <div class="space-y-4">
-                <a href="/auth/google" class="w-full flex items-center justify-center bg-[#4285F4] hover:bg-[#357AE8] text-white px-6 py-3 rounded-button font-medium transition-all duration-300">
+                <a href="/auth/google"
+                    class="w-full flex items-center justify-center bg-[#4285F4] hover:bg-[#357AE8] text-white px-6 py-3 rounded-button font-medium transition-all duration-300">
                     <i class="ri-google-fill mr-2"></i>
                     <span>Login with Google</span>
                 </a>
-                <a href="/auth/github" class="w-full flex items-center justify-center bg-[#333] hover:bg-[#444] text-white px-6 py-3 rounded-button font-medium transition-all duration-300">
+                <a href="/auth/github"
+                    class="w-full flex items-center justify-center bg-[#333] hover:bg-[#444] text-white px-6 py-3 rounded-button font-medium transition-all duration-300">
                     <i class="ri-github-fill mr-2"></i>
                     <span>Login with GitHub</span>
                 </a>
             </div>
         </div>
+
+        <!-- Signup Form -->
+        <div id="signupForm" class="space-y-4 hidden">
+            <form action="/signup" method="post">
+                <div class="space-y-4">
+                    <input type="text" name="name" placeholder="Full Name" required
+                        class="w-full px-4 py-2 rounded-lg bg-[#0F172A] text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary">
+                    <input type="email" name="email" placeholder="Email" required
+                        class="w-full px-4 py-2 rounded-lg bg-[#0F172A] text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary">
+                    <input type="password" name="password" placeholder="Password" required
+                        class="w-full px-4 py-2 rounded-lg bg-[#0F172A] text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary">
+                    <button type="submit"
+                        class="w-full bg-secondary hover:bg-secondary/90 text-white px-6 py-3 rounded-button font-medium transition-all duration-300">Sign
+                        Up</button>
+                </div>
+            </form>
+            <div class="flex items-center justify-center space-x-4">
+                <span class="h-px bg-gray-600 w-full"></span>
+                <span class="text-gray-500">OR</span>
+                <span class="h-px bg-gray-600 w-full"></span>
+            </div>
+            <div class="space-y-4">
+                <a href="/auth/google"
+                    class="w-full flex items-center justify-center bg-[#4285F4] hover:bg-[#357AE8] text-white px-6 py-3 rounded-button font-medium transition-all duration-300">
+                    <i class="ri-google-fill mr-2"></i>
+                    <span>Sign up with Google</span>
+                </a>
+                <a href="/auth/github"
+                    class="w-full flex items-center justify-center bg-[#333] hover:bg-[#444] text-white px-6 py-3 rounded-button font-medium transition-all duration-300">
+                    <i class="ri-github-fill mr-2"></i>
+                    <span>Sign up with GitHub</span>
+                </a>
+            </div>
+        </div>
+
+        <script>
+            const loginTab = document.getElementById('loginTab');
+            const signupTab = document.getElementById('signupTab');
+            const loginForm = document.getElementById('loginForm');
+            const signupForm = document.getElementById('signupForm');
+
+            loginTab.addEventListener('click', () => {
+                loginTab.classList.add('text-white', 'border-primary');
+                loginTab.classList.remove('text-gray-500', 'border-transparent');
+                signupTab.classList.add('text-gray-500', 'border-transparent');
+                signupTab.classList.remove('text-white', 'border-primary');
+                loginForm.classList.remove('hidden');
+                signupForm.classList.add('hidden');
+            });
+
+            signupTab.addEventListener('click', () => {
+                signupTab.classList.add('text-white', 'border-primary');
+                signupTab.classList.remove('text-gray-500', 'border-transparent');
+                loginTab.classList.add('text-gray-500', 'border-transparent');
+                loginTab.classList.remove('text-white', 'border-primary');
+                signupForm.classList.remove('hidden');
+                loginForm.classList.add('hidden');
+            });
+
+            // Check URL parameters for error messages
+            const urlParams = new URLSearchParams(window.location.search);
+            const error = urlParams.get('error');
+            if (error) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'bg-red-500/20 text-red-500 p-3 rounded-lg text-center mb-4';
+                errorDiv.innerText = error;
+                document.querySelector('.max-w-md').insertBefore(errorDiv, document.querySelector('.max-w-md').firstChild);
+            }
+
+            // Check URL parameters for mode (login or signup)
+            const mode = urlParams.get('mode');
+            if (mode === 'signup') {
+                signupTab.click();
+            }
+        </script>
     </div>
 </body>
+
 </html>

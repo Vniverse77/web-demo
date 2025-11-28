@@ -1,8 +1,5 @@
 {
-
   "users": [
-
-
     {
       "googleId": "109108470466588793688",
       "name": "no1linuxuser",
@@ -30,6 +27,14 @@
       "verified": true,
       "downloads": [],
       "photo": "https://lh3.googleusercontent.com/a/ACg8ocKgGYkm-o4Lx1kqhFMfWSRkSmPkyIzOTJopaq2NT1jNQM4Z7LU=s96-c"
+    },
+    {
+      "githubId": "179668946",
+      "name": "Vniverse77",
+      "email": "justforcodings@hotmail.com",
+      "photo": "https://avatars.githubusercontent.com/u/179668946?v=4",
+      "verified": true,
+      "downloads": []
     }
   ]
 }

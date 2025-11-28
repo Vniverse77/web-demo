@@ -1,3 +1,4 @@
+import 'dotenv/config'; // Load environment variables
 import express from 'express';
 import fs from 'fs/promises';
 import session from 'express-session';
@@ -10,13 +11,13 @@ import bcrypt from 'bcrypt';
 const app = express();
 const port = 3000;
 
-// Google OAuth Credentials (replace with your actual credentials)
-const GOOGLE_CLIENT_ID = '87432178367-7tpk4lhkd0fr12eqstbjkq3t5jvieo16.apps.googleusercontent.com';
-const GOOGLE_CLIENT_SECRET = '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';
+// Google OAuth Credentials
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
-// GitHub OAuth Credentials (replace with your actual credentials)
-const GITHUB_CLIENT_ID = 'YOUR_GITHUB_CLIENT_ID'; // Replace with your GitHub Client ID
-const GITHUB_CLIENT_SECRET = 'YOUR_GITHUB_CLIENT_SECRET'; // Replace with your GitHub Client Secret
+// GitHub OAuth Credentials
+const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
+const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -24,7 +25,7 @@ app.use(express.static('.'));
 
 // Session middleware
 app.use(session({
-  secret: 'your_secret_key', // Replace with a strong secret key
+  secret: process.env.SESSION_SECRET || 'default_secret_key', // Use env var or fallback
   resave: false,
   saveUninitialized: false,
   cookie: { secure: false } // Set to true if using HTTPS
@@ -34,12 +35,42 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+import { Strategy as LocalStrategy } from 'passport-local';
+
+// Passport Local Strategy
+passport.use(new LocalStrategy(
+  async (username, password, done) => {
+    try {
+      const data = await fs.readFile('db.json', 'utf8');
+      const db = JSON.parse(data);
+      const user = db.users.find(u => u.email === username);
+
+      if (!user) {
+        return done(null, false, { message: 'Incorrect email.' });
+      }
+
+      if (!user.password) {
+        return done(null, false, { message: 'Please log in with your social account.' });
+      }
+
+      const match = await bcrypt.compare(password, user.password);
+      if (!match) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+
+      return done(null, user);
+    } catch (err) {
+      return done(err);
+    }
+  }
+));
+
 // Passport Google OAuth Strategy
 passport.use(new GoogleStrategy({
-    clientID: GOOGLE_CLIENT_ID,
-    clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: 'http://localhost:3000/auth/google/callback'
-  },
+  clientID: GOOGLE_CLIENT_ID,
+  clientSecret: GOOGLE_CLIENT_SECRET,
+  callbackURL: 'http://localhost:3000/auth/google/callback'
+},
   async (accessToken, refreshToken, profile, done) => {
     try {
       const data = await fs.readFile('db.json', 'utf8');
@@ -114,12 +145,65 @@ passport.use(new GitHubStrategy({
 
 // Serialize and deserialize user for session management
 passport.serializeUser((user, done) => {
-  done(null, user);
+  // We use email as the ID for local users if they don't have a googleId/githubId
+  // But better to use a unique ID. For now, let's use email as a fallback or generate an ID.
+  // Let's assume the user object is what we want to store in the session or lookup.
+  // For simplicity in this file-based DB, we'll serialize the whole user or a unique identifier.
+  // Let's use email as the key for now since it's unique in our logic.
+  done(null, user.email);
 });
 
-passport.deserializeUser((user, done) => {
-  done(null, user);
+passport.deserializeUser(async (email, done) => {
+  try {
+    const data = await fs.readFile('db.json', 'utf8');
+    const db = JSON.parse(data);
+    const user = db.users.find(u => u.email === email);
+    done(null, user);
+  } catch (err) {
+    done(err, null);
+  }
 });
+
+// Local Auth Routes
+app.post('/signup', async (req, res) => {
+  const { name, email, password } = req.body;
+  try {
+    const data = await fs.readFile('db.json', 'utf8');
+    const db = JSON.parse(data);
+
+    if (db.users.find(u => u.email === email)) {
+      return res.redirect('/login.html?error=Email already exists');
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = {
+      name,
+      email,
+      password: hashedPassword,
+      verified: true, // Auto-verify for now
+      downloads: [],
+      photo: null // Default or placeholder
+    };
+
+    db.users.push(newUser);
+    await fs.writeFile('db.json', JSON.stringify(db, null, 2));
+
+    req.login(newUser, (err) => {
+      if (err) { return next(err); }
+      return res.redirect('/');
+    });
+  } catch (error) {
+    console.error(error);
+    res.redirect('/login.html?error=An error occurred');
+  }
+});
+
+app.post('/login-user',
+  passport.authenticate('local', { failureRedirect: '/login.html?error=Invalid credentials' }),
+  (req, res) => {
+    res.redirect('/');
+  }
+);
 
 // Google OAuth routes
 app.get('/auth/google',
@@ -161,7 +245,7 @@ app.get('/api/user', (req, res) => {
 
 // Logout route
 app.get('/logout', (req, res, next) => {
-  req.logout(function(err) {
+  req.logout(function (err) {
     if (err) { return next(err); }
     res.redirect('/');
   });
@@ -229,14 +313,14 @@ app.get('/api/download/:itemId', async (req, res) => {
 const adminDbPath = 'admin-db.json';
 
 async function initializeAdminDb() {
-    try {
-        await fs.access(adminDbPath);
-    } catch (error) {
-        const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = bcrypt.hashSync('admin', salt);
-        const defaultAdmin = { admins: [{ username: 'admin', password: hashedPassword }] };
-        await fs.writeFile(adminDbPath, JSON.stringify(defaultAdmin, null, 2));
-    }
+  try {
+    await fs.access(adminDbPath);
+  } catch (error) {
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync('admin', salt);
+    const defaultAdmin = { admins: [{ username: 'admin', password: hashedPassword }] };
+    await fs.writeFile(adminDbPath, JSON.stringify(defaultAdmin, null, 2));
+  }
 }
 
 initializeAdminDb();
@@ -245,44 +329,44 @@ const JWT_SECRET = 'your_jwt_secret'; // Replace with a strong secret
 
 // Admin login route
 app.post('/login', async (req, res) => {
-    const { username, password } = req.body;
-    const adminDbRaw = await fs.readFile(adminDbPath, 'utf8');
-    const adminDb = JSON.parse(adminDbRaw);
-    const admin = adminDb.admins.find(admin => admin.username === username);
+  const { username, password } = req.body;
+  const adminDbRaw = await fs.readFile(adminDbPath, 'utf8');
+  const adminDb = JSON.parse(adminDbRaw);
+  const admin = adminDb.admins.find(admin => admin.username === username);
 
-    if (admin && bcrypt.compareSync(password, admin.password)) {
-        const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '1h' });
-        res.json({ token });
-    } else {
-        res.status(401).send('Invalid credentials');
-    }
+  if (admin && bcrypt.compareSync(password, admin.password)) {
+    const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '1h' });
+    res.json({ token });
+  } else {
+    res.status(401).send('Invalid credentials');
+  }
 });
 
 // Middleware to verify token
 const verifyToken = (req, res, next) => {
-    const token = req.headers['authorization'];
-    if (token) {
-        jwt.verify(token, JWT_SECRET, (err, decoded) => {
-            if (err) {
-                return res.status(401).send('Invalid token');
-            }
-            req.decoded = decoded;
-            next();
-        });
-    } else {
-        res.status(401).send('No token provided');
-    }
+  const token = req.headers['authorization'];
+  if (token) {
+    jwt.verify(token, JWT_SECRET, (err, decoded) => {
+      if (err) {
+        return res.status(401).send('Invalid token');
+      }
+      req.decoded = decoded;
+      next();
+    });
+  } else {
+    res.status(401).send('No token provided');
+  }
 };
 
 // Protected admin route
 app.get('/api/admin/users', verifyToken, async (req, res) => {
-    try {
-        const data = await fs.readFile('db.json', 'utf8');
-        const db = JSON.parse(data);
-        res.json(db.users);
-    } catch (error) {
-        res.status(500).send('An error occurred.');
-    }
+  try {
+    const data = await fs.readFile('db.json', 'utf8');
+    const db = JSON.parse(data);
+    res.json(db.users);
+  } catch (error) {
+    res.status(500).send('An error occurred.');
+  }
 });
 
 app.listen(port, () => {

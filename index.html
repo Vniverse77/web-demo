@@ -1,1588 +1,1225 @@
 <!DOCTYPE html>
 <html lang="tr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vniverse77</title>
-    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: { primary: "#8B5CF6", secondary: "#EC4899" },
-            borderRadius: {
-              none: "0px",
-              sm: "8px",
-              DEFAULT: "12px",
-              md: "16px",
-              lg: "20px",
-              xl: "24px",
-              "2xl": "28px",
-              "3xl": "32px",
-              full: "9999px",
-              button: "12px",
-            },
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vniverse77</title>
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { primary: "#8B5CF6", secondary: "#EC4899" },
+          borderRadius: {
+            none: "0px",
+            sm: "8px",
+            DEFAULT: "12px",
+            md: "16px",
+            lg: "20px",
+            xl: "24px",
+            "2xl": "28px",
+            "3xl": "32px",
+            full: "9999px",
+            button: "12px",
           },
         },
-      };
-    </script>
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="icon" type="png" href="images/Tux.png"/>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
-      rel="stylesheet"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="icon" type="png" href="images/Tux.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
 
-  </head>
-  <body class="bg-black text-gray-200">
-    <!-- !! dev notification  -->
-    <div id="devNotification" class="fixed inset-0 bg-black bg-opacity-90 z-[10000] flex flex-col justify-center items-center">
-      <div class="bg-[#1E293B] p-8 rounded-lg text-center max-w-md mx-4">
-        <h2 class="text-2xl font-bold text-white mb-4">Caution!</h2>
-        <p class="text-gray-300 mb-6">The site is still under development. To continue please tap "Ok" button! <br>
-        Don't forget to join our <a class="text-purple-500 font-bold hover:text-white transition-colors" href="https://discord.gg/M2BzbCxX">Discord</a> server!!!
-         </p>
-        <button id="devNotificationBtn" class="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-button font-medium transition-all duration-300">Ok</button>
+</head>
+
+<body class="bg-black text-gray-200">
+  <!-- !! dev notification  -->
+  <div id="devNotification"
+    class="fixed inset-0 bg-black bg-opacity-90 z-[10000] flex flex-col justify-center items-center">
+    <div class="bg-[#1E293B] p-8 rounded-lg text-center max-w-md mx-4">
+      <h2 class="text-2xl font-bold text-white mb-4">Caution!</h2>
+      <p class="text-gray-300 mb-6">The site is still under development. To continue please tap "Ok" button! <br>
+        Don't forget to join our <a class="text-purple-500 font-bold hover:text-white transition-colors"
+          href="https://discord.gg/M2BzbCxX">Discord</a> server!!!
+      </p>
+      <button id="devNotificationBtn"
+        class="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-button font-medium transition-all duration-300">Ok</button>
+    </div>
+  </div>
+  <!--  dev notification -->
+  <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 header-effect" id="header">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="relative">
+        <a href="#home" class="logo" id="profile-menu-button">
+          <img src="images/Tux.png" alt="Header Logo" class="w-[75px] h-[75px] circular-image">
+        </a>
+        <div id="profile-menu"
+          class="absolute left-0 mt-2 w-48 bg-[#1E293B] rounded-md shadow-lg z-50 profile-menu-hidden">
+          <a href="/login.html" class="block px-4 py-2 text-sm text-gray-300 hover:bg-primary hover:text-white">Log
+            In</a>
+          <a href="/login.html?mode=signup"
+            class="block px-4 py-2 text-sm text-gray-300 hover:bg-primary hover:text-white">Sign
+            Up</a>
+        </div>
+      </div>
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="#home"
+          class="text-gray-300 hover:text-white transition-colors header-effect font-bold text-gray-400">Home</a>
+        <a href="#skills" class="text-gray-300 hover:text-white transition-colors font-bold text-gray-400">Skills</a>
+        <a href="#portfolio"
+          class="text-gray-300 hover:text-white transition-colors header-effect font-bold text-gray-400">Portfolio</a>
+        <a href="#store" class="text-gray-300 hover:text-white transition-colors font-bold text-gray-400">Store</a>
+        <a href="#news" class="text-gray-300 hover:text-white transition-colors font-bold text-gray-400">News</a>
+        <a href="#social"
+          class="text-gray-300 hover:text-white transition-colors header-effect font-bold text-gray-400">Social
+          Media</a>
+        <a href="#contact" class="text-gray-300 hover:text-white transition-colors font-bold text-gray-400">Contact</a>
+      </nav>
+      <div class="flex items-center space-x-4 font-bold">
+        <a href="https://github.com/Vniverse77?tab=repositories" target="_blank"
+          class="flex items-center space-x-1 text-gray-300 hover:text-white">
+          <span class="w-6 h-6 flex items-center justify-center">
+            <i class="ri-github-fill"></i>
+          </span>
+          <span>GitHub Star</span>
+        </a>
+        <button class="md:hidden w-10 h-10 rounded-full flex items-center justify-center bg-[#1E293B]"
+          id="mobileMenuToggle">
+          <span class="w-6 h-6 flex items-center justify-center">
+            <i class="ri-menu-line"></i>
+          </span>
+        </button>
       </div>
     </div>
-    <!--  dev notification -->
-    <header
-      class="fixed top-0 left-0 w-full z-50 transition-all duration-300 header-effect"
-      id="header"
-    >
-      <div
-        class="container mx-auto px-6 py-4 flex justify-between items-center"
-      >
-        <div class="relative">
-          <a href="#home" class="logo" id="profile-menu-button">
-            <img src="images/Tux.png" alt="Header Logo" class="w-[75px] h-[75px] circular-image">
-          </a>
-          <div id="profile-menu" class="absolute left-0 mt-2 w-48 bg-[#1E293B] rounded-md shadow-lg z-50 hidden">
-            <a href="/login.html" class="block px-4 py-2 text-sm text-gray-300 hover:bg-primary hover:text-white">Log In</a>
-            <a href="/login.html" class="block px-4 py-2 text-sm text-gray-300 hover:bg-primary hover:text-white">Sign Up</a>
+    <!-- !!! Do not touch here Mobile toggle section is HERE -->
+    <div class="md:hidden bg-[#1E293B] absolute w-full transition-all duration-300 overflow-hidden" id="mobileMenu"
+      style="max-height: 0;">
+      <div class="container mx-auto px-6 py-4">
+        <nav class="flex flex-col space-y-4">
+          <a href="#home" class="text-gray-300 hover:text-white transition-colors py-2">Home</a>
+          <a href="#skills" class="text-gray-300 hover:text-white transition-colors py-2">Skills</a>
+          <a href="#portfolio" class="text-gray-300 hover:text-white transition-colors py-2">Portfolio</a>
+          <a href="#store" class="text-gray-300 hover:text-white transition-colors py-2">Store</a>
+          <a href="#news" class="text-gray-300 hover:text-white transition-colors">News</a>
+          <a href="#social" class="text-gray-300 hover:text-white transition-colors py-2">Social Media</a>
+          <a href="#contact" class="text-gray-300 hover:text-white transition-colors py-2">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!-- Hero  -->
+  <section id="home" class="relative min-h-screen  flex items-center pt-20">
+    <div id="particles" class="hero-bg absolute inset-0 z-0"></div>
+    <div class="container mx-auto px-6 z-10">
+      <div class="flex flex-col md:flex-row items-center">
+        <div class="w-full  md:w-1/2 mb-10 md:mb-0">
+          <div class="mb-4 inline-block">
+            <span class="bg-primary/25 text-primary px-7 py-3 rounded-full text-sm font-medium">Hello, I'm</span>
+          </div>
+          <h1 class="text-4xl md:text-6xl font-bold mb-4">Vniverse77</h1>
+          <h2 class="text-2xl md:text-3xl font-semibold mb-6 gradient-text">
+            Creative Developer & 3D Designer
+          </h2>
+          <p class="text-gray-400  mb-8 max-w-lg">
+            With 3 years of software development experience and a passion for
+            3D modeling, I create innovative solutions in the digital world.
+            I'm ready to transform your vision into reality using
+            future-shaping technologies.
+          </p>
+          <div class="flex space-x-4">
+            <a href="#contact"
+              class="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-button font-medium transition-all duration-300 whitespace-nowrap">Want
+              to hire me?</a>
+            <a href="#portfolio"
+              class="border border-gray-600 hover:border-primary text-white px-6 py-3 rounded-button font-medium transition-all duration-300 whitespace-nowrap">View
+              Portfolio</a>
           </div>
         </div>
-        <nav class="hidden md:flex items-center space-x-8">
-          <a
-            href="#home"
-            class="text-gray-300 hover:text-white transition-colors header-effect font-bold text-gray-400"
-            >Home</a
-          >
-          <a
-            href="#skills"
-            class="text-gray-300 hover:text-white transition-colors font-bold text-gray-400"
-            >Skills</a
-          >
-          <a
-            href="#portfolio"
-            class="text-gray-300 hover:text-white transition-colors header-effect font-bold text-gray-400"
-            >Portfolio</a
-          >
-          <a
-            href="#store"
-            class="text-gray-300 hover:text-white transition-colors font-bold text-gray-400"
-            >Store</a
-          >
-          <a
-            href="#news"
-            class="text-gray-300 hover:text-white transition-colors font-bold text-gray-400"
-            >News</a
-          >
-          <a
-            href="#social"
-            class="text-gray-300 hover:text-white transition-colors header-effect font-bold text-gray-400"
-            >Social Media</a
-          >
-          <a
-            href="#contact"
-            class="text-gray-300 hover:text-white transition-colors font-bold text-gray-400"
-            >Contact</a
-          >
-        </nav>
-        <div class="flex items-center space-x-4 font-bold">
-          <a href="https://github.com/Vniverse77?tab=repositories" target="_blank" class="flex items-center space-x-1 text-gray-300 hover:text-white">
-            <span class="w-6 h-6 flex items-center justify-center">
-              <i class="ri-github-fill"></i>
-            </span>
-            <span>GitHub Star</span>
-          </a>
+        <div class="w-full md:w-1/2 flex justify-center">
+          <div class="relative w-80 h-80 md:w-96 md:h-96">
+
+            <img src="images/Tux.png" alt="Me"
+              class="hero-image w-full h-full object-cover rounded-full border-4 border-primary/30" />
+            <div class="absolute -top-4 -right-4 bg-[#1E293B] p-3 rounded-full">
+              <div class="w-10 h-10 flex items-center justify-center">
+                <i class="ri-blender-line text-2xl text-primary"></i>
+              </div>
+            </div>
+            <div class="absolute -bottom-4 -left-4 bg-[#1E293B] p-3 rounded-full">
+              <div class="w-10 h-10 flex items-center justify-center">
+                <i class="ri-code-s-slash-line text-2xl text-primary"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Skills Section -->
+  <section id="skills" class="py-20 relative">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">My Skills</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">
+          Skills and technologies I've acquired in software development and 3D
+          modeling.
+        </p>
+      </div>
+      <div class="mb-16">
+        <h3 class="text-2xl font-semibold mb-8 gradient-text">
+          Software technologies
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-lg mr-4">
+                <i class="ri-html5-line text-2xl text-primary"></i>
+              </div>
+              <h4 class="text-lg font-medium">HTML/CSS</h4>
+            </div>
+            <div class="mb-2 flex justify-between">
+              <span class="text-gray-400">Expertise</span>
+              <span>90%</span>
+            </div>
+            <div class="w-full h-2 bg-[#0F172A] rounded-full overflow-hidden">
+              <div class="h-full bg-primary rounded-full" style="width: 90%"></div>
+            </div>
+          </div>
+          <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-lg mr-4">
+                <i class="ri-javascript-line text-2xl text-primary"></i>
+              </div>
+              <h4 class="text-lg font-medium">JavaScript</h4>
+            </div>
+            <div class="mb-2 flex justify-between">
+              <span class="text-gray-400">Expertise</span>
+              <span>95%</span>
+            </div>
+            <div class="w-full h-2 bg-[#0F172A] rounded-full overflow-hidden">
+              <div class="h-full bg-primary rounded-full" style="width: 85%"></div>
+            </div>
+          </div>
+          <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-lg mr-4">
+                <i class="ri-reactjs-line text-2xl text-primary"></i>
+              </div>
+              <h4 class="text-lg font-medium">React</h4>
+            </div>
+            <div class="mb-2 flex justify-between">
+              <span class="text-gray-400">Expertise</span>
+              <span>80%</span>
+            </div>
+            <div class="w-full h-2 bg-[#0F172A] rounded-full overflow-hidden">
+              <div class="h-full bg-primary rounded-full" style="width: 80%"></div>
+            </div>
+          </div>
+          <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-lg mr-4">
+                <i class="ri-nodejs-line text-2xl text-primary"></i>
+              </div>
+              <h4 class="text-lg font-medium">Node.js</h4>
+            </div>
+            <div class="mb-2 flex justify-between">
+              <span class="text-gray-400">Expertise</span>
+              <span>75%</span>
+            </div>
+            <div class="w-full h-2 bg-[#0F172A] rounded-full overflow-hidden">
+              <div class="h-full bg-primary rounded-full" style="width: 75%"></div>
+            </div>
+          </div>
+          <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-lg mr-4">
+                <i class="ri-database-2-line text-2xl text-primary"></i>
+              </div>
+              <h4 class="text-lg font-medium">Bash Scripting</h4>
+            </div>
+            <div class="mb-2 flex justify-between">
+              <span class="text-gray-400">Expertise</span>
+              <span>70%</span>
+            </div>
+            <div class="w-full h-2 bg-[#0F172A] rounded-full overflow-hidden">
+              <div class="h-full bg-primary rounded-full" style="width: 70%"></div>
+            </div>
+          </div>
+          <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-lg mr-4">
+                <i class="ri-git-branch-line text-2xl text-primary"></i>
+              </div>
+              <h4 class="text-lg font-medium">Git</h4>
+            </div>
+            <div class="mb-2 flex justify-between">
+              <span class="text-gray-400">Expertise</span>
+              <span>90%</span>
+            </div>
+            <div class="w-full h-2 bg-[#0F172A] rounded-full overflow-hidden">
+              <div class="h-full bg-primary rounded-full" style="width: 85%"></div>
+            </div>
+          </div>
+          <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-lg mr-4">
+                <i class="ri-flutter-line text-2xl text-primary"></i>
+              </div>
+              <h4 class="text-lg font-medium">Flutter</h4>
+            </div>
+            <div class="mb-2 flex justify-between">
+              <span class="text-gray-400">Expertise</span>
+              <span>65%</span>
+            </div>
+            <div class="w-full h-2 bg-[#0F172A] rounded-full overflow-hidden">
+              <div class="h-full bg-primary rounded-full" style="width: 65%"></div>
+            </div>
+          </div>
+          <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-lg mr-4">
+                <i class="ri-terminal-box-line text-2xl text-primary"></i>
+              </div>
+              <h4 class="text-lg font-medium">Python</h4>
+            </div>
+            <div class="mb-2 flex justify-between">
+              <span class="text-gray-400">Expertise</span>
+              <span>60%</span>
+            </div>
+            <div class="w-full h-2 bg-[#0F172A] rounded-full overflow-hidden">
+              <div class="h-full bg-primary rounded-full" style="width: 60%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-2xl font-semibold mb-8 gradient-text">
+          3D Modelling & Design
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
+            <div class="flex items-center mb-6">
+              <div class="w-12 h-12 flex items-center justify-center bg-secondary/20 rounded-lg mr-4">
+                <i class="ri-blender-line text-2xl text-secondary"></i>
+              </div>
+              <h4 class="text-lg font-medium">Blender</h4>
+            </div>
+            <div class="space-y-4">
+              <div>
+                <div class="mb-2 flex justify-between">
+                  <span class="text-gray-400">Modelling</span>
+                  <span>80%</span>
+                </div>
+                <div class="w-full h-2 bg-[#0F172A] rounded-full overflow-hidden">
+                  <div class="h-full bg-secondary rounded-full" style="width: 80%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="mb-2 flex justify-between">
+                  <span class="text-gray-400">Sculpting</span>
+                  <span>65%</span>
+                </div>
+                <div class="w-full h-2 bg-[#0F172A] rounded-full overflow-hidden">
+                  <div class="h-full bg-secondary rounded-full" style="width: 65%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="mb-2 flex justify-between">
+                  <span class="text-gray-400">Rigging & Animation</span>
+                  <span>60%</span>
+                </div>
+
+                <div class="w-full h-2 bg-[#0F172A] rounded-full overflow-hidden">
+                  <div class="h-full bg-secondary rounded-full" style="width: 60%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-[#1E293B] rounded-lg overflow-hidden">
+            <img src="images/trustme.png" alt="3D Modelleme Örneği" class="w-cover h-54 object-cover" />
+            <div class="p-6">
+              <h4 class="text-lg font-medium mb-2">Collabirative Projects</h4>
+              <p class="text-gray-400 mb-4">
+                Characters, environment and product models also some of the projects. And also more will be added soon.
+                Be one of the first to experience these exciting developments!
+              </p>
+              <a href="#portfolio" class="text-secondary hover:text-secondary/80 inline-flex items-center">
+                <span>See more...</span>
+                <span class="w-5 h-5 flex items-center justify-center ml-1">
+                  <i class="ri-arrow-right-line"></i>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="py-20 relative">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Portfolio</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">
+          Projects I've completed in software development and 3D modeling, but some of them are upcoming!
+        </p>
+      </div>
+      <div class="mb-8 flex justify-center">
+        <div class="flex flex-wrap justify-center gap-2 bg-[#1E293B] rounded-full p-1">
+          <button class="px-4 sm:px-6 py-2 rounded-full bg-primary text-white whitespace-nowrap text-sm sm:text-base"
+            data-filter="all">
+            All
+          </button>
           <button
-            class="md:hidden w-10 h-10 rounded-full flex items-center justify-center bg-[#1E293B]"
-            id="mobileMenuToggle"
-          >
-            <span class="w-6 h-6 flex items-center justify-center">
-              <i class="ri-menu-line"></i>
-            </span>
+            class="px-4 sm:px-6 py-2 rounded-full text-gray-300 hover:text-white whitespace-nowrap text-sm sm:text-base"
+            data-filter="web">
+            Web development
+          </button>
+          <button
+            class="px-4 sm:px-6 py-2 rounded-full text-gray-300 hover:text-white whitespace-nowrap text-sm sm:text-base"
+            data-filter="mobile">
+            Mobile Application
+          </button>
+          <button
+            class="px-4 sm:px-6 py-2 rounded-full text-gray-300 hover:text-white whitespace-nowrap text-sm sm:text-base"
+            data-filter="3d">
+            3D Modelling
           </button>
         </div>
       </div>
-      <!-- !!! Do not touch here Mobile toggle section is HERE -->
-      <div
-        class="md:hidden bg-[#1E293B] absolute w-full transition-all duration-300 overflow-hidden"
-        id="mobileMenu"
-        style="max-height: 0;"
-      >
-        <div class="container mx-auto px-6 py-4">
-          <nav class="flex flex-col space-y-4">
-            <a
-              href="#home"
-              class="text-gray-300 hover:text-white transition-colors py-2"
-              >Home</a
-            >
-            <a
-              href="#skills"
-              class="text-gray-300 hover:text-white transition-colors py-2"
-              >Skills</a
-            >
-            <a
-              href="#portfolio"
-              class="text-gray-300 hover:text-white transition-colors py-2"
-              >Portfolio</a
-            >
-            <a
-              href="#store"
-              class="text-gray-300 hover:text-white transition-colors py-2"
-              >Store</a
-            >
-             <a
-            href="#news"
-            class="text-gray-300 hover:text-white transition-colors"
-            >News</a
-          >
-            <a
-              href="#social"
-              class="text-gray-300 hover:text-white transition-colors py-2"
-              >Social Media</a
-            >
-            <a
-              href="#contact"
-              class="text-gray-300 hover:text-white transition-colors py-2"
-              >Contact</a
-            >
-          </nav>
-        </div>
-      </div>
-    </header>
-    <!-- Hero  -->
-    <section id="home" class="relative min-h-screen  flex items-center pt-20">
-      <div id="particles" class="hero-bg absolute inset-0 z-0"></div>
-      <div class="container mx-auto px-6 z-10">
-        <div class="flex flex-col md:flex-row items-center">
-          <div class="w-full  md:w-1/2 mb-10 md:mb-0">
-            <div class="mb-4 inline-block">
-              <span
-                class="bg-primary/25 text-primary px-7 py-3 rounded-full text-sm font-medium"
-                >Hello, I'm</span
-              >
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolioGrid">
+        <!-- Project 1 -->
+        <div class="bg-[#1E293B] rounded-lg overflow-hidden card-hover" data-category="web">
+          <div class="relative">
+            <img src="images/com-site.png" alt="" class="w-full h-56 object-cover" />
+            <div class="absolute top-4 right-4 bg-primary/90 text-white px-3 py-1 rounded-full text-sm">
+              Web Application (accomplished)
             </div>
-            <h1 class="text-4xl md:text-6xl font-bold mb-4">Vniverse77</h1>
-            <h2 class="text-2xl md:text-3xl font-semibold mb-6 gradient-text">
-              Creative Developer & 3D Designer
-            </h2>
-            <p class="text-gray-400  mb-8 max-w-lg">
-              With 3 years of software development experience and a passion for
-              3D modeling, I create innovative solutions in the digital world.
-              I'm ready to transform your vision into reality using
-              future-shaping technologies.
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2">E-commercial Platform</h3>
+            <p class="text-gray-400 mb-4">
+              A full comprehensive developed using react and node.js
+              e-commerce solution.Payment integration, user management and
+              Contains inventory tracking.
             </p>
-            <div class="flex space-x-4">
-              <a
-                href="#contact"
-                class="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-button font-medium transition-all duration-300 whitespace-nowrap"
-                >Want to hire me?</a
-              >
-              <a
-                href="#portfolio"
-                class="border border-gray-600 hover:border-primary text-white px-6 py-3 rounded-button font-medium transition-all duration-300 whitespace-nowrap"
-                >View Portfolio</a
-              >
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs">React</span>
+              <span class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs">Node.js</span>
+              <span class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs">MongoDB</span>
+              <span class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs">Stripe API</span>
+            </div>
+            <button class="text-primary hover:text-primary/80 inline-flex items-center project-details-btn"
+              data-project="">
+              <span><a target="_blank" rel="noopener noreferrer"
+                  href="https://sites.google.com/view/faceofdreamss/menu">See Details</a></span>
+              <span class="w-5 h-5 flex items-center justify-center ml-1">
+                <i class="ri-arrow-right-line"></i>
+              </span>
+            </button>
+          </div>
+        </div>
+        <!-- Project 2 -->
+        <div class="bg-[#1E293B] rounded-lg overflow-hidden card-hover" data-category="mobile">
+          <div class="relative">
+            <img src="images/un-maint.png" alt="" class="w-full h-56 object-cover" />
+            <div class="absolute top-4 right-4 bg-secondary/90 text-white px-3 py-1 rounded-full text-sm">
+              Mobile Application(not accomplished)
             </div>
           </div>
-          <div class="w-full md:w-1/2 flex justify-center">
-            <div class="relative w-80 h-80 md:w-96 md:h-96">
-
-              <img
-                src="images/Tux.png"
-                alt="Me"
-                class="hero-image w-full h-full object-cover rounded-full border-4 border-primary/30"
-              />
-              <div
-                class="absolute -top-4 -right-4 bg-[#1E293B] p-3 rounded-full"
-              >
-                <div class="w-10 h-10 flex items-center justify-center">
-                  <i class="ri-blender-line text-2xl text-primary"></i>
-                </div>
-              </div>
-              <div
-                class="absolute -bottom-4 -left-4 bg-[#1E293B] p-3 rounded-full"
-              >
-                <div class="w-10 h-10 flex items-center justify-center">
-                  <i class="ri-code-s-slash-line text-2xl text-primary"></i>
-                </div>
-              </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2">Mobile Application Project</h3>
+            <p class="text-gray-400 mb-4">
+              A mobile application developed with Flutter for cross-platform compatibility.
+              Features user authentication, data synchronization, and a clean UI.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs">Flutter</span>
+              <span class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs">Dart</span>
+              <span class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs">Firebase</span>
             </div>
+            <button class="text-secondary hover:text-secondary/80 inline-flex items-center project-details-btn"
+              data-project="">
+              <span><a target="_blank" rel="noopener noreferrer" href="https://github.com/Vniverse77/">See
+                  Details</a></span>
+              <span class="w-5 h-5 flex items-center justify-center ml-1">
+                <i class="ri-arrow-right-line"></i>
+              </span>
+            </button>
+          </div>
+        </div>
+        <!-- Project 3 -->
+        <div class="bg-[#1E293B] rounded-lg overflow-hidden card-hover" data-category="3d">
+          <div class="relative">
+            <img src="images/living-room.png" alt="" class="w-full h-56 object-cover" />
+            <div class="absolute top-4 right-4 bg-primary/90 text-white px-3 py-1 rounded-full text-sm">
+              3D Modelling(Accomplished)
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2">
+              Architectural Room design(Accomplished)
+            </h3>
+            <p class="text-gray-400 mb-4">
+              Designed for a video game designed using blender
+              A detailed science fiction character model.Rigging and
+              contains basic animations.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs">Blender</span>
+              <span class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs">Sculpting</span>
+              <span class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs">Rigging</span>
+            </div>
+            <button class="text-primary hover:text-primary/80 inline-flex items-center project-details-btn"
+              data-project="">
+              <span><a target="_blank" rel="noopener noreferrer"
+                  href="https://github.com/Vniverse77/Blend-pro/blob/main/has-gowy.png">See Details</a></span>
+              <span class="w-5 h-5 flex items-center justify-center ml-1">
+                <i class="ri-arrow-right-line"></i>
+              </span>
+            </button>
+          </div>
+        </div>
+        <!-- Project 4 -->
+        <div class="bg-[#1E293B] rounded-lg overflow-hidden card-hover" data-category="web">
+          <div class="relative">
+            <img src="images/un-maint.png" alt="Analitik Dashboard" class="w-full h-56 object-cover" />
+            <div class="absolute top-4 right-4 bg-primary/90 text-white px-3 py-1 rounded-full text-sm">
+              Web Development(Not accomplished)
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2">Analitic Dashboard</h3>
+            <p class="text-gray-400 mb-4">
+              Visualizing businesses of businesses and analysis
+              an interactive dashboard that allows them to.Real
+              Timed data monitoring and reporting features.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs">Vue.js</span>
+              <span class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs">D3.js</span>
+              <span class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs">Express</span>
+            </div>
+            <button class="text-primary hover:text-primary/80 inline-flex items-center project-details-btn"
+              data-project="">
+              <span><a target="_blank" rel="noopener noreferrer" href="https://github.com/Vniverse77/">See
+                  Details</a></span>
+              <span class="w-5 h-5 flex items-center justify-center ml-1">
+                <i class="ri-arrow-right-line"></i>
+              </span>
+            </button>
+          </div>
+        </div>
+        <!-- Project 5 -->
+        <div class="bg-[#1E293B] rounded-lg overflow-hidden card-hover" data-category="mobile">
+          <div class="relative">
+            <img src="images/un-maint.png" alt="Not even needed" class="w-full h-56 object-cover" />
+            <div class="absolute top-4 right-4 bg-secondary/90 text-white px-3 py-1 rounded-full text-sm">
+              Mobile App(Not accomplished)
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2">
+              Vocation Planning App
+            </h3>
+            <p class="text-gray-400 mb-4">
+              Users planning travel, reservation
+              allowing them to do and create travel routes
+              Comprehensive mobile application.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs">React Native</span>
+              <span class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs">GraphQL</span>
+              <span class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs">Maps API</span>
+            </div>
+            <button class="text-secondary hover:text-secondary/80 inline-flex items-center project-details-btn"
+              data-project="">
+              <span><a target="_blank" rel="noopener noreferrer" href="https://github.com/Vniverse77/">See
+                  Details</a></span>
+              <span class="w-5 h-5 flex items-center justify-center ml-1">
+                <i class="ri-arrow-right-line"></i>
+              </span>
+            </button>
+          </div>
+        </div>
+        <!-- Project 6 -->
+        <div class="bg-[#1E293B] rounded-lg overflow-hidden card-hover" data-category="3d">
+          <div class="relative">
+            <img src="images/my-setup.png" alt="" class="w-full h-56 object-cover" />
+            <div class="absolute top-4 right-4 bg-primary/90 text-white px-3 py-1 rounded-full text-sm">
+              3D Modelling(Accomplished)
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2">Architecture development</h3>
+            <p class="text-gray-400 mb-4">
+              Created using blender for an architectural project
+              photorealistic interior and outdoor visualization.Detailed
+              It includes lighting and material studies.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs">Blender</span>
+              <span class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs">Cycles Render</span>
+              <span class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs">Texturing</span>
+            </div>
+            <button class="text-primary hover:text-primary/80 inline-flex items-center project-details-btn"
+              data-project="">
+              <span><a target="_blank" rel="noopener noreferrer"
+                  href="https://github.com/Vniverse77/Blend-pro/blob/main/my-room.png">See Details</a></span>
+              <span class="w-5 h-5 flex items-center justify-center ml-1">
+                <i class="ri-arrow-right-line"></i>
+              </span>
+            </button>
           </div>
         </div>
       </div>
-    </section>
-    <!-- Skills Section -->
-    <section id="skills" class="py-20 relative">
-      <div class="container mx-auto px-6">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">My Skills</h2>
-          <p class="text-gray-400 max-w-2xl mx-auto">
-            Skills and technologies I've acquired in software development and 3D
-            modeling.
-          </p>
-        </div>
-        <div class="mb-16">
-          <h3 class="text-2xl font-semibold mb-8 gradient-text">
-            Software technologies
-          </h3>
-          <div
-            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
-          >
-            <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
-              <div class="flex items-center mb-4">
-                <div
-                  class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-lg mr-4"
-                >
-                  <i class="ri-html5-line text-2xl text-primary"></i>
-                </div>
-                <h4 class="text-lg font-medium">HTML/CSS</h4>
-              </div>
-              <div class="mb-2 flex justify-between">
-                <span class="text-gray-400">Expertise</span>
-                <span>90%</span>
-              </div>
-              <div class="w-full h-2 bg-[#0F172A] rounded-full overflow-hidden">
-                <div
-                  class="h-full bg-primary rounded-full"
-                  style="width: 90%"
-                ></div>
-              </div>
-            </div>
-            <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
-              <div class="flex items-center mb-4">
-                <div
-                  class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-lg mr-4"
-                >
-                  <i class="ri-javascript-line text-2xl text-primary"></i>
-                </div>
-                <h4 class="text-lg font-medium">JavaScript</h4>
-              </div>
-              <div class="mb-2 flex justify-between">
-                <span class="text-gray-400">Expertise</span>
-                <span>95%</span>
-              </div>
-              <div class="w-full h-2 bg-[#0F172A] rounded-full overflow-hidden">
-                <div
-                  class="h-full bg-primary rounded-full"
-                  style="width: 85%"
-                ></div>
-              </div>
-            </div>
-            <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
-              <div class="flex items-center mb-4">
-                <div
-                  class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-lg mr-4"
-                >
-                  <i class="ri-reactjs-line text-2xl text-primary"></i>
-                </div>
-                <h4 class="text-lg font-medium">React</h4>
-              </div>
-              <div class="mb-2 flex justify-between">
-                <span class="text-gray-400">Expertise</span>
-                <span>80%</span>
-              </div>
-              <div class="w-full h-2 bg-[#0F172A] rounded-full overflow-hidden">
-                <div
-                  class="h-full bg-primary rounded-full"
-                  style="width: 80%"
-                ></div>
-              </div>
-            </div>
-            <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
-              <div class="flex items-center mb-4">
-                <div
-                  class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-lg mr-4"
-                >
-                  <i class="ri-nodejs-line text-2xl text-primary"></i>
-                </div>
-                <h4 class="text-lg font-medium">Node.js</h4>
-              </div>
-              <div class="mb-2 flex justify-between">
-                <span class="text-gray-400">Expertise</span>
-                <span>75%</span>
-              </div>
-              <div class="w-full h-2 bg-[#0F172A] rounded-full overflow-hidden">
-                <div
-                  class="h-full bg-primary rounded-full"
-                  style="width: 75%"
-                ></div>
-              </div>
-            </div>
-            <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
-              <div class="flex items-center mb-4">
-                <div
-                  class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-lg mr-4"
-                >
-                  <i class="ri-database-2-line text-2xl text-primary"></i>
-                </div>
-                <h4 class="text-lg font-medium">Bash Scripting</h4>
-              </div>
-              <div class="mb-2 flex justify-between">
-                <span class="text-gray-400">Expertise</span>
-                <span>70%</span>
-              </div>
-              <div class="w-full h-2 bg-[#0F172A] rounded-full overflow-hidden">
-                <div
-                  class="h-full bg-primary rounded-full"
-                  style="width: 70%"
-                ></div>
-              </div>
-            </div>
-            <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
-              <div class="flex items-center mb-4">
-                <div
-                  class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-lg mr-4"
-                >
-                  <i class="ri-git-branch-line text-2xl text-primary"></i>
-                </div>
-                <h4 class="text-lg font-medium">Git</h4>
-              </div>
-              <div class="mb-2 flex justify-between">
-                <span class="text-gray-400">Expertise</span>
-                <span>90%</span>
-              </div>
-              <div class="w-full h-2 bg-[#0F172A] rounded-full overflow-hidden">
-                <div
-                  class="h-full bg-primary rounded-full"
-                  style="width: 85%"
-                ></div>
-              </div>
-            </div>
-            <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
-              <div class="flex items-center mb-4">
-                <div
-                  class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-lg mr-4"
-                >
-                  <i class="ri-flutter-line text-2xl text-primary"></i>
-                </div>
-                <h4 class="text-lg font-medium">Flutter</h4>
-              </div>
-              <div class="mb-2 flex justify-between">
-                <span class="text-gray-400">Expertise</span>
-                <span>65%</span>
-              </div>
-              <div class="w-full h-2 bg-[#0F172A] rounded-full overflow-hidden">
-                <div
-                  class="h-full bg-primary rounded-full"
-                  style="width: 65%"
-                ></div>
-              </div>
-            </div>
-            <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
-              <div class="flex items-center mb-4">
-                <div
-                  class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-lg mr-4"
-                >
-                  <i class="ri-terminal-box-line text-2xl text-primary"></i>
-                </div>
-                <h4 class="text-lg font-medium">Python</h4>
-              </div>
-              <div class="mb-2 flex justify-between">
-                <span class="text-gray-400">Expertise</span>
-                <span>60%</span>
-              </div>
-              <div class="w-full h-2 bg-[#0F172A] rounded-full overflow-hidden">
-                <div
-                  class="h-full bg-primary rounded-full"
-                  style="width: 60%"
-                ></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <h3 class="text-2xl font-semibold mb-8 gradient-text">
-            3D Modelling & Design
-          </h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
-              <div class="flex items-center mb-6">
-                <div
-                  class="w-12 h-12 flex items-center justify-center bg-secondary/20 rounded-lg mr-4"
-                >
-                  <i class="ri-blender-line text-2xl text-secondary"></i>
-                </div>
-                <h4 class="text-lg font-medium">Blender</h4>
-              </div>
-              <div class="space-y-4">
-                <div>
-                  <div class="mb-2 flex justify-between">
-                    <span class="text-gray-400">Modelling</span>
-                    <span>80%</span>
-                  </div>
-                  <div
-                    class="w-full h-2 bg-[#0F172A] rounded-full overflow-hidden"
-                  >
-                    <div
-                      class="h-full bg-secondary rounded-full"
-                      style="width: 80%"
-                    ></div>
-                  </div>
-                </div>
-                <div>
-                  <div class="mb-2 flex justify-between">
-                    <span class="text-gray-400">Sculpting</span>
-                    <span>65%</span>
-                  </div>
-                  <div
-                    class="w-full h-2 bg-[#0F172A] rounded-full overflow-hidden"
-                  >
-                    <div
-                      class="h-full bg-secondary rounded-full"
-                      style="width: 65%"
-                    ></div>
-                  </div>
-                </div>
-              
-                <div>
-                  <div class="mb-2 flex justify-between">
-                    <span class="text-gray-400">Rigging & Animation</span>
-                    <span>60%</span>
-                  </div>
-                  
-                  <div
-                    class="w-full h-2 bg-[#0F172A] rounded-full overflow-hidden"
-                  >
-                    <div
-                      class="h-full bg-secondary rounded-full"
-                      style="width: 60%"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="bg-[#1E293B] rounded-lg overflow-hidden">
-              <img
-                src="images/trustme.png"
-                alt="3D Modelleme Örneği"
-                class="w-cover h-54 object-cover"
-              />
-              <div class="p-6">
-                <h4 class="text-lg font-medium mb-2">Collabirative Projects</h4>
-                <p class="text-gray-400 mb-4">
-                  Characters, environment and product models also some of the projects. And also more will be added soon.
-                  Be one of the first to experience these exciting developments!
-                </p>
-                <a
-                  href="#portfolio"
-                  class="text-secondary hover:text-secondary/80 inline-flex items-center"
-                >
-                  <span>See more...</span>
-                  <span class="w-5 h-5 flex items-center justify-center ml-1">
-                    <i class="ri-arrow-right-line"></i>
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="py-20 relative">
-      <div class="container mx-auto px-6">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">Portfolio</h2>
-          <p class="text-gray-400 max-w-2xl mx-auto">
-            Projects I've completed in software development and 3D modeling, but some of them are upcoming!
-          </p>
-        </div>
-        <div class="mb-8 flex justify-center">
-          <div
-            class="flex flex-wrap justify-center gap-2 bg-[#1E293B] rounded-full p-1"
-          >
-            <button
-              class="px-4 sm:px-6 py-2 rounded-full bg-primary text-white whitespace-nowrap text-sm sm:text-base"
-              data-filter="all"
-            >
-              All
-            </button>
-            <button
-              class="px-4 sm:px-6 py-2 rounded-full text-gray-300 hover:text-white whitespace-nowrap text-sm sm:text-base"
-              data-filter="web"
-            >
-              Web development
-            </button>
-            <button
-              class="px-4 sm:px-6 py-2 rounded-full text-gray-300 hover:text-white whitespace-nowrap text-sm sm:text-base"
-              data-filter="mobile"
-            >
-              Mobile Application
-            </button>
-            <button
-              class="px-4 sm:px-6 py-2 rounded-full text-gray-300 hover:text-white whitespace-nowrap text-sm sm:text-base"
-              data-filter="3d"
-            >
-              3D Modelling
-            </button>
-          </div>
-        </div>
-        <div
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          id="portfolioGrid"
-        >
-          <!-- Project 1 -->
-          <div class="bg-[#1E293B] rounded-lg overflow-hidden card-hover" data-category="web">
-            <div class="relative">
-              <img
-                src="images/com-site.png"
-                alt=""
-                class="w-full h-56 object-cover"
-              />
-              <div class="absolute top-4 right-4 bg-primary/90 text-white px-3 py-1 rounded-full text-sm">
-                Web Application (accomplished)
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2">E-commercial Platform</h3>
-              <p class="text-gray-400 mb-4">
-               A full comprehensive developed using react and node.js
-e-commerce solution.Payment integration, user management and
-Contains inventory tracking.
-              </p>
-              <div class="flex flex-wrap gap-2 mb-4">
-                <span
-                  class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs"
-                  >React</span
-                >
-                <span
-                  class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs"
-                  >Node.js</span
-                >
-                <span
-                  class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs"
-                  >MongoDB</span
-                >
-                <span
-                  class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs"
-                  >Stripe API</span
-                >
-              </div>
-              <button
-                class="text-primary hover:text-primary/80 inline-flex items-center project-details-btn"
-                data-project=""
-              >
-                <span><a target="_blank" rel="noopener noreferrer" href="https://sites.google.com/view/faceofdreamss/menu">See Details</a></span>
-                <span class="w-5 h-5 flex items-center justify-center ml-1">
-                  <i class="ri-arrow-right-line"></i>
-                </span>
-              </button>
-            </div>
-          </div>
-          <!-- Project 2 -->
-          <div
-            class="bg-[#1E293B] rounded-lg overflow-hidden card-hover"
-            data-category="mobile"
-          >
-            <div class="relative">
-              <img
-                src="images/un-maint.png"
-                alt=""
-                class="w-full h-56 object-cover"
-              />
-              <div
-                class="absolute top-4 right-4 bg-secondary/90 text-white px-3 py-1 rounded-full text-sm"
-              >
-                Mobile Application(not accomplished)
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2">Mobile Application Project</h3>
-              <p class="text-gray-400 mb-4">
-                A mobile application developed with Flutter for cross-platform compatibility.
-                Features user authentication, data synchronization, and a clean UI.
-              </p>
-              <div class="flex flex-wrap gap-2 mb-4">
-                <span
-                  class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs"
-                  >Flutter</span
-                >
-                <span
-                  class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs"
-                  >Dart</span
-                >
-                <span
-                  class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs"
-                  >Firebase</span
-                >
-              </div>
-              <button
-                class="text-secondary hover:text-secondary/80 inline-flex items-center project-details-btn"
-                data-project=""
-              >
-                <span><a target="_blank" rel="noopener noreferrer" href="https://github.com/Vniverse77/">See Details</a></span>
-                <span class="w-5 h-5 flex items-center justify-center ml-1">
-                  <i class="ri-arrow-right-line"></i>
-                </span>
-              </button>
-            </div>
-          </div>
-          <!-- Project 3 -->
-          <div class="bg-[#1E293B] rounded-lg overflow-hidden card-hover" data-category="3d">
-            <div class="relative">
-              <img
-                src="images/living-room.png"
-                alt=""
-                class="w-full h-56 object-cover"
-              />
-              <div class="absolute top-4 right-4 bg-primary/90 text-white px-3 py-1 rounded-full text-sm">
-                3D Modelling(Accomplished)
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2">
-                Architectural Room design(Accomplished)
-              </h3>
-              <p class="text-gray-400 mb-4">
-                Designed for a video game designed using blender
-A detailed science fiction character model.Rigging and
-contains basic animations.
-              </p>
-              <div class="flex flex-wrap gap-2 mb-4">
-                <span
-                  class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs"
-                  >Blender</span
-                >
-                <span
-                  class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs"
-                  >Sculpting</span
-                >
-                <span
-                  class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs"
-                  >Rigging</span
-                >
-              </div>
-              <button
-                class="text-primary hover:text-primary/80 inline-flex items-center project-details-btn"
-                data-project=""
-              >
-                <span><a target="_blank" rel="noopener noreferrer" href="https://github.com/Vniverse77/Blend-pro/blob/main/has-gowy.png">See Details</a></span>
-                <span class="w-5 h-5 flex items-center justify-center ml-1">
-                  <i class="ri-arrow-right-line"></i>
-                </span>
-              </button>
-            </div>
-          </div>
-          <!-- Project 4 -->
-          <div
-            class="bg-[#1E293B] rounded-lg overflow-hidden card-hover"
-            data-category="web"
-          >
-            <div class="relative">
-              <img
-                src="images/un-maint.png"
-                alt="Analitik Dashboard"
-                class="w-full h-56 object-cover"
-              />
-              <div
-                class="absolute top-4 right-4 bg-primary/90 text-white px-3 py-1 rounded-full text-sm"
-              >
-                Web Development(Not accomplished)
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2">Analitic Dashboard</h3>
-              <p class="text-gray-400 mb-4">
-                Visualizing businesses of businesses and analysis
-an interactive dashboard that allows them to.Real
-Timed data monitoring and reporting features.
-              </p>
-              <div class="flex flex-wrap gap-2 mb-4">
-                <span
-                  class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs"
-                  >Vue.js</span
-                >
-                <span
-                  class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs"
-                  >D3.js</span
-                >
-                <span
-                  class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs"
-                  >Express</span
-                >
-              </div>
-              <button
-                class="text-primary hover:text-primary/80 inline-flex items-center project-details-btn"
-                data-project=""
-              >
-                <span><a target="_blank" rel="noopener noreferrer" href="https://github.com/Vniverse77/">See Details</a></span>
-                <span class="w-5 h-5 flex items-center justify-center ml-1">
-                  <i class="ri-arrow-right-line"></i>
-                </span>
-              </button>
-            </div>
-          </div>
-          <!-- Project 5 -->
-          <div
-            class="bg-[#1E293B] rounded-lg overflow-hidden card-hover"
-            data-category="mobile"
-          >
-            <div class="relative">
-              <img
-                src="images/un-maint.png"
-                alt="Not even needed"
-                class="w-full h-56 object-cover"
-              />
-              <div
-                class="absolute top-4 right-4 bg-secondary/90 text-white px-3 py-1 rounded-full text-sm"
-              >
-                Mobile App(Not accomplished)
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2">
-                Vocation Planning App
-              </h3>
-              <p class="text-gray-400 mb-4">
-               Users planning travel, reservation
-allowing them to do and create travel routes
-Comprehensive mobile application.
-              </p>
-              <div class="flex flex-wrap gap-2 mb-4">
-                <span
-                  class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs"
-                  >React Native</span
-                >
-                <span
-                  class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs"
-                  >GraphQL</span
-                >
-                <span
-                  class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs"
-                  >Maps API</span
-                >
-              </div>
-              <button
-                class="text-secondary hover:text-secondary/80 inline-flex items-center project-details-btn"
-                data-project=""
-              >
-                <span><a target="_blank" rel="noopener noreferrer" href="https://github.com/Vniverse77/">See Details</a></span>
-                <span class="w-5 h-5 flex items-center justify-center ml-1">
-                  <i class="ri-arrow-right-line"></i>
-                </span>
-              </button>
-            </div>
-          </div>
-          <!-- Project 6 -->
-          <div class="bg-[#1E293B] rounded-lg overflow-hidden card-hover" data-category="3d">
-            <div class="relative">
-              <img
-                src="images/my-setup.png"
-                alt=""
-                class="w-full h-56 object-cover"
-              />
-              <div class="absolute top-4 right-4 bg-primary/90 text-white px-3 py-1 rounded-full text-sm">
-                3D Modelling(Accomplished)
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2">Architecture development</h3>
-              <p class="text-gray-400 mb-4">
-               Created using blender for an architectural project
-photorealistic interior and outdoor visualization.Detailed
-It includes lighting and material studies.
-              </p>
-              <div class="flex flex-wrap gap-2 mb-4">
-                <span
-                  class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs"
-                  >Blender</span
-                >
-                <span
-                  class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs"
-                  >Cycles Render</span
-                >
-                <span
-                  class="bg-[#0F172A] text-gray-300 px-3 py-1 rounded-full text-xs"
-                  >Texturing</span
-                >
-              </div>
-              <button
-                class="text-primary hover:text-primary/80 inline-flex items-center project-details-btn"
-                data-project=""
-              >
-                <span><a target="_blank" rel="noopener noreferrer" href="https://github.com/Vniverse77/Blend-pro/blob/main/my-room.png">See Details</a></span>
-                <span class="w-5 h-5 flex items-center justify-center ml-1">
-                  <i class="ri-arrow-right-line"></i>
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="mt-12 text-center">
-          <!-- <button
+      <div class="mt-12 text-center">
+        <!-- <button
             class="bg-[#1E293B] hover:bg-[#2D3748] text-white px-6 py-3 rounded-button font-medium transition-all duration-300 whitespace-nowrap"
           >
             More Projects
           </button> -->
-        </div>
       </div>
-      <!-- News Section -->
-    </section>
-    <!-- Store Section -->
-    <section id="store" class="py-20 relative">
-      <div class="container mx-auto px-6">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">Store</h2>
-          <p class="text-gray-400 max-w-2xl mx-auto">
-            Downloadable assets.
-          </p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="bg-[#1E293B] rounded-lg overflow-hidden card-hover">
-            <div class="relative">
-              <img
-                src="images/placeholder.png"
-                alt="Placeholder Image"
-                class="w-full h-56 object-cover"
-              />
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2">Placeholder Image</h3>
-              <p class="text-gray-400 mb-4">
-                A simple placeholder image.
-              </p>
-              <div class="flex justify-between items-center">
-                <a
-                  href="#contact"
-                  id="download-btn"
-                  class="text-primary hover:text-primary/80 inline-flex items-center"
-                >
-                  <span>Download</span>
-                  <span class="w-5 h-5 flex items-center justify-center ml-1">
-                    <i class="ri-download-2-line"></i>
-                  </span>
-                </a>
-              </div>
-            </div>
+    </div>
+    <!-- News Section -->
+  </section>
+  <!-- Store Section -->
+  <section id="store" class="py-20 relative">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Store</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">
+          Downloadable assets.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-[#1E293B] rounded-lg overflow-hidden card-hover">
+          <div class="relative">
+            <img src="images/placeholder.png" alt="Placeholder Image" class="w-full h-56 object-cover" />
           </div>
-        </div>
-      </div>
-    </section>
-      <section id="news" class="py-20 relative gradient-bg">
-        <div class="container mx-auto px-6">
-          <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Latest News (under maintenance)</h2>
-            <p class="text-gray-400 max-w-2xl mx-auto">
-              <b>Stay tuned for updates!
-                <br />
-                Bu bolumi gutarmagmyza az galdy, sabyr ediň!!!
-              </b>
-              <img class="rounded-lg overflow-hidden" src="images/rick-and-morty.jpg" alt="">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2">Placeholder Image</h3>
+            <p class="text-gray-400 mb-4">
+              A simple placeholder image.
             </p>
-          </div>
-        </div>
-      </section>
-    </section>
-    <!-- Social Media Section -->
-    <section id="social" class="py-20 relative gradient-bg">
-      <div class="container mx-auto px-6">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">Social Media</h2>
-          <p class="text-gray-400 max-w-2xl mx-auto">
-            Information about my social media accounts and activities
-You can get them here.
-          </p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- GitHub Card -->
-          <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
-            <div class="flex items-center mb-6">
-              <div
-                class="w-12 h-12 flex items-center justify-center bg-[#0F172A] rounded-full mr-4"
-              >
-                <i class="ri-github-fill text-2xl"></i>
-              </div>
-              <div>
-                <h3 class="text-xl font-semibold">GitHub</h3>
-                <a target="_blank" rel="noopener noreferrer" href="https://github.com/Vniverse77" class="text-gray-400 hover:text-primary"
-                  >@Vniverse77</a
-                >
-              </div>
-            </div>
-            <div class="mb-6">
-              <div class="flex justify-between mb-2">
-                <span>Repositories</span>
-                <span>13</span>
-              </div>
-              <div class="flex justify-between mb-2">
-                <span>Followers</span>
-                <span>16</span>
-              </div>
-              <div class="flex justify-between">
-                <span>Supports (This year)</span>
-                <span>8</span>
-              </div>
-            </div>
-            <div class="bg-[#0F172A] rounded p-4 mb-4">
-              <div id="githubContributions" class="w-full h-32"></div>
-            </div>
-            <a
-              href="https://github.com/Vniverse77?tab=repositories"
-              target="_blank" rel="noopener noreferrer"
-              class="bg-[#0F172A] hover:bg-[#1E293B] text-white w-full py-2 rounded-button font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap"
-            >
-              <span class="w-5 h-5 flex items-center justify-center mr-2">
-                <i class="ri-github-fill"></i>
-              </span>
-              <span>View Repos</span>
-            </a>
-          </div>
-          <!-- LinkedIn Card -->
-          <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
-            <div class="flex items-center mb-6">
-              <div
-                class="w-12 h-12 flex items-center justify-center bg-[#0077B5]/20 rounded-full mr-4"
-              >
-                <i class="ri-linkedin-fill text-2xl text-[#0077B5]"></i>
-              </div>
-              <div>
-                <h3 class="text-xl font-semibold">LinkedIn</h3>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/berdimuhammet-yslamow-b7900a319/" class="text-gray-400 hover:text-[#0077B5]"
-                  >Vniverse77</a
-                >
-              </div>
-            </div>
-            <div class="mb-6">
-              <p class="text-gray-400 mb-4">
-                Software Developer & 3D Designer | React | Node.js | Blender |
-Creative Technologies
-              </p>
-              <div class="flex justify-between mb-2">
-                <span>Links</span>
-                <span>412</span>
-              </div>
-              <div class="flex justify-between mb-2">
-                <span>Post views</span>
-                <span>2.4K</span>
-              </div>
-            </div>
-            <div class="bg-[#0F172A] rounded p-4 mb-4">
-              <h4 class="font-medium mb-2">Last Post</h4>
-              <p class="text-gray-400 text-sm">
-               I shared a new 3D modeling project! I have prepared a detailed article for those who are curious about the construction process of this Sci-Fi character I have developed in Blender. #3DModelleme #Blender #GameDev
-              </p>
-              <div class="flex mt-2 text-sm">
-                <span class="flex items-center mr-4">
-                  <span class="w-4 h-4 flex items-center justify-center mr-1">
-                    <i class="ri-thumb-up-line"></i>
-                  </span>
-                  <span>86</span>
+            <div class="flex justify-between items-center">
+              <a href="#contact" id="download-btn" class="text-primary hover:text-primary/80 inline-flex items-center">
+                <span>Download</span>
+                <span class="w-5 h-5 flex items-center justify-center ml-1">
+                  <i class="ri-download-2-line"></i>
                 </span>
-                <span class="flex items-center mr-4">
-                  <span class="w-4 h-4 flex items-center justify-center mr-1">
-                    <i class="ri-chat-1-line"></i>
-                  </span>
-                  <span>12</span>
-                </span>
-                <span class="flex items-center">
-                  <span class="w-4 h-4 flex items-center justify-center mr-1">
-                    <i class="ri-share-line"></i>
-                  </span>
-                  <span>24</span>
-                </span>
-              </div>
-            </div>
-            <a
-              href="https://www.linkedin.com/in/berdimuhammet-yslamow-b7900a319/"
-              target="_blank" rel="noopener noreferrer"
-              class="bg-[#0077B5] hover:bg-[#0077B5]/80 text-white w-full py-2 rounded-button font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap"
-            >
-              <span class="w-5 h-5 flex items-center justify-center mr-2">
-                <i class="ri-linkedin-fill"></i>
-              </span>
-              <span>View Profile</span>
-            </a>
-          </div>
-          <!-- Start Card -->
-            <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
-            <div class="flex items-center mb-6">
-              <div
-                class="w-12 h-12 flex items-center justify-center bg-[#0889f3]/20 rounded-full mr-4"
-              >
-                <i class="ri-telegram-fill text-2xl text-[#0889f3]"></i>
-              </div>
-              <div>
-                <h3 class="text-xl font-semibold">Start</h3>
-                <a target="_blank" rel="noopener noreferrer" href="https://tmstart.me/vniverse77" class="text-gray-400 hover:text-[#0077B5]"
-                  >@Vniverse77</a
-                >
-              </div>
-            </div>
-            <div class="mb-6">
-              <p class="text-gray-400 mb-4">
-                Programistler we kompyutere, Linux'a dusunyanler ucin Chat 💻.
-                 Bu Group adamlara mugt we ynamly cesmelerden oz gozleyan maglumatlaryny,
-                  dusunmeyan zatlaryny, esasan LINUX barada maglumatlary tapmagy ozune maksat edinendir!!!
-              </p>
-              <div class="flex justify-between mb-2">
-                <span>Stories</span>
-                <span>2</span>
-              </div>
-              <div class="flex justify-between mb-2">
-                <span>Post views</span>
-                <span>2.4K</span>
-              </div>
-            </div>
-            <div class="bg-[#0F172A] rounded p-4 mb-4">
-              <h4 class="font-medium mb-2">Announcement</h4>
-              <p class="text-gray-400 text-sm">
-               Chat users will now deleted by this night. If you want to continue using the chat, please join the new group. And bots are not allowed in the group, so please don't use them.
-              </p>
-              <div class="flex mt-2 text-sm">
-                <span class="flex items-center mr-4">
-                  <span class="w-4 h-4 flex items-center justify-center mr-1">
-                    <i class="ri-thumb-up-line"></i>
-                  </span>
-                  <span>219</span>
-                </span>
-                <span class="flex items-center mr-4">
-                  <span class="w-4 h-4 flex items-center justify-center mr-1">
-                    <i class="ri-chat-1-line"></i>
-                  </span>
-                  <span>12</span>
-                </span>
-                <span class="flex items-center">
-                  <span class="w-4 h-4 flex items-center justify-center mr-1">
-                    <i class="ri-share-line"></i>
-                  </span>
-                  <span>24</span>
-                </span>
-              </div>
-            </div>
-            <a
-              target="_blank" rel="noopener noreferrer"
-              href="https://tmstart.me/+4GyB9ZjXeYrxE4RDmdc7"
-              class="bg-[#0077B5] hover:bg-[#0077B5]/80 text-white w-full py-2 rounded-button font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap"
-            >
-              <span class="w-5 h-5 flex items-center justify-center mr-2">
-                <i class="ri-telegram-fill"></i>
-              </span>
-              <span>Join the Chat</span>
-            </a>
-          </div>
-          <!-- Twitter Card -->
-          <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
-            <div class="flex items-center mb-6">
-              <div
-                class="w-12 h-12 flex items-center justify-center bg-[#1DA1F2]/20 rounded-full mr-4"
-              >
-                <i class="ri-twitter-x-fill text-2xl text-[#000000]"></i>
-              </div>
-              <div>
-                <h3 class="text-xl font-semibold">Twitter</h3>
-                <a target="_blank" rel="noopener noreferrer" href="https://x.com/Vniverse77" class="text-gray-400 hover:text-[#1DA1F2]"
-                  >@Vniverse77</a
-                >
-              </div>
-            </div>
-            <div class="mb-6">
-              <div class="flex justify-between mb-2">
-                <span>Followers</span>
-                <span>143</span>
-              </div>
-              <div class="flex justify-between mb-2">
-                <span>Following</span>
-                <span>512</span>
-              </div>
-            </div>
-            <div class="space-y-4 mb-4">
-              <div class="bg-[#0F172A] rounded p-4">
-                <p class="text-gray-400 text-sm mb-2">
-                  Interactive 3D Web using React and Three.js in my new project
-I create experiences.The future of the Web is really excitement
-transmitter! #WebDev #3D #React
-                </p>
-                <div class="flex text-sm text-gray-500">
-                  <span class="flex items-center mr-4">
-                    <span class="w-4 h-4 flex items-center justify-center mr-1">
-                      <i class="ri-heart-line"></i>
-                    </span>
-                    <span>42</span>
-                  </span>
-                  <span class="flex items-center mr-4">
-                    <span class="w-4 h-4 flex items-center justify-center mr-1">
-                      <i class="ri-chat-1-line"></i>
-                    </span>
-                    <span>7</span>
-                  </span>
-                  <span class="flex items-center">
-                    <span class="w-4 h-4 flex items-center justify-center mr-1">
-                      <i class="ri-repeat-line"></i>
-                    </span>
-                    <span>16</span>
-                  </span>
-                </div>
-              </div>
-              <div class="bg-[#0F172A] rounded p-4">
-                <p class="text-gray-400 text-sm mb-2">
-                  The new features of Blender 4.0 are incredible! With Geometry Nodes
-I discover what I can do. A Tutorial Series soon
-I will start. #Blender3D #Tutorial
-                </p>
-                <div class="flex text-sm text-gray-500">
-                  <span class="flex items-center mr-4">
-                    <span class="w-4 h-4 flex items-center justify-center mr-1">
-                      <i class="ri-heart-line"></i>
-                    </span>
-                    <span>58</span>
-                  </span>
-                  <span class="flex items-center mr-4">
-                    <span class="w-4 h-4 flex items-center justify-center mr-1">
-                      <i class="ri-chat-1-line"></i>
-                    </span>
-                    <span>12</span>
-                  </span>
-                  <span class="flex items-center">
-                    <span class="w-4 h-4 flex items-center justify-center mr-1">
-                      <i class="ri-repeat-line"></i>
-                    </span>
-                    <span>23</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <a
-              target="_blank" rel="noopener noreferrer"
-              href="https://x.com/Vniverse77"
-              class="bg-[#1DA1F2] hover:bg-[#1DA1F2]/80 text-white w-full py-2 rounded-button font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap"
-            >
-              <span class="w-5 h-5 flex items-center justify-center mr-2">
-                <i class="ri-twitter-x-fill"></i>
-              </span>
-              <span>View Profile</span>
-            </a>
-          </div>
-        </div>
-         <!-- Here something will come after maintenence!! -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 relative">
-      <div class="container mx-auto px-6">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">Contact & Questions</h2>
-          <p class="text-gray-400 max-w-2xl mx-auto">
-            You can contact with me your Danishnesses, Projects and Questions: This section might not work well!!!
-          </p>
-        </div>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div>
-            <div class="py-6"></div>
-            <form id="contact-form" class="space-y-6">
-              <p class="text-gray-400 text-center">To download the file, please log in with your Google account:</p>
-              <button
-                type="button"
-                id="google-login-btn"
-                class="bg-[#4285F4] hover:bg-[#357AE8] text-white px-6 py-3 rounded-button font-medium transition-all duration-300 w-full whitespace-nowrap flex items-center justify-center"
-              >
-                <i class="ri-google-fill mr-2"></i>
-                Login with Google
-              </button>
-            </form>
-            <div class="my-4"></div> <!-- Added space here -->
-            <div class="max-w-sm mx-auto">
-              <div class="space-y-4">
-                <button
-                  type="button"
-                  class="bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-button font-medium transition-all duration-300 w-full whitespace-nowrap flex items-center justify-center"
-                >
-                  <i class="ri-mail-line mr-2"></i>
-                  Login with Email
-                </button>
-                <a
-                  href="/auth/github"
-                  class="bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-button font-medium transition-all duration-300 w-full whitespace-nowrap flex items-center justify-center"
-                >
-                  <i class="ri-github-fill mr-2"></i>
-                  Login with GitHub
-                </a>
-              </div>
-            </div>
-            <div id="contact-messages" class="mt-6"></div>
-          </div>
-          <div class="space-y-8">
-            <div class="bg-[#1E293B] rounded-lg p-6">
-              <h3 class="text-xl font-semibold mb-6">Contact informations</h3>
-              <div class="space-y-4">
-                <div class="flex items-start">
-                  <div
-                    class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-lg mr-4 mt-1"
-                  >
-                    <i class="ri-mail-line text-xl text-primary"></i>
-                  </div>
-                  <div>
-                    <h4 class="font-medium mb-1">E-mail</h4>
-                    <a
-                      href="mailto:justforcodigs@hotmail.com"
-                      class="text-gray-400 hover:text-primary"
-                      >justforcodings@hotmail.com</a
-                    >
-                  </div>
-                </div>
-                <div class="flex items-start">
-                  <div
-                    class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-lg mr-4 mt-1"
-                  >
-                    <i class="ri-map-pin-line text-xl text-primary"></i>
-                  </div>
-                  <div>
-                    <h4 class="font-medium mb-1 ">Location</h4>
-                    <p class="text-gray-400 ">Mary, Turkmenistan</p>
-                  </div>
-                </div>
-                <div class="flex items-start">
-                  <div
-                    class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-lg mr-4 mt-1"
-                  >
-                    <i class="ri-time-line text-xl text-primary"></i>
-                  </div>
-                  <div>
-                    <h4 class="font-medium mb-1">Working times</h4>
-                    <p class="text-gray-400">Weekends: 08:00 - 19:00
-                      <br />
-                      Weekdays: 14:00 - 20:00
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-12 bg-gradient-to-r from-[#0F172A] to-[#1E293B]">
-      <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          <div>
-            <!-- Replace the text logo with your footer PNG -->
-            <a target="_blank" href="https://tmstart.me/face_of_dreams" class="logo mb-4 inline-block">
-              <!-- Replace 'your-footer-logo.png' with your PNG file path -->
-              <img src="images/Tux.png" alt="Footer Logo" class="w-32">
-            </a>
-            <p class="text-gray-400 mb-6">
-              I serve creative software solutions & modern 3D designs.
-              Ready to bring your ideas to life with cutting-edge technology and design.
-            </p>
-            <div class="flex flex-wrap gap-4">
-              <a
-                target="_blank" rel="noopener noreferrer"
-                href="https://github.com/Vniverse77"
-
-                class="w-10 h-10 flex items-center justify-center bg-[#1E293B] rounded-full hover:bg-primary/20 transition-colors"
-              >
-                <i class="ri-github-fill text-lg"></i>
               </a>
-              <a
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="news" class="py-20 relative gradient-bg">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Latest News (under maintenance)</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">
+          <b>Stay tuned for updates!
+            <br />
+            Bu bolumi gutarmagmyza az galdy, sabyr ediň!!!
+          </b>
+          <img class="rounded-lg overflow-hidden" src="images/rick-and-morty.jpg" alt="">
+        </p>
+      </div>
+    </div>
+  </section>
+  </section>
+  <!-- Social Media Section -->
+  <section id="social" class="py-20 relative gradient-bg">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Social Media</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">
+          Information about my social media accounts and activities
+          You can get them here.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- GitHub Card -->
+        <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 flex items-center justify-center bg-[#0F172A] rounded-full mr-4">
+              <i class="ri-github-fill text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold">GitHub</h3>
+              <a target="_blank" rel="noopener noreferrer" href="https://github.com/Vniverse77"
+                class="text-gray-400 hover:text-primary">@Vniverse77</a>
+            </div>
+          </div>
+          <div class="mb-6">
+            <div class="flex justify-between mb-2">
+              <span>Repositories</span>
+              <span>13</span>
+            </div>
+            <div class="flex justify-between mb-2">
+              <span>Followers</span>
+              <span>16</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Supports (This year)</span>
+              <span>8</span>
+            </div>
+          </div>
+          <div class="bg-[#0F172A] rounded p-4 mb-4">
+            <div id="githubContributions" class="w-full h-32"></div>
+          </div>
+          <a href="https://github.com/Vniverse77?tab=repositories" target="_blank" rel="noopener noreferrer"
+            class="bg-[#0F172A] hover:bg-[#1E293B] text-white w-full py-2 rounded-button font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap">
+            <span class="w-5 h-5 flex items-center justify-center mr-2">
+              <i class="ri-github-fill"></i>
+            </span>
+            <span>View Repos</span>
+          </a>
+        </div>
+        <!-- LinkedIn Card -->
+        <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 flex items-center justify-center bg-[#0077B5]/20 rounded-full mr-4">
+              <i class="ri-linkedin-fill text-2xl text-[#0077B5]"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold">LinkedIn</h3>
+              <a target="_blank" rel="noopener noreferrer"
                 href="https://www.linkedin.com/in/berdimuhammet-yslamow-b7900a319/"
-                target="_blank" rel="noopener noreferrer"
-                class="w-10 h-10 flex items-center justify-center bg-[#1E293B] rounded-full hover:bg-[#0077B5]/20 transition-colors"
-              >
-                <i class="ri-linkedin-fill text-lg text-[#0077B5]"></i>
+                class="text-gray-400 hover:text-[#0077B5]">Vniverse77</a>
+            </div>
+          </div>
+          <div class="mb-6">
+            <p class="text-gray-400 mb-4">
+              Software Developer & 3D Designer | React | Node.js | Blender |
+              Creative Technologies
+            </p>
+            <div class="flex justify-between mb-2">
+              <span>Links</span>
+              <span>412</span>
+            </div>
+            <div class="flex justify-between mb-2">
+              <span>Post views</span>
+              <span>2.4K</span>
+            </div>
+          </div>
+          <div class="bg-[#0F172A] rounded p-4 mb-4">
+            <h4 class="font-medium mb-2">Last Post</h4>
+            <p class="text-gray-400 text-sm">
+              I shared a new 3D modeling project! I have prepared a detailed article for those who are curious about the
+              construction process of this Sci-Fi character I have developed in Blender. #3DModelleme #Blender #GameDev
+            </p>
+            <div class="flex mt-2 text-sm">
+              <span class="flex items-center mr-4">
+                <span class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-thumb-up-line"></i>
+                </span>
+                <span>86</span>
+              </span>
+              <span class="flex items-center mr-4">
+                <span class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-chat-1-line"></i>
+                </span>
+                <span>12</span>
+              </span>
+              <span class="flex items-center">
+                <span class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-share-line"></i>
+                </span>
+                <span>24</span>
+              </span>
+            </div>
+          </div>
+          <a href="https://www.linkedin.com/in/berdimuhammet-yslamow-b7900a319/" target="_blank"
+            rel="noopener noreferrer"
+            class="bg-[#0077B5] hover:bg-[#0077B5]/80 text-white w-full py-2 rounded-button font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap">
+            <span class="w-5 h-5 flex items-center justify-center mr-2">
+              <i class="ri-linkedin-fill"></i>
+            </span>
+            <span>View Profile</span>
+          </a>
+        </div>
+        <!-- Start Card -->
+        <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 flex items-center justify-center bg-[#0889f3]/20 rounded-full mr-4">
+              <i class="ri-telegram-fill text-2xl text-[#0889f3]"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold">Start</h3>
+              <a target="_blank" rel="noopener noreferrer" href="https://tmstart.me/vniverse77"
+                class="text-gray-400 hover:text-[#0077B5]">@Vniverse77</a>
+            </div>
+          </div>
+          <div class="mb-6">
+            <p class="text-gray-400 mb-4">
+              Programistler we kompyutere, Linux'a dusunyanler ucin Chat 💻.
+              Bu Group adamlara mugt we ynamly cesmelerden oz gozleyan maglumatlaryny,
+              dusunmeyan zatlaryny, esasan LINUX barada maglumatlary tapmagy ozune maksat edinendir!!!
+            </p>
+            <div class="flex justify-between mb-2">
+              <span>Stories</span>
+              <span>2</span>
+            </div>
+            <div class="flex justify-between mb-2">
+              <span>Post views</span>
+              <span>2.4K</span>
+            </div>
+          </div>
+          <div class="bg-[#0F172A] rounded p-4 mb-4">
+            <h4 class="font-medium mb-2">Announcement</h4>
+            <p class="text-gray-400 text-sm">
+              Chat users will now deleted by this night. If you want to continue using the chat, please join the new
+              group. And bots are not allowed in the group, so please don't use them.
+            </p>
+            <div class="flex mt-2 text-sm">
+              <span class="flex items-center mr-4">
+                <span class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-thumb-up-line"></i>
+                </span>
+                <span>219</span>
+              </span>
+              <span class="flex items-center mr-4">
+                <span class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-chat-1-line"></i>
+                </span>
+                <span>12</span>
+              </span>
+              <span class="flex items-center">
+                <span class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-share-line"></i>
+                </span>
+                <span>24</span>
+              </span>
+            </div>
+          </div>
+          <a target="_blank" rel="noopener noreferrer" href="https://tmstart.me/+4GyB9ZjXeYrxE4RDmdc7"
+            class="bg-[#0077B5] hover:bg-[#0077B5]/80 text-white w-full py-2 rounded-button font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap">
+            <span class="w-5 h-5 flex items-center justify-center mr-2">
+              <i class="ri-telegram-fill"></i>
+            </span>
+            <span>Join the Chat</span>
+          </a>
+        </div>
+        <!-- Twitter Card -->
+        <div class="bg-[#1E293B] rounded-lg p-6 card-hover">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 flex items-center justify-center bg-[#1DA1F2]/20 rounded-full mr-4">
+              <i class="ri-twitter-x-fill text-2xl text-[#000000]"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold">Twitter</h3>
+              <a target="_blank" rel="noopener noreferrer" href="https://x.com/Vniverse77"
+                class="text-gray-400 hover:text-[#1DA1F2]">@Vniverse77</a>
+            </div>
+          </div>
+          <div class="mb-6">
+            <div class="flex justify-between mb-2">
+              <span>Followers</span>
+              <span>143</span>
+            </div>
+            <div class="flex justify-between mb-2">
+              <span>Following</span>
+              <span>512</span>
+            </div>
+          </div>
+          <div class="space-y-4 mb-4">
+            <div class="bg-[#0F172A] rounded p-4">
+              <p class="text-gray-400 text-sm mb-2">
+                Interactive 3D Web using React and Three.js in my new project
+                I create experiences.The future of the Web is really excitement
+                transmitter! #WebDev #3D #React
+              </p>
+              <div class="flex text-sm text-gray-500">
+                <span class="flex items-center mr-4">
+                  <span class="w-4 h-4 flex items-center justify-center mr-1">
+                    <i class="ri-heart-line"></i>
+                  </span>
+                  <span>42</span>
+                </span>
+                <span class="flex items-center mr-4">
+                  <span class="w-4 h-4 flex items-center justify-center mr-1">
+                    <i class="ri-chat-1-line"></i>
+                  </span>
+                  <span>7</span>
+                </span>
+                <span class="flex items-center">
+                  <span class="w-4 h-4 flex items-center justify-center mr-1">
+                    <i class="ri-repeat-line"></i>
+                  </span>
+                  <span>16</span>
+                </span>
+              </div>
+            </div>
+            <div class="bg-[#0F172A] rounded p-4">
+              <p class="text-gray-400 text-sm mb-2">
+                The new features of Blender 4.0 are incredible! With Geometry Nodes
+                I discover what I can do. A Tutorial Series soon
+                I will start. #Blender3D #Tutorial
+              </p>
+              <div class="flex text-sm text-gray-500">
+                <span class="flex items-center mr-4">
+                  <span class="w-4 h-4 flex items-center justify-center mr-1">
+                    <i class="ri-heart-line"></i>
+                  </span>
+                  <span>58</span>
+                </span>
+                <span class="flex items-center mr-4">
+                  <span class="w-4 h-4 flex items-center justify-center mr-1">
+                    <i class="ri-chat-1-line"></i>
+                  </span>
+                  <span>12</span>
+                </span>
+                <span class="flex items-center">
+                  <span class="w-4 h-4 flex items-center justify-center mr-1">
+                    <i class="ri-repeat-line"></i>
+                  </span>
+                  <span>23</span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <a target="_blank" rel="noopener noreferrer" href="https://x.com/Vniverse77"
+            class="bg-[#1DA1F2] hover:bg-[#1DA1F2]/80 text-white w-full py-2 rounded-button font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap">
+            <span class="w-5 h-5 flex items-center justify-center mr-2">
+              <i class="ri-twitter-x-fill"></i>
+            </span>
+            <span>View Profile</span>
+          </a>
+        </div>
+      </div>
+      <!-- Here something will come after maintenence!! -->
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+  </section>
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 relative">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Contact & Questions</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">
+          You can contact with me your Danishnesses, Projects and Questions: This section might not work well!!!
+        </p>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div>
+          <div class="py-6"></div>
+          <form id="contact-form" class="space-y-6">
+            <p class="text-gray-400 text-center">To download the file, please log in with your Google account:</p>
+            <button type="button" id="google-login-btn"
+              class="bg-[#4285F4] hover:bg-[#357AE8] text-white px-6 py-3 rounded-button font-medium transition-all duration-300 w-full whitespace-nowrap flex items-center justify-center">
+              <i class="ri-google-fill mr-2"></i>
+              Login with Google
+            </button>
+          </form>
+          <div class="my-4"></div> <!-- Added space here -->
+          <div class="max-w-sm mx-auto">
+            <div class="space-y-4">
+              <a href="/login.html"
+                class="bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-button font-medium transition-all duration-300 w-full whitespace-nowrap flex items-center justify-center">
+                <i class="ri-mail-line mr-2"></i>
+                Login with Email
               </a>
-              <a
-                href="https://x.com/Vniverse77"
-                target="_blank" rel="noopener noreferrer"
-                class="w-10 h-10 flex items-center justify-center bg-[#1E293B] rounded-full hover:bg-[#1DA1F2]/20 transition-colors"
-              >
-                <i class="ri-twitter-x-fill text-lg text-[#ffffff]"></i>
-              </a>
-              <a
-                href="https://discord.gg/qSvHgfwg"
-                target="_blank" rel="noopener noreferrer"
-                class="w-10 h-10 flex items-center justify-center bg-[#1E293B] rounded-full hover:bg-[#485cf0]/20 transition-colors"
-              >
-                <i class="ri-discord-fill text-lg text-[#1f38ee]"></i>
-              </a>
-              <a
-                href="https://t.me/linux_community_by_vniverse77"
-                target="_blank" rel="noopener noreferrer"
-                class="w-10 h-10 flex items-center justify-center bg-[#1E293B] rounded-full hover:bg-[#004677]/20 transition-colors"
-              >
-                <i class="ri-telegram-fill text-lg text-[#0984dc]"></i>
-              </a>
-              <a
-                href="https://open.spotify.com/playlist/2Nrn8p6wkoZH2IUDbVIEnl"
-               target="_blank" rel="noopener noreferrer"
-                class="w-10 h-10 flex items-center justify-center bg-[#1E293B] rounded-full hover:bg-[#1DB954]/20 transition-colors"
-              >
-                <i class="ri-spotify-fill text-lg text-[#1DB954]"></i>
+              <a href="/auth/github"
+                class="bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-button font-medium transition-all duration-300 w-full whitespace-nowrap flex items-center justify-center">
+                <i class="ri-github-fill mr-2"></i>
+                Login with GitHub
               </a>
             </div>
           </div>
-          <div>
-            <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
-            <ul class="space-y-3">
-              <li>
-                <a
-                  href="#home"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >Home</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#skills"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >Skills</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#portfolio"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >Portfolio</a
-                >
-              </li>
-               <li>
-                <a
-                  href="#news"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >News</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#social"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >Social Media</a
-                >
-              </li>
+          <div id="contact-messages" class="mt-6"></div>
+        </div>
+        <div class="space-y-8">
+          <div class="bg-[#1E293B] rounded-lg p-6">
+            <h3 class="text-xl font-semibold mb-6">Contact informations</h3>
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <div class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-lg mr-4 mt-1">
+                  <i class="ri-mail-line text-xl text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium mb-1">E-mail</h4>
+                  <a href="mailto:justforcodigs@hotmail.com"
+                    class="text-gray-400 hover:text-primary">justforcodings@hotmail.com</a>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-lg mr-4 mt-1">
+                  <i class="ri-map-pin-line text-xl text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium mb-1 ">Location</h4>
+                  <p class="text-gray-400 ">Mary, Turkmenistan</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-lg mr-4 mt-1">
+                  <i class="ri-time-line text-xl text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium mb-1">Working times</h4>
+                  <p class="text-gray-400">Weekends: 08:00 - 19:00
+                    <br />
+                    Weekdays: 14:00 - 20:00
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            </ul>
-          </div>
-          <div>
-            <h4 class="text-lg font-semibold mb-6">Services</h4>
-            <ul class="space-y-3">
-              <li>
-                <a
-                  href="#"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >Web Development</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >Mobile Application</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >3D Modelling</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >UI/UX Design</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  ><a href="mailto:berdimuhammet0770@outlook.com"
-                  class="text-gray-400 hover:text-white transition-colors" 
-                  >Consultancy</a></a
-                >
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="text-lg font-semibold mb-6">Contact</h4>
-            <ul class="space-y-3">
-              <li class="flex items-center">
-                <span class="w-5 h-5 flex items-center justify-center mr-2">
-                  <i class="ri-mail-line"></i>
-                </span>
-                <a
-                target="_blank" rel="noopener noreferrer"
-                  href="mailto:justforcodings@hotmail.com"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >justforcodings@hotmail.com</a
-                >
-              </li>
-              <li class="flex items-center">
-                <span class="w-5 h-5 flex items-center justify-center mr-2">
-                  <i class="ri-map-pin-line"></i>
-                </span>
-                <span class="text-gray-400 hover:text-white transition-colors"><a target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/place/Mary,+Turkmenistan/@37.6041845,61.7990462,13z/data=!4m6!3m5!1s0x3f418e242a6088b7:0x945f91c717829ac3!8m2!3d37.6092461!4d61.8643252!16zL20vMDN3ZDMx?entry=ttu&g_ep=EgoyMDI1MDUyOC4wIKXMDSoASAFQAw%3D%3D">Mary, Turkmenistan</a></span>
-              </li>
-              <li class="flex items-center">
-                <span class="w-5 h-5 flex items-center justify-center mr-2">
-                  <i class="ri-time-line"></i>
-                </span>
-                <span class="text-gray-400">UTC+05 (Ashgabat)</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div
-          class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center"
-        >
-          <p
-            class="text-gray-500 text-sm mb-4 md:mb-0 text-center md:text-left"
-          >
-            &copy; 2025 Face of Dreams. All rights reserved.
+  <!-- Footer -->
+  <footer class="py-12 bg-gradient-to-r from-[#0F172A] to-[#1E293B]">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div>
+          <!-- Replace the text logo with your footer PNG -->
+          <a target="_blank" href="https://tmstart.me/face_of_dreams" class="logo mb-4 inline-block">
+            <!-- Replace 'your-footer-logo.png' with your PNG file path -->
+            <img src="images/Tux.png" alt="Footer Logo" class="w-32">
+          </a>
+          <p class="text-gray-400 mb-6">
+            I serve creative software solutions & modern 3D designs.
+            Ready to bring your ideas to life with cutting-edge technology and design.
           </p>
-          <div class="flex flex-wrap justify-center gap-4 md:gap-6">
-            <a href="#" class="text-gray-500 hover:text-white text-sm"
-              >Privacy Policy</a
-            >
-            <a href="#" class="text-gray-500 hover:text-white text-sm"
-              >Terms of Use</a
-            >
-            <a href="#" class="text-gray-500 hover:text-white text-sm"
-              >Cookie Policy</a
-            >
-            <a  href="mailto:justforcodings@hotmail.com" class="text-gray-500 hover:text-white text-sm"
-              >Feedback</a
-            >
+          <div class="flex flex-wrap gap-4">
+            <a target="_blank" rel="noopener noreferrer" href="https://github.com/Vniverse77"
+              class="w-10 h-10 flex items-center justify-center bg-[#1E293B] rounded-full hover:bg-primary/20 transition-colors">
+              <i class="ri-github-fill text-lg"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/berdimuhammet-yslamow-b7900a319/" target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 flex items-center justify-center bg-[#1E293B] rounded-full hover:bg-[#0077B5]/20 transition-colors">
+              <i class="ri-linkedin-fill text-lg text-[#0077B5]"></i>
+            </a>
+            <a href="https://x.com/Vniverse77" target="_blank" rel="noopener noreferrer"
+              class="w-10 h-10 flex items-center justify-center bg-[#1E293B] rounded-full hover:bg-[#1DA1F2]/20 transition-colors">
+              <i class="ri-twitter-x-fill text-lg text-[#ffffff]"></i>
+            </a>
+            <a href="https://discord.gg/qSvHgfwg" target="_blank" rel="noopener noreferrer"
+              class="w-10 h-10 flex items-center justify-center bg-[#1E293B] rounded-full hover:bg-[#485cf0]/20 transition-colors">
+              <i class="ri-discord-fill text-lg text-[#1f38ee]"></i>
+            </a>
+            <a href="https://t.me/linux_community_by_vniverse77" target="_blank" rel="noopener noreferrer"
+              class="w-10 h-10 flex items-center justify-center bg-[#1E293B] rounded-full hover:bg-[#004677]/20 transition-colors">
+              <i class="ri-telegram-fill text-lg text-[#0984dc]"></i>
+            </a>
+            <a href="https://open.spotify.com/playlist/2Nrn8p6wkoZH2IUDbVIEnl" target="_blank" rel="noopener noreferrer"
+              class="w-10 h-10 flex items-center justify-center bg-[#1E293B] rounded-full hover:bg-[#1DB954]/20 transition-colors">
+              <i class="ri-spotify-fill text-lg text-[#1DB954]"></i>
+            </a>
           </div>
         </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+          <ul class="space-y-3">
+            <li>
+              <a href="#home" class="text-gray-400 hover:text-white transition-colors">Home</a>
+            </li>
+            <li>
+              <a href="#skills" class="text-gray-400 hover:text-white transition-colors">Skills</a>
+            </li>
+            <li>
+              <a href="#portfolio" class="text-gray-400 hover:text-white transition-colors">Portfolio</a>
+            </li>
+            <li>
+              <a href="#news" class="text-gray-400 hover:text-white transition-colors">News</a>
+            </li>
+            <li>
+              <a href="#social" class="text-gray-400 hover:text-white transition-colors">Social Media</a>
+            </li>
+
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-6">Services</h4>
+          <ul class="space-y-3">
+            <li>
+              <a href="#" class="text-gray-400 hover:text-white transition-colors">Web Development</a>
+            </li>
+            <li>
+              <a href="#" class="text-gray-400 hover:text-white transition-colors">Mobile Application</a>
+            </li>
+            <li>
+              <a href="#" class="text-gray-400 hover:text-white transition-colors">3D Modelling</a>
+            </li>
+            <li>
+              <a href="#" class="text-gray-400 hover:text-white transition-colors">UI/UX Design</a>
+            </li>
+            <li>
+              <a href="#" class="text-gray-400 hover:text-white transition-colors"><a
+                  href="mailto:berdimuhammet0770@outlook.com"
+                  class="text-gray-400 hover:text-white transition-colors">Consultancy</a></a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-6">Contact</h4>
+          <ul class="space-y-3">
+            <li class="flex items-center">
+              <span class="w-5 h-5 flex items-center justify-center mr-2">
+                <i class="ri-mail-line"></i>
+              </span>
+              <a target="_blank" rel="noopener noreferrer" href="mailto:justforcodings@hotmail.com"
+                class="text-gray-400 hover:text-white transition-colors">justforcodings@hotmail.com</a>
+            </li>
+            <li class="flex items-center">
+              <span class="w-5 h-5 flex items-center justify-center mr-2">
+                <i class="ri-map-pin-line"></i>
+              </span>
+              <span class="text-gray-400 hover:text-white transition-colors"><a target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://www.google.com/maps/place/Mary,+Turkmenistan/@37.6041845,61.7990462,13z/data=!4m6!3m5!1s0x3f418e242a6088b7:0x945f91c717829ac3!8m2!3d37.6092461!4d61.8643252!16zL20vMDN3ZDMx?entry=ttu&g_ep=EgoyMDI1MDUyOC4wIKXMDSoASAFQAw%3D%3D">Mary,
+                  Turkmenistan</a></span>
+            </li>
+            <li class="flex items-center">
+              <span class="w-5 h-5 flex items-center justify-center mr-2">
+                <i class="ri-time-line"></i>
+              </span>
+              <span class="text-gray-400">UTC+05 (Ashgabat)</span>
+            </li>
+          </ul>
+        </div>
       </div>
-    </footer>
-    <!-- Project Details Modal -->
-    <div
-      class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center"
-      id="projectModal"
-    >
-      <div
-        class="bg-[#1E293B] rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto mx-4"
-      >
-        <div class="p-6">
-          <div class="flex justify-between items-center mb-6">
-            <h3 class="text-2xl font-semibold" id="modalTitle">
-              Project Details
-            </h3>
-            <button
-              class="w-10 h-10 flex items-center justify-center bg-[#0F172A] rounded-full"
-              id="closeModal"
-            >
-              <i class="ri-close-line text-xl"></i>
-            </button>
-          </div>
-          <div id="modalContent">
-            <!-- Content will be dynamically inserted here -->
-          </div>
+      <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-500 text-sm mb-4 md:mb-0 text-center md:text-left">
+          &copy; 2025 Face of Dreams. All rights reserved.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 md:gap-6">
+          <a href="#" class="text-gray-500 hover:text-white text-sm">Privacy Policy</a>
+          <a href="#" class="text-gray-500 hover:text-white text-sm">Terms of Use</a>
+          <a href="#" class="text-gray-500 hover:text-white text-sm">Cookie Policy</a>
+          <a href="mailto:justforcodings@hotmail.com" class="text-gray-500 hover:text-white text-sm">Feedback</a>
         </div>
       </div>
     </div>
-    <!------------------------- Loading Screen ---------------- -->
-    <div
-      class="blur-overlay fixed inset-0 z-[9999] flex items-center justify-center"
-      id="loadingScreen"
-      style="background: url('/images/samsung.jpg') no-repeat center center/cover;"
-    >
-      <div class="text-center">
-        <div class="text-4xl font-['Pacifico'] gradient-text mb-4">
-          Face of Dreams
+  </footer>
+  <!-- Project Details Modal -->
+  <div class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center" id="projectModal">
+    <div class="bg-[#1E293B] rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto mx-4">
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-2xl font-semibold" id="modalTitle">
+            Project Details
+          </h3>
+          <button class="w-10 h-10 flex items-center justify-center bg-[#0F172A] rounded-full" id="closeModal">
+            <i class="ri-close-line text-xl"></i>
+          </button>
         </div>
-        <div class="w-64 h-2 bg-[#1E293B] rounded-full overflow-hidden">
-          <div
-            class="h-full bg-gradient-to-r from-primary to-secondary rounded-full loading-bar"
-            style="width: 0%"
-          ></div>
+        <div id="modalContent">
+          <!-- Content will be dynamically inserted here -->
         </div>
       </div>
     </div>
-    <script id="headerScript">
-      document.addEventListener("DOMContentLoaded", function () {
-        const header = document.getElementById("header");
-        const mobileMenuToggle = document.getElementById("mobileMenuToggle");
-        const mobileMenu = document.getElementById("mobileMenu");
-        // Scroll event for header
-        window.addEventListener("scroll", function () {
-          if (window.scrollY > 50) {
-            header.classList.add("bg-[#0F172A]/90", "backdrop-blur-md", "shadow-lg");
-          } else {
-            header.classList.remove(
-              "bg-[#0F172A]/90",
-              "backdrop-blur-md",
-              "shadow-lg"
-            );
+  </div>
+  <!------------------------- Loading Screen ---------------- -->
+  <div class="blur-overlay fixed inset-0 z-[9999] flex items-center justify-center" id="loadingScreen"
+    style="background: url('/images/samsung.jpg') no-repeat center center/cover;">
+    <div class="text-center">
+      <div class="text-4xl font-['Pacifico'] gradient-text mb-4">
+        Face of Dreams
+      </div>
+      <div class="w-64 h-2 bg-[#1E293B] rounded-full overflow-hidden">
+        <div class="h-full bg-gradient-to-r from-primary to-secondary rounded-full loading-bar" style="width: 0%"></div>
+      </div>
+    </div>
+  </div>
+  <script id="headerScript">
+    document.addEventListener("DOMContentLoaded", function () {
+      const header = document.getElementById("header");
+      const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+      const mobileMenu = document.getElementById("mobileMenu");
+
+      // Profile Menu Logic
+      const profileMenuButton = document.getElementById("profile-menu-button");
+      const profileMenu = document.getElementById("profile-menu");
+
+      if (profileMenuButton && profileMenu) {
+        profileMenuButton.addEventListener("click", function (e) {
+          e.preventDefault();
+          profileMenu.classList.toggle("profile-menu-hidden");
+        });
+
+        document.addEventListener("click", function (e) {
+          if (!profileMenu.contains(e.target) && !profileMenuButton.contains(e.target)) {
+            profileMenu.classList.add("profile-menu-hidden");
           }
         });
-        // Mobile menu toggle
-        mobileMenuToggle.addEventListener("click", function () {
-          if (
-            mobileMenu.style.maxHeight === "0px" ||
-            mobileMenu.style.maxHeight === ""
-          ) {
-            mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
-            mobileMenuToggle.querySelector("i").classList.remove("ri-menu-line");
-            mobileMenuToggle.querySelector("i").classList.add("ri-close-line");
-          } else {
-            mobileMenu.style.maxHeight = "0px";
-            mobileMenuToggle.querySelector("i").classList.remove("ri-close-line");
-            mobileMenuToggle.querySelector("i").classList.add("ri-menu-line");
-          }
-        });
-        // Close mobile menu on link click
-        const mobileMenuLinks = mobileMenu.querySelectorAll("a");
-        mobileMenuLinks.forEach((link) => {
-          link.addEventListener("click", function () {
-            mobileMenu.style.maxHeight = "0px";
-            mobileMenuToggle.querySelector("i").classList.remove("ri-close-line");
-            mobileMenuToggle.querySelector("i").classList.add("ri-menu-line");
-          });
+      }
+
+      // Scroll event for header
+      window.addEventListener("scroll", function () {
+        if (window.scrollY > 50) {
+          header.classList.add("bg-[#0F172A]/90", "backdrop-blur-md", "shadow-lg");
+        } else {
+          header.classList.remove(
+            "bg-[#0F172A]/90",
+            "backdrop-blur-md",
+            "shadow-lg"
+          );
+        }
+      });
+      // Mobile menu toggle
+      mobileMenuToggle.addEventListener("click", function () {
+        if (
+          mobileMenu.style.maxHeight === "0px" ||
+          mobileMenu.style.maxHeight === ""
+        ) {
+          mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
+          mobileMenuToggle.querySelector("i").classList.remove("ri-menu-line");
+          mobileMenuToggle.querySelector("i").classList.add("ri-close-line");
+        } else {
+          mobileMenu.style.maxHeight = "0px";
+          mobileMenuToggle.querySelector("i").classList.remove("ri-close-line");
+          mobileMenuToggle.querySelector("i").classList.add("ri-menu-line");
+        }
+      });
+      // Close mobile menu on link click
+      const mobileMenuLinks = mobileMenu.querySelectorAll("a");
+      mobileMenuLinks.forEach((link) => {
+        link.addEventListener("click", function () {
+          mobileMenu.style.maxHeight = "0px";
+          mobileMenuToggle.querySelector("i").classList.remove("ri-close-line");
+          mobileMenuToggle.querySelector("i").classList.add("ri-menu-line");
         });
       });
-    </script>
-    <script id="particlesScript">
-      document.addEventListener("DOMContentLoaded", function () {
-        const particlesContainer = document.getElementById("particles");
-        const particleCount = 50;
-        for (let i = 0; i < particleCount; i++) {
-          const particle = document.createElement("div");
-          particle.classList.add("particle");
-          const size = Math.random() * 10 + 5;
-          particle.style.width = size + "px";
-          particle.style.height = size + "px";
-          particle.style.left = Math.random() * 100 + "%";
-          particle.style.top = Math.random() * 100 + "%";
-          const animationDuration = Math.random() * 20 + 10;
-          particle.style.animation = `float ${animationDuration}s infinite ease-in-out`;
-          particlesContainer.appendChild(particle);
-        }
-        // Add keyframes for floating animation
-        const styleSheet = document.createElement("style");
-        styleSheet.textContent = `
+    });
+  </script>
+  <script id="particlesScript">
+    document.addEventListener("DOMContentLoaded", function () {
+      const particlesContainer = document.getElementById("particles");
+      const particleCount = 50;
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement("div");
+        particle.classList.add("particle");
+        const size = Math.random() * 10 + 5;
+        particle.style.width = size + "px";
+        particle.style.height = size + "px";
+        particle.style.left = Math.random() * 100 + "%";
+        particle.style.top = Math.random() * 100 + "%";
+        const animationDuration = Math.random() * 20 + 10;
+        particle.style.animation = `float ${animationDuration}s infinite ease-in-out`;
+        particlesContainer.appendChild(particle);
+      }
+      // Add keyframes for floating animation
+      const styleSheet = document.createElement("style");
+      styleSheet.textContent = `
       @keyframes float {
       0%, 100% {
       transform: translateY(0) translateX(0);
@@ -1598,230 +1235,235 @@ I will start. #Blender3D #Tutorial
       }
       }
       `;
-        document.head.appendChild(styleSheet);
-      });
-    </script>
-    <script id="githubContributionsScript">
-      document.addEventListener("DOMContentLoaded", function () {
-        const githubChart = echarts.init(
-          document.getElementById("githubContributions"),
-        );
-        const option = {
-          animation: false,
-          tooltip: {
-            trigger: "axis",
-            backgroundColor: "rgba(255, 255, 255, 0.8)",
-            textStyle: {
-              color: "#1f2937",
-            },
+      document.head.appendChild(styleSheet);
+    });
+  </script>
+  <script id="githubContributionsScript">
+    document.addEventListener("DOMContentLoaded", function () {
+      const githubChart = echarts.init(
+        document.getElementById("githubContributions"),
+      );
+      const option = {
+        animation: false,
+        tooltip: {
+          trigger: "axis",
+          backgroundColor: "rgba(255, 255, 255, 0.8)",
+          textStyle: {
+            color: "#1f2937",
           },
-          grid: {
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 0,
-          },
-          xAxis: {
-            type: "category",
-            data: [
-              "Jan",
-              "Feb",
-              "Mar",
-              "Apr",
-              "May",
-              "Jun",
-              "Jul",
-              "Aug",
-              "Sep",
-              "Oct",
-              "Nov",
-              "Dec",
-            ],
-            show: false,
-          },
-          yAxis: {
-            type: "value",
-            show: false,
-          },
-          series: [
-            {
-              data: [30, 45, 78, 63, 52, 78, 94, 82, 76, 102, 91, 84],
-              type: "bar",
-              itemStyle: {
-                color: "#8B5CF6",
-                borderRadius: [4, 4, 0, 0],
-              },
-            },
+        },
+        grid: {
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+        },
+        xAxis: {
+          type: "category",
+          data: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
           ],
-        };
-        githubChart.setOption(option);
-        window.addEventListener("resize", function () {
-          githubChart.resize();
-        });
+          show: false,
+        },
+        yAxis: {
+          type: "value",
+          show: false,
+        },
+        series: [
+          {
+            data: [30, 45, 78, 63, 52, 78, 94, 82, 76, 102, 91, 84],
+            type: "bar",
+            itemStyle: {
+              color: "#8B5CF6",
+              borderRadius: [4, 4, 0, 0],
+            },
+          },
+        ],
+      };
+      githubChart.setOption(option);
+      window.addEventListener("resize", function () {
+        githubChart.resize();
       });
-    </script>
-    <script id="portfolioScript">
-      document.addEventListener("DOMContentLoaded", function () {
-        // Portfolio filtering
-        const filterButtons = document.querySelectorAll("[data-filter]");
-        const portfolioItems = document.querySelectorAll("#portfolioGrid > div");
-        filterButtons.forEach((button) => {
-          button.addEventListener("click", function () {
-            const filterValue = this.getAttribute("data-filter");
-            // Update active button
-            filterButtons.forEach((btn) => {
-              btn.classList.remove("bg-primary", "text-white");
-              btn.classList.add("text-gray-300", "hover:text-white");
-            });
-            this.classList.add("bg-primary", "text-white");
-            this.classList.remove("text-gray-300", "hover:text-white");
-            // Filter items
-            portfolioItems.forEach((item) => {
-              if (
-                filterValue === "all" ||
-                item.getAttribute("data-category") === filterValue
-              ) {
-                item.style.display = "block";
-              } else {
-                item.style.display = "none";
-              }
-            });
+    });
+  </script>
+  <script id="portfolioScript">
+    document.addEventListener("DOMContentLoaded", function () {
+      // Portfolio filtering
+      const filterButtons = document.querySelectorAll("[data-filter]");
+      const portfolioItems = document.querySelectorAll("#portfolioGrid > div");
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+          const filterValue = this.getAttribute("data-filter");
+          // Update active button
+          filterButtons.forEach((btn) => {
+            btn.classList.remove("bg-primary", "text-white");
+            btn.classList.add("text-gray-300", "hover:text-white");
           });
-        });
-        // Project modal
-        const modal = document.getElementById("projectModal");
-        const modalTitle = document.getElementById("modalTitle");
-        const modalContent = document.getElementById("modalContent");
-        const closeModal = document.getElementById("closeModal");
-        const projectButtons = document.querySelectorAll(".project-details-btn");
-
-        // Form validation (placeholder)
-        const contactForm = document.querySelector("form");
-        contactForm.addEventListener("submit", function (e) {
-          e.preventDefault();
-          // Simple validation example
-          const name = document.getElementById("name").value;
-          const email = document.getElementById("email").value;
-          const message = document.getElementById("message").value;
-          const isChecked = checkbox.classList.contains("checked");
-          if (name && email && message && isChecked) {
-            // Form is valid, show success message
-            alert("Mesajınız başarıyla gönderildi! Teşekkür ederiz.");
-            contactForm.reset();
-            checkbox.classList.remove("checked");
-          } else {
-            // Form is invalid, show error message
-            alert(
-              "Lütfen tüm alanları doldurun ve kişisel verilerin işlenmesini kabul edin.",
-            );
-          }
-        });
-      });
-    </script>
-    <script id="smoothScrollScript">
-      document.addEventListener("DOMContentLoaded", function () {
-        // Smooth scroll for navigation links
-        const navLinks = document.querySelectorAll('a[href^="#"]');
-        navLinks.forEach((link) => {
-          link.addEventListener("click", function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute("href");
-            if (targetId === "#") return;
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-              const headerHeight = document.getElementById("header").offsetHeight;
-              const targetPosition =
-                targetElement.getBoundingClientRect().top +
-                window.pageYOffset -
-                headerHeight;
-              window.scrollTo({
-                top: targetPosition,
-                behavior: "smooth",
-              });
+          this.classList.add("bg-primary", "text-white");
+          this.classList.remove("text-gray-300", "hover:text-white");
+          // Filter items
+          portfolioItems.forEach((item) => {
+            if (
+              filterValue === "all" ||
+              item.getAttribute("data-category") === filterValue
+            ) {
+              item.style.display = "block";
+            } else {
+              item.style.display = "none";
             }
           });
         });
       });
-    </script>
-    <script id="loadingScreenScript">
-      document.addEventListener("DOMContentLoaded", function () {
-        const loadingScreen = document.getElementById("loadingScreen");
-        const loadingBar = document.querySelector(".loading-bar");
-        // Simulate loading progress
-        let progress = 0;
-        const interval = setInterval(function () {
-          progress += Math.random() * 10;
-          if (progress >= 100) {
-            progress = 100;
-            clearInterval(interval);
-            // Hide loading screen after a short delay
-            setTimeout(function () {
-              loadingScreen.style.opacity = "0";
-              setTimeout(function () {
-                loadingScreen.style.display = "none";
-              }, 50); // Changed from 100 to 50
-            }, 50); // Changed from 100 to 50
-          }
-          loadingBar.style.width = progress + "%";
-        }, 50); // Changed from 200 to 50
+      // Project modal
+      const modal = document.getElementById("projectModal");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalContent = document.getElementById("modalContent");
+      const closeModal = document.getElementById("closeModal");
+      const projectButtons = document.querySelectorAll(".project-details-btn");
+
+      // Form validation (placeholder)
+      const contactForm = document.querySelector("form");
+      contactForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        // Simple validation example
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const message = document.getElementById("message").value;
+        const isChecked = checkbox.classList.contains("checked");
+        if (name && email && message && isChecked) {
+          // Form is valid, show success message
+          alert("Mesajınız başarıyla gönderildi! Teşekkür ederiz.");
+          contactForm.reset();
+          checkbox.classList.remove("checked");
+        } else {
+          // Form is invalid, show error message
+          alert(
+            "Lütfen tüm alanları doldurun ve kişisel verilerin işlenmesini kabul edin.",
+          );
+        }
       });
-    </script>
-    <!-- Modified Dev Notification Script -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function(){
-        const devNotification = document.getElementById("devNotification");
-        const btn = document.getElementById("devNotificationBtn");
-        btn.addEventListener("click", function(){
-          devNotification.classList.add("opacity-0", "transition-opacity", "duration-500");
-          setTimeout(function(){
-            devNotification.style.display = "none";
-          }, 500);
+    });
+  </script>
+  <script id="smoothScrollScript">
+    document.addEventListener("DOMContentLoaded", function () {
+      // Smooth scroll for navigation links
+      const navLinks = document.querySelectorAll('a[href^="#"]');
+      navLinks.forEach((link) => {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute("href");
+          if (targetId === "#") return;
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            const headerHeight = document.getElementById("header").offsetHeight;
+            const targetPosition =
+              targetElement.getBoundingClientRect().top +
+              window.pageYOffset -
+              headerHeight;
+            window.scrollTo({
+              top: targetPosition,
+              behavior: "smooth",
+            });
+          }
         });
       });
-    </script>
-    <script id="contact-script">
-      document.addEventListener('DOMContentLoaded', function () {
-        const googleLoginBtn = document.getElementById('google-login-btn');
-
-        if (googleLoginBtn) {
-          googleLoginBtn.addEventListener('click', function () {
-            window.location.href = '/auth/google';
-          });
+    });
+  </script>
+  <script id="loadingScreenScript">
+    document.addEventListener("DOMContentLoaded", function () {
+      const loadingScreen = document.getElementById("loadingScreen");
+      const loadingBar = document.querySelector(".loading-bar");
+      // Simulate loading progress
+      let progress = 0;
+      const interval = setInterval(function () {
+        progress += Math.random() * 10;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(interval);
+          // Hide loading screen after a short delay
+          setTimeout(function () {
+            loadingScreen.style.opacity = "0";
+            setTimeout(function () {
+              loadingScreen.style.display = "none";
+            }, 50); // Changed from 100 to 50
+          }, 50); // Changed from 100 to 50
         }
+        loadingBar.style.width = progress + "%";
+      }, 50); // Changed from 200 to 50
+    });
+  </script>
+  <!-- Modified Dev Notification Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const devNotification = document.getElementById("devNotification");
+      const btn = document.getElementById("devNotificationBtn");
+      btn.addEventListener("click", function () {
+        devNotification.classList.add("opacity-0", "transition-opacity", "duration-500");
+        setTimeout(function () {
+          devNotification.style.display = "none";
+        }, 500);
       });
-    </script>
+    });
+  </script>
+  <script id="contact-script">
+    document.addEventListener('DOMContentLoaded', function () {
+      const googleLoginBtn = document.getElementById('google-login-btn');
+
+      if (googleLoginBtn) {
+        googleLoginBtn.addEventListener('click', function () {
+          window.location.href = '/auth/google';
+        });
+      }
+    });
+  </script>
   <script id="user-profile-script">
-  document.addEventListener('DOMContentLoaded', async () => {
-    try {
-      const response = await fetch('/api/user');
-      if (response.ok) {
-        const user = await response.json();
-        const userImage = document.querySelector('.logo img');
-        if (userImage && user.photo) {
-          userImage.src = user.photo;
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const response = await fetch('/api/user');
+        const profileMenu = document.getElementById('profile-menu');
+
+        if (response.ok) {
+          const user = await response.json();
+          const userImage = document.querySelector('.logo img');
+          if (userImage && user.photo) {
+            userImage.src = user.photo;
+          }
+
+          // User is logged in, show Log Out
+          if (profileMenu) {
+            profileMenu.innerHTML = `
+              <div class="px-4 py-2 text-sm text-gray-400 border-b border-gray-700">
+                ${user.name || 'User'}
+              </div>
+              <a href="/logout" class="block px-4 py-2 text-sm text-gray-300 hover:bg-primary hover:text-white">Log Out</a>
+            `;
+          }
+        } else {
+          // User is not logged in, show Log In / Sign Up
+          if (profileMenu) {
+            profileMenu.innerHTML = `
+              <a href="/login.html" class="block px-4 py-2 text-sm text-gray-300 hover:bg-primary hover:text-white">Log In</a>
+              <a href="/login.html?mode=signup" class="block px-4 py-2 text-sm text-gray-300 hover:bg-primary hover:text-white">Sign Up</a>
+            `;
+          }
         }
-      }
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
-  });
-</script>
-  <script id="profile-menu-script">
-  document.addEventListener('DOMContentLoaded', () => {
-    const profileMenuButton = document.getElementById('profile-menu-button');
-    const profileMenu = document.getElementById('profile-menu');
-
-    profileMenuButton.addEventListener('click', (event) => {
-      event.preventDefault();
-      profileMenu.classList.toggle('hidden');
-    });
-
-    document.addEventListener('click', (event) => {
-      if (!profileMenuButton.contains(event.target) && !profileMenu.contains(event.target)) {
-        profileMenu.classList.add('hidden');
+      } catch (error) {
+        console.error('Error fetching user data:', error);
       }
     });
-  });
-</script>
+  </script>
+
 </body>
+
 </html>
