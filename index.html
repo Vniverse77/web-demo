@@ -64,11 +64,15 @@
       <div
         class="container mx-auto px-6 py-4 flex justify-between items-center"
       >
-       
-        <a href="#home" class="logo">
-         
-          <img src="images/Tux.png" alt="Header Logo" class="w-[75px] h-[75px] circular-image">
-        </a>
+        <div class="relative">
+          <a href="#home" class="logo" id="profile-menu-button">
+            <img src="images/Tux.png" alt="Header Logo" class="w-[75px] h-[75px] circular-image">
+          </a>
+          <div id="profile-menu" class="absolute left-0 mt-2 w-48 bg-[#1E293B] rounded-md shadow-lg z-50 hidden">
+            <a href="/login.html" class="block px-4 py-2 text-sm text-gray-300 hover:bg-primary hover:text-white">Log In</a>
+            <a href="/login.html" class="block px-4 py-2 text-sm text-gray-300 hover:bg-primary hover:text-white">Sign Up</a>
+          </div>
+        </div>
         <nav class="hidden md:flex items-center space-x-8">
           <a
             href="#home"
@@ -107,8 +111,6 @@
           >
         </nav>
         <div class="flex items-center space-x-4 font-bold">
-          <a href="/login.html" id="login-button" class="text-gray-300 hover:text-white">Log In</a>
-          <a href="/login.html" id="signup-button" class="text-gray-300 hover:text-white">Sign Up</a>
           <a href="https://github.com/Vniverse77?tab=repositories" target="_blank" class="flex items-center space-x-1 text-gray-300 hover:text-white">
             <span class="w-6 h-6 flex items-center justify-center">
               <i class="ri-github-fill"></i>
@@ -1804,5 +1806,22 @@ I will start. #Blender3D #Tutorial
     }
   });
 </script>
-  </body>
+  <script id="profile-menu-script">
+  document.addEventListener('DOMContentLoaded', () => {
+    const profileMenuButton = document.getElementById('profile-menu-button');
+    const profileMenu = document.getElementById('profile-menu');
+
+    profileMenuButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      profileMenu.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!profileMenuButton.contains(event.target) && !profileMenu.contains(event.target)) {
+        profileMenu.classList.add('hidden');
+      }
+    });
+  });
+</script>
+</body>
 </html>

@@ -225,6 +225,16 @@
   background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
 }
 
+#profile-menu {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+
 /* Responsive Styles */
 @media (max-width: 768px) {
   .header-effect {
