@@ -1,185 +1,278 @@
 /* empty for now bcuz, I dont need */
-:where([class^="ri-"])::before { content: "\f3c2"; }
-      body {
-      font-family: 'JetBrains Mono Nerd Font', monospace;
-      background-color: #0A2342;
-      color: #E0E0E0;
-      overflow-x: hidden;
-      }
-      .gradient-text {
-      background: linear-gradient(90deg, #0A2342, #0B6E4F);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      }
-      .gradient-bg {
-      background: linear-gradient(135deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
-      }
-      .card-hover {
-      transition: all 0.3s ease;
-      }
-      .card-hover:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px -5px rgba(11, 110, 79, 0.3);
-      }
-      .custom-cursor {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background-color: rgba(11, 110, 79, 0.5);
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      mix-blend-mode: difference;
-      transition: transform 0.1s ease;
-      }
-      .custom-cursor-follower {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 1px solid rgba(11, 110, 79, 0.3);
-      position: fixed;
-      pointer-events: none;
-      z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
-      }
-      input[type="range"] {
-      width: 100%;
-      height: 6px;
-      background: #1E293B;
-      border-radius: 5px;
-      outline: none;
-      }
-      input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 18px;
-      height: 18px;
-      background: #0A2342;
-      border-radius: 50%;
-      cursor: pointer;
-      }
-      input[type="range"]::-moz-range-thumb {
-      width: 18px;
-      height: 18px;
-      background: #0A2342;
-      border-radius: 50%;
-      cursor: pointer;
-      border: none;
-      }
-      .custom-checkbox {
-      position: relative;
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border-radius: 4px;
-      background-color: #1E293B;
-      cursor: pointer;
-      }
-      .custom-checkbox.checked {
-      background-color: #0B6E4F;
-      }
-      .custom-checkbox.checked::after {
-      content: '';
-      position: absolute;
-      top: 5px;
-      left: 7px;
-      width: 6px;
-      height: 10px;
-      border: solid white;
-      border-width: 0 2px 2px 0;
-      transform: rotate(45deg);
-      }
-      .switch {
-      position: relative;
-      display: inline-block;
-      width: 50px;
-      height: 26px;
-      }
-      .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-      }
-      .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #1E293B;
-      transition: .4s;
-      border-radius: 34px;
-      }
-      .slider:before {
-      position: absolute;
-      content: "";
-      height: 18px;
-      width: 18px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      transition: .4s;
-      border-radius: 50%;
-      }
-      input:checked + .slider {
-      background-color: #0B6E4F;
-      }
-      input:checked + .slider:before {
-      transform: translateX(24px);
-      }
-      .custom-radio {
-      position: relative;
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background-color: #1E293B;
-      cursor: pointer;
-      }
-      .custom-radio.checked {
-      background-color: #0B6E4F;
-      }
-      .custom-radio.checked::after {
-      content: '';
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background-color: white;
-      }
-      .hero-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('../images/astronout.jpg');
-      background-size: cover;
-      background-position: center;
-      opacity: 0.3;
-      z-index: -1;
-      }
-      .particle {
-      position: absolute;
-      background: linear-gradient(135deg, #0A2342, #0B6E4F);
-      border-radius: 50%;
-      opacity: 0.3;
-      }
-      .masonry-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      grid-auto-rows: 10px;
-      grid-gap: 20px;
-      }
-      .masonry-item {
-      grid-row-end: span var(--span);
-      }
-      /* .code-clean{
+:where([class^="ri-"])::before {
+  content: "\f3c2";
+}
+
+:root {
+  --bg-color: #02040a;
+  /* Dark+Dark */
+  --text-color: #FFFFFF;
+  --card-bg: rgba(10, 35, 66, 0.65);
+  /* Glassy Dark Blue */
+  --card-text: #FFFFFF;
+  --primary-color: #3B82F6;
+  --secondary-color: #60A5FA;
+  --menu-bg: rgba(10, 35, 66, 0.85);
+  /* Glassy Menu */
+  --menu-text: #FFFFFF;
+  --hover-bg: #3B82F6;
+  --hover-text: #FFFFFF;
+  --muted-text: #D1D5DB;
+}
+
+.light-mode {
+  --bg-color: #FFFFFF;
+  --text-color: #000000;
+  --card-bg: rgba(255, 255, 255, 0.75);
+  /* Glassy White */
+  --card-text: #000000;
+  --primary-color: #2563EB;
+  --secondary-color: #60A5FA;
+  --menu-bg: rgba(255, 255, 255, 0.9);
+  --menu-text: #000000;
+  --hover-bg: #2563EB;
+  --hover-text: #FFFFFF;
+  --muted-text: #4B5563;
+}
+
+/* Liquid Glass Effect for Cards */
+.bg-card {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+}
+
+.light-mode .bg-card {
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+}
+
+body {
+  font-family: 'JetBrains Mono Nerd Font', monospace;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light Mode Overrides for specific elements */
+.light-mode #profile-menu {
+  background-color: var(--menu-bg) !important;
+  color: var(--menu-text) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #E5E5E5;
+}
+
+.light-mode #profile-menu a,
+.light-mode #profile-menu div {
+  color: var(--menu-text) !important;
+}
+
+.light-mode #profile-menu a:hover {
+  background-color: var(--hover-bg) !important;
+  color: var(--hover-text) !important;
+}
+
+.gradient-text {
+  /* Removed gradient, just white */
+  color: var(--text-color);
+}
+
+.gradient-bg {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.card-hover {
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(255, 255, 255, 0.1);
+  border-color: var(--primary-color);
+}
+
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  transition: transform 0.1s ease;
+}
+
+.custom-cursor-follower {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #FFFFFF;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+}
+
+input[type="range"] {
+  width: 100%;
+  height: 6px;
+  background: #1E293B;
+  border-radius: 5px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #0A2342;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: #0A2342;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+.custom-checkbox {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background-color: #1E293B;
+  cursor: pointer;
+}
+
+.custom-checkbox.checked {
+  background-color: #0B6E4F;
+}
+
+.custom-checkbox.checked::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 7px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #1E293B;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked+.slider {
+  background-color: #0B6E4F;
+}
+
+input:checked+.slider:before {
+  transform: translateX(24px);
+}
+
+.custom-radio {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #1E293B;
+  cursor: pointer;
+}
+
+.custom-radio.checked {
+  background-color: #0B6E4F;
+}
+
+.custom-radio.checked::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../images/astronout.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+.particle {
+  position: absolute;
+  background: linear-gradient(135deg, #0A2342, #0B6E4F);
+  border-radius: 50%;
+  opacity: 0.3;
+}
+
+.masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-rows: 10px;
+  grid-gap: 20px;
+}
+
+.masonry-item {
+  grid-row-end: span var(--span);
+}
+
+/* .code-clean{
         position: absolute;
         top: 10px;
         
@@ -190,39 +283,52 @@
         padding: 0.25rem 0.5rem;
         border-radius: 4px;
       } */
-       .blur-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            z-index: 999;
-        }
-      input[type="number"]::-webkit-inner-spin-button,
-      input[type="number"]::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-      }
-      /* input[type="number"] {
+.blur-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 999;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* input[type="number"] {
       -moz-appearance: textfield;
       } */
-      @keyframes headerEffect {
-        from { transform: translateY(-20px); opacity: 0; }
-        to { transform: translateY(0); opacity: 1; }
-      }
-      .header-effect {
-        animation: headerEffect 1s ease-out;
-      }
+@keyframes headerEffect {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.header-effect {
+  animation: headerEffect 1s ease-out;
+}
+
 .circular-image {
   border-radius: 50%;
-  border: 3px solid #8B5CF6; /* Primary color border */
-  box-shadow: 0 0 10px rgba(139, 92, 246, 0.5); /* Soft shadow with primary color */
+  border: 3px solid var(--primary-color);
+  /* Primary color border */
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+  /* Soft shadow with primary color (Blue) */
 }
 
 .hero-image {
-  background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
 }
 
 #profile-menu {
@@ -240,83 +346,110 @@
   .header-effect {
     animation: none;
   }
+
   .container {
     padding-left: 1rem;
     padding-right: 1rem;
   }
+
   #home .flex-col {
     text-align: center;
   }
+
   #home .md\:flex-row {
     flex-direction: column;
   }
+
   #home .md\:w-1\/2 {
     width: 100%;
   }
+
   #home .md\:mb-0 {
     margin-bottom: 2.5rem;
   }
+
   #home .hero-image {
     margin: 0 auto;
   }
+
   .grid-cols-1 {
     grid-template-columns: 1fr;
   }
+
   .md\:grid-cols-2 {
     grid-template-columns: 1fr;
   }
+
   .lg\:grid-cols-3 {
     grid-template-columns: 1fr;
   }
+
   .lg\:grid-cols-4 {
     grid-template-columns: 1fr;
   }
+
   .md\:grid-cols-3 {
     grid-template-columns: 1fr;
   }
+
   .sm\:grid-cols-2 {
     grid-template-columns: 1fr;
   }
+
   .flex.space-x-4 {
     justify-content: center;
   }
+
   .text-4xl {
     font-size: 2.5rem;
   }
+
   .md\:text-6xl {
     font-size: 3rem;
   }
+
   .text-2xl {
     font-size: 1.5rem;
   }
+
   .md\:text-3xl {
     font-size: 1.75rem;
   }
+
   .login-signup-buttons {
     display: none;
   }
+
   .flex-wrap {
     justify-content: center;
   }
+
   .lg\:grid-cols-2 {
     grid-template-columns: 1fr;
   }
+
   .footer .grid-cols-1 {
     text-align: center;
   }
-  .footer .md\:grid-cols-2, .footer .lg\:grid-cols-4 {
+
+  .footer .md\:grid-cols-2,
+  .footer .lg\:grid-cols-4 {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+
   .footer .flex-wrap {
     justify-content: center;
   }
+
   .footer .md\:text-left {
     text-align: center;
   }
+
   .footer .md\:flex-row {
     flex-direction: column;
   }
+
   .footer .md\:mb-0 {
     margin-bottom: 1rem;
   }
@@ -327,35 +460,45 @@
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
+
   .text-4xl {
     font-size: 2rem;
   }
+
   .md\:text-6xl {
     font-size: 2.5rem;
   }
+
   .text-2xl {
     font-size: 1.25rem;
   }
+
   .md\:text-3xl {
     font-size: 1.5rem;
   }
+
   .px-6 {
     padding-left: 1rem;
     padding-right: 1rem;
   }
+
   .py-3 {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
   }
+
   .w-80 {
     width: 16rem;
   }
+
   .h-80 {
     height: 16rem;
   }
+
   .md\:w-96 {
     width: 18rem;
   }
+
   .md\:h-96 {
     height: 18rem;
   }

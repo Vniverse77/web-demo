@@ -10,9 +10,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet" />
 </head>
 
-<body class="bg-black text-gray-200 flex items-center justify-center min-h-screen">
-    <div class="bg-[#1E293B] p-8 rounded-lg shadow-lg w-full max-w-md relative">
-        <a href="/" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+<body class="bg-bg text-text-color flex items-center justify-center min-h-screen relative">
+    <div id="particles" class="hero-bg absolute inset-0 z-0"></div>
+    <div class="bg-card p-8 rounded-lg shadow-lg w-full max-w-md relative border border-white/10 z-10">
+        <a href="/" class="absolute top-4 right-4 text-muted hover:text-white transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -23,7 +24,7 @@
                 class="text-xl font-bold text-white border-b-2 border-primary px-4 py-2 focus:outline-none">Log
                 In</button>
             <button id="signupTab"
-                class="text-xl font-bold text-gray-500 border-b-2 border-transparent px-4 py-2 focus:outline-none hover:text-gray-300">Sign
+                class="text-xl font-bold text-muted border-b-2 border-transparent px-4 py-2 focus:outline-none hover:text-white">Sign
                 Up</button>
         </div>
 
@@ -32,21 +33,21 @@
             <form action="/login-user" method="post">
                 <div class="space-y-4">
                     <input type="email" name="username" placeholder="Email" required
-                        class="w-full px-4 py-2 rounded-lg bg-[#0F172A] text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary">
+                        class="w-full px-4 py-2 rounded-lg bg-bg/50 border border-white/10 text-white placeholder-muted focus:outline-none focus:ring-2 focus:ring-primary">
                     <input type="password" name="password" placeholder="Password" required
-                        class="w-full px-4 py-2 rounded-lg bg-[#0F172A] text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary">
+                        class="w-full px-4 py-2 rounded-lg bg-bg/50 border border-white/10 text-white placeholder-muted focus:outline-none focus:ring-2 focus:ring-primary">
                     <button type="submit"
-                        class="w-full bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-button font-medium transition-all duration-300">Login</button>
+                        class="w-full bg-primary hover:bg-primary/80 text-white px-6 py-3 rounded-button font-medium transition-all duration-300">Login</button>
                 </div>
             </form>
             <div class="flex items-center justify-center space-x-4">
-                <span class="h-px bg-gray-600 w-full"></span>
-                <span class="text-gray-500">OR</span>
-                <span class="h-px bg-gray-600 w-full"></span>
+                <span class="h-px bg-white/10 w-full"></span>
+                <span class="text-muted">OR</span>
+                <span class="h-px bg-white/10 w-full"></span>
             </div>
             <div class="space-y-4">
                 <a href="/auth/google"
-                    class="w-full flex items-center justify-center bg-[#4285F4] hover:bg-[#357AE8] text-white px-6 py-3 rounded-button font-medium transition-all duration-300">
+                    class="w-full flex items-center justify-center bg-white text-black hover:bg-gray-200 px-6 py-3 rounded-button font-medium transition-all duration-300">
                     <i class="ri-google-fill mr-2"></i>
                     <span>Login with Google</span>
                 </a>
@@ -63,24 +64,24 @@
             <form action="/signup" method="post">
                 <div class="space-y-4">
                     <input type="text" name="name" placeholder="Full Name" required
-                        class="w-full px-4 py-2 rounded-lg bg-[#0F172A] text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary">
+                        class="w-full px-4 py-2 rounded-lg bg-bg/50 border border-white/10 text-white placeholder-muted focus:outline-none focus:ring-2 focus:ring-primary">
                     <input type="email" name="email" placeholder="Email" required
-                        class="w-full px-4 py-2 rounded-lg bg-[#0F172A] text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary">
+                        class="w-full px-4 py-2 rounded-lg bg-bg/50 border border-white/10 text-white placeholder-muted focus:outline-none focus:ring-2 focus:ring-primary">
                     <input type="password" name="password" placeholder="Password" required
-                        class="w-full px-4 py-2 rounded-lg bg-[#0F172A] text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary">
+                        class="w-full px-4 py-2 rounded-lg bg-bg/50 border border-white/10 text-white placeholder-muted focus:outline-none focus:ring-2 focus:ring-primary">
                     <button type="submit"
-                        class="w-full bg-secondary hover:bg-secondary/90 text-white px-6 py-3 rounded-button font-medium transition-all duration-300">Sign
+                        class="w-full bg-primary hover:bg-primary/80 text-white px-6 py-3 rounded-button font-medium transition-all duration-300">Sign
                         Up</button>
                 </div>
             </form>
             <div class="flex items-center justify-center space-x-4">
-                <span class="h-px bg-gray-600 w-full"></span>
-                <span class="text-gray-500">OR</span>
-                <span class="h-px bg-gray-600 w-full"></span>
+                <span class="h-px bg-white/10 w-full"></span>
+                <span class="text-muted">OR</span>
+                <span class="h-px bg-white/10 w-full"></span>
             </div>
             <div class="space-y-4">
                 <a href="/auth/google"
-                    class="w-full flex items-center justify-center bg-[#4285F4] hover:bg-[#357AE8] text-white px-6 py-3 rounded-button font-medium transition-all duration-300">
+                    class="w-full flex items-center justify-center bg-white text-black hover:bg-gray-200 px-6 py-3 rounded-button font-medium transition-all duration-300">
                     <i class="ri-google-fill mr-2"></i>
                     <span>Sign up with Google</span>
                 </a>
@@ -100,8 +101,8 @@
 
             loginTab.addEventListener('click', () => {
                 loginTab.classList.add('text-white', 'border-primary');
-                loginTab.classList.remove('text-gray-500', 'border-transparent');
-                signupTab.classList.add('text-gray-500', 'border-transparent');
+                loginTab.classList.remove('text-muted', 'border-transparent');
+                signupTab.classList.add('text-muted', 'border-transparent');
                 signupTab.classList.remove('text-white', 'border-primary');
                 loginForm.classList.remove('hidden');
                 signupForm.classList.add('hidden');
@@ -109,8 +110,8 @@
 
             signupTab.addEventListener('click', () => {
                 signupTab.classList.add('text-white', 'border-primary');
-                signupTab.classList.remove('text-gray-500', 'border-transparent');
-                loginTab.classList.add('text-gray-500', 'border-transparent');
+                signupTab.classList.remove('text-muted', 'border-transparent');
+                loginTab.classList.add('text-muted', 'border-transparent');
                 loginTab.classList.remove('text-white', 'border-primary');
                 signupForm.classList.remove('hidden');
                 loginForm.classList.add('hidden');

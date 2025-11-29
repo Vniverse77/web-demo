@@ -369,13 +369,31 @@ app.get('/api/admin/users', verifyToken, async (req, res) => {
   }
 });
 
+// NASA API Route
+app.get('/api/nasa-images', async (req, res) => {
+  try {
+    // Fetch 5 random images from NASA APOD
+    const response = await fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&count=5');
+    if (!response.ok) {
+      throw new Error('Failed to fetch from NASA API');
+    }
+    const data = await response.json();
+    // Filter for images only (exclude videos)
+    const images = data.filter(item => item.media_type === 'image').map(item => ({
+      url: item.url,
+      title: item.title,
+      explanation: item.explanation,
+      hdurl: item.hdurl
+    }));
+    res.json(images);
+  } catch (error) {
+    console.error('NASA API Error:', error);
+    res.status(500).json({ error: 'Failed to fetch NASA images' });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
-
-
-
-
-
 
 
