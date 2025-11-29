@@ -369,28 +369,104 @@ app.get('/api/admin/users', verifyToken, async (req, res) => {
   }
 });
 
-// NASA API Route
+// NASA API Route with Fallback
 app.get('/api/nasa-images', async (req, res) => {
-  try {
-    // Fetch 5 random images from NASA APOD
-    const response = await fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&count=5');
-    if (!response.ok) {
-      throw new Error('Failed to fetch from NASA API');
+  // Fallback images if API fails
+  const fallbackImages = [
+    {
+      url: 'https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=1920&q=80',
+      title: 'Deep Space',
+      explanation: 'A stunning view of the cosmos',
+      hdurl: 'https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=1920&q=80'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=80',
+      title: 'Galaxy',
+      explanation: 'Beautiful spiral galaxy in deep space',
+      hdurl: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=80'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1920&q=80',
+      title: 'Nebula',
+      explanation: 'Colorful nebula formation',
+      hdurl: 'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1920&q=80'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1464802686167-b939a6910659?w=1920&q=80',
+      title: 'Starfield',
+      explanation: 'Millions of stars in the night sky',
+      hdurl: 'https://images.unsplash.com/photo-1464802686167-b939a6910659?w=1920&q=80'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1543722530-d2c3201371e7?w=1920&q=80',
+      title: 'Cosmic Wonder',
+      explanation: 'The beauty of our universe',
+      hdurl: 'https://images.unsplash.com/photo-1543722530-d2c3201371e7?w=1920&q=80'
     }
+  ];
+
+  try {
+    const apiKey = process.env.NASA_API_KEY || '';
+    const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=5`, {
+      timeout: 5000
+    });
+
+    if (!response.ok) {
+      console.warn('NASA API returned error, using fallback images');
+      return res.json(fallbackImages);
+    }
+
     const data = await response.json();
+
     // Filter for images only (exclude videos)
     const images = data.filter(item => item.media_type === 'image').map(item => ({
       url: item.url,
       title: item.title,
       explanation: item.explanation,
-      hdurl: item.hdurl
+      hdurl: item.hdurl || item.url
     }));
-    res.json(images);
+
+    // If we got images, return them; otherwise use fallback
+    if (images.length > 0) {
+      res.json(images);
+    } else {
+      console.warn('No images from NASA API, using fallback');
+      res.json(fallbackImages);
+    }
   } catch (error) {
-    console.error('NASA API Error:', error);
-    res.status(500).json({ error: 'Failed to fetch NASA images' });
+    console.error('NASA API Error:', error.message);
+    // Return fallback images instead of error
+    res.json(fallbackImages);
   }
 });
+
+// News API Route
+app.get('/api/tech-news', async (req, res) => {
+  try {
+    const apiKey = process.env.NEWS_API_KEY || 'd93238b79cdc46cbbd894ee0f88a6f06';
+    const page = req.query.page || 1;
+    const pageSize = 6;
+    const url = `https://newsapi.org/v2/top-headlines?category=technology&language=en&pageSize=${pageSize}&page=${page}&apiKey=${apiKey}`;
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (data.status === 'ok') {
+      res.json({
+        articles: data.articles,
+        totalResults: data.totalResults,
+        currentPage: parseInt(page),
+        hasMore: (parseInt(page) * pageSize) < data.totalResults
+      });
+    } else {
+      throw new Error('Failed to fetch news');
+    }
+  } catch (error) {
+    console.error('News API Error:', error);
+    res.status(500).json({ error: 'Failed to fetch news' });
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);

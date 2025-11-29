@@ -106,6 +106,72 @@
           </span>
           <span>GitHub Star</span>
         </a>
+
+        <!-- Donation Heart Button -->
+        <div class="relative inline-block">
+          <button id="donation-heart-btn"
+            class="flex items-center space-x-1 text-card-text hover:text-primary transition-colors">
+            <span class="w-6 h-6 flex items-center justify-center">
+              <i class="ri-heart-fill text-red-500"></i>
+            </span>
+            <span>Support</span>
+          </button>
+
+          <!-- Donation Dropdown Menu -->
+          <div id="donation-menu"
+            class="profile-menu-hidden absolute right-0 mt-2 w-80 bg-menu-bg rounded-lg shadow-lg border border-white/10 overflow-hidden z-50">
+            <div class="p-4">
+              <h3 class="text-sm font-semibold text-card-text mb-3 flex items-center">
+                <i class="ri-heart-fill text-red-500 mr-2"></i>
+                Support My Work
+              </h3>
+
+              <!-- IBAN -->
+              <div class="bg-card/50 rounded-lg p-3 mb-3 border border-primary/20">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-xs text-muted">IBAN (Bank Transfer)</span>
+                  <button
+                    onclick="navigator.clipboard.writeText('TR49 0015 7000 0000 0201 0280 50'); this.innerHTML='<i class=&quot;ri-check-line&quot;></i>'; setTimeout(() => this.innerHTML='<i class=&quot;ri-file-copy-line&quot;></i>', 2000)"
+                    class="text-primary hover:text-secondary transition-colors">
+                    <i class="ri-file-copy-line"></i>
+                  </button>
+                </div>
+                <code class="text-xs text-card-text font-mono block">TR49 0015 7000 0000 0201 0280 50</code>
+              </div>
+
+              <!-- BTC -->
+              <div class="bg-card/50 rounded-lg p-3 mb-3 border border-primary/20">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-xs text-muted">Bitcoin (BTC)</span>
+                  <button
+                    onclick="navigator.clipboard.writeText('bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh'); this.innerHTML='<i class=&quot;ri-check-line&quot;></i>'; setTimeout(() => this.innerHTML='<i class=&quot;ri-file-copy-line&quot;></i>', 2000)"
+                    class="text-primary hover:text-secondary transition-colors">
+                    <i class="ri-file-copy-line"></i>
+                  </button>
+                </div>
+                <code
+                  class="text-xs text-card-text font-mono block break-all">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</code>
+              </div>
+
+              <!-- Donation Links -->
+              <div class="grid grid-cols-2 gap-2">
+                <a href="https://www.buymeacoffee.com/vniverse77" target="_blank" rel="noopener noreferrer"
+                  class="bg-[#FFDD00] hover:bg-[#FFDD00]/80 text-black px-3 py-2 rounded-button text-xs font-medium transition-all duration-300 flex items-center justify-center">
+                  <i class="ri-cup-fill mr-1"></i>
+                  Coffee
+                </a>
+                <a href="https://ko-fi.com/vniverse77" target="_blank" rel="noopener noreferrer"
+                  class="bg-[#FF5E5B] hover:bg-[#FF5E5B]/80 text-white px-3 py-2 rounded-button text-xs font-medium transition-all duration-300 flex items-center justify-center">
+                  <i class="ri-heart-fill mr-1"></i>
+                  Ko-fi
+                </a>
+              </div>
+
+              <p class="text-xs text-muted mt-3 text-center">Thank you! 🙏</p>
+            </div>
+          </div>
+        </div>
+
         <button class="md:hidden w-10 h-10 rounded-full flex items-center justify-center bg-card text-card-text"
           id="mobileMenuToggle">
           <span class="w-6 h-6 flex items-center justify-center">
@@ -654,15 +720,35 @@
   </section>
   <section id="news" class="py-20 relative gradient-bg">
     <div class="container mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 class="text-2xl md:text-4xl font-bold mb-4">Latest News (under maintenance)</h2>
-        <p class="text-gray-400 max-w-2xl mx-auto">
-          <b>Stay tuned for updates!
-            <br />
-            Bu bolumi gutarmagmyza az galdy, sabyr ediň!!!
-          </b>
-          <img class="rounded-lg overflow-hidden" src="images/rick-and-morty.jpg" alt="">
+      <div class="text-center mb-16 relative">
+        <h2 class="text-2xl md:text-4xl font-bold mb-4">Latest Technology News</h2>
+        <p class="text-muted max-w-2xl mx-auto">
+          Stay updated with the latest news and trends in technology
         </p>
+        <!-- Refresh Button -->
+        <button id="news-refresh-btn"
+          class="absolute top-0 right-0 w-10 h-10 flex items-center justify-center bg-primary/20 hover:bg-primary/30 rounded-full transition-colors"
+          title="Refresh News">
+          <i class="ri-refresh-line text-primary"></i>
+        </button>
+      </div>
+
+      <!-- News Grid -->
+      <div id="news-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Loading placeholder -->
+        <div class="col-span-full text-center text-muted">
+          <i class="ri-loader-4-line text-4xl animate-spin"></i>
+          <p class="mt-4">Loading latest news...</p>
+        </div>
+      </div>
+
+      <!-- Show More Button -->
+      <div id="news-show-more-container" class="text-center mt-8 hidden">
+        <button id="news-show-more-btn"
+          class="bg-primary hover:bg-primary/80 text-white px-8 py-3 rounded-button font-medium transition-all duration-300 flex items-center justify-center mx-auto">
+          <i class="ri-arrow-down-line mr-2"></i>
+          Show More News
+        </button>
       </div>
     </div>
   </section>
@@ -1636,8 +1722,6 @@
     document.addEventListener('DOMContentLoaded', async () => {
       try {
         const response = await fetch('/api/nasa-images');
-        if (!response.ok) throw new Error('Failed to fetch NASA images');
-
         const images = await response.json();
         const wrapper = document.getElementById('hero-swiper-wrapper');
 
@@ -1655,19 +1739,18 @@
           // Initialize Swiper
           new Swiper('.hero-swiper', {
             loop: true,
-            effect: 'fade', // Fade effect for background
+            effect: 'fade',
             speed: 1000,
             autoplay: {
               delay: 3000,
               disableOnInteraction: false,
             },
-            allowTouchMove: true, // Allow swiping
+            allowTouchMove: true,
           });
         }
       } catch (error) {
-        console.error('Error loading NASA images:', error);
-        // Fallback is already there (hero-bg) if we didn't clear it, 
-        // but we cleared it. Let's add a fallback slide if fetch fails.
+        console.error('Error loading hero images:', error);
+        // Fallback to dark background
         const wrapper = document.getElementById('hero-swiper-wrapper');
         if (wrapper) {
           wrapper.innerHTML = `
@@ -1675,6 +1758,173 @@
                <div class="hero-bg w-full h-full bg-[#02040a]"></div> 
             </div>`;
         }
+      }
+    });
+  </script>
+
+  <!-- News API Script -->
+  <script>
+    let currentNewsPage = 1;
+    let allNewsArticles = [];
+
+    // Function to create article HTML
+    function createArticleHTML(article) {
+      return `
+        <div class="bg-card rounded-lg overflow-hidden card-hover border border-white/10">
+          <div class="relative h-48 overflow-hidden">
+            <img src="${article.urlToImage || 'images/Tux.png'}" 
+                 alt="${article.title || 'News'}" 
+                 class="w-full h-full object-cover"
+                 onerror="this.src='images/Tux.png'">
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-semibold mb-2 text-card-text line-clamp-2 min-h-[3.5rem]">
+              ${article.title || 'No title available'}
+            </h3>
+            <p class="text-muted text-sm mb-4 line-clamp-3 min-h-[4.5rem]">
+              ${article.description || 'No description available'}
+            </p>
+            <div class="flex items-center justify-between text-xs text-muted mb-4">
+              <span class="flex items-center">
+                <i class="ri-newspaper-line mr-1"></i>
+                ${article.source?.name || 'Unknown'}
+              </span>
+              <span class="flex items-center">
+                <i class="ri-time-line mr-1"></i>
+                ${new Date(article.publishedAt).toLocaleDateString()}
+              </span>
+            </div>
+            <a href="${article.url}" target="_blank" rel="noopener noreferrer"
+               class="text-primary hover:text-secondary transition-colors flex items-center font-medium">
+              Read More <i class="ri-arrow-right-line ml-1"></i>
+            </a>
+          </div>
+        </div>
+      `;
+    }
+
+    // Function to load news
+    async function loadNews(page = 1, append = false) {
+      const newsGrid = document.getElementById('news-grid');
+      const showMoreContainer = document.getElementById('news-show-more-container');
+      const refreshBtn = document.getElementById('news-refresh-btn');
+
+      try {
+        // Show loading state
+        if (!append) {
+          newsGrid.innerHTML = `
+            <div class="col-span-full text-center text-muted">
+              <i class="ri-loader-4-line text-4xl animate-spin"></i>
+              <p class="mt-4">Loading latest news...</p>
+            </div>
+          `;
+        }
+
+        // Disable refresh button during load
+        if (refreshBtn) refreshBtn.disabled = true;
+
+        const response = await fetch(`/api/tech-news?page=${page}`);
+        if (!response.ok) throw new Error('Failed to fetch news');
+
+        const data = await response.json();
+
+        if (append) {
+          allNewsArticles = [...allNewsArticles, ...data.articles];
+        } else {
+          allNewsArticles = data.articles;
+        }
+
+        if (allNewsArticles && allNewsArticles.length > 0) {
+          newsGrid.innerHTML = allNewsArticles.map(article => createArticleHTML(article)).join('');
+
+          // Show/hide "Show More" button
+          if (data.hasMore) {
+            showMoreContainer.classList.remove('hidden');
+          } else {
+            showMoreContainer.classList.add('hidden');
+          }
+        } else {
+          newsGrid.innerHTML = `
+            <div class="col-span-full text-center text-muted">
+              <i class="ri-error-warning-line text-4xl mb-4 block"></i>
+              <p>No news articles available at the moment.</p>
+            </div>
+          `;
+          showMoreContainer.classList.add('hidden');
+        }
+
+        // Re-enable refresh button
+        if (refreshBtn) refreshBtn.disabled = false;
+
+      } catch (error) {
+        console.error('Failed to load news:', error);
+        newsGrid.innerHTML = `
+          <div class="col-span-full text-center text-muted">
+            <i class="ri-error-warning-line text-4xl mb-4 block"></i>
+            <p>Failed to load news. Please try again later.</p>
+          </div>
+        `;
+        showMoreContainer.classList.add('hidden');
+        if (refreshBtn) refreshBtn.disabled = false;
+      }
+    }
+
+    // Initial load
+    document.addEventListener('DOMContentLoaded', () => {
+      loadNews(1);
+
+      // Refresh button handler
+      const refreshBtn = document.getElementById('news-refresh-btn');
+      if (refreshBtn) {
+        refreshBtn.addEventListener('click', () => {
+          currentNewsPage = 1;
+          refreshBtn.querySelector('i').classList.add('animate-spin');
+          loadNews(1).then(() => {
+            refreshBtn.querySelector('i').classList.remove('animate-spin');
+          });
+        });
+      }
+
+      // Show More button handler
+      const showMoreBtn = document.getElementById('news-show-more-btn');
+      if (showMoreBtn) {
+        showMoreBtn.addEventListener('click', () => {
+          currentNewsPage++;
+          showMoreBtn.disabled = true;
+          showMoreBtn.innerHTML = '<i class="ri-loader-4-line animate-spin mr-2"></i>Loading...';
+          loadNews(currentNewsPage, true).then(() => {
+            showMoreBtn.disabled = false;
+            showMoreBtn.innerHTML = '<i class="ri-arrow-down-line mr-2"></i>Show More News';
+          });
+        });
+      }
+    });
+  </script>
+
+  <!-- Donation Menu Toggle Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const donationBtn = document.getElementById('donation-heart-btn');
+      const donationMenu = document.getElementById('donation-menu');
+
+      if (donationBtn && donationMenu) {
+        // Toggle menu on button click
+        donationBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          donationMenu.classList.toggle('profile-menu-hidden');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function (e) {
+          if (!donationMenu.contains(e.target) && !donationBtn.contains(e.target)) {
+            donationMenu.classList.add('profile-menu-hidden');
+          }
+        });
+
+        // Prevent menu from closing when clicking inside it
+        donationMenu.addEventListener('click', function (e) {
+          e.stopPropagation();
+        });
       }
     });
   </script>
