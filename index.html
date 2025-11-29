@@ -88,18 +88,19 @@
         </div>
       </div>
       <nav class="hidden md:flex items-center space-x-8">
-        <a href="#home" class="text-muted hover:text-white transition-colors header-effect font-bold">Home</a>
-        <a href="#skills" class="text-muted hover:text-white transition-colors font-bold">Skills</a>
-        <a href="#portfolio" class="text-muted hover:text-white transition-colors header-effect font-bold">Portfolio</a>
-        <a href="#store" class="text-muted hover:text-white transition-colors font-bold">Store</a>
-        <a href="#news" class="text-muted hover:text-white transition-colors font-bold">News</a>
-        <a href="#social" class="text-muted hover:text-white transition-colors header-effect font-bold">Social
+        <a href="#home" class="text-card-text hover:text-primary transition-colors header-effect font-bold">Home</a>
+        <a href="#skills" class="text-card-text hover:text-primary transition-colors font-bold">Skills</a>
+        <a href="#portfolio"
+          class="text-card-text hover:text-primary transition-colors header-effect font-bold">Portfolio</a>
+        <a href="#store" class="text-card-text hover:text-primary transition-colors font-bold">Store</a>
+        <a href="#news" class="text-card-text hover:text-primary transition-colors font-bold">News</a>
+        <a href="#social" class="text-card-text hover:text-primary transition-colors header-effect font-bold">Social
           Media</a>
-        <a href="#contact" class="text-muted hover:text-white transition-colors font-bold">Contact</a>
+        <a href="#contact" class="text-card-text hover:text-primary transition-colors font-bold">Contact</a>
       </nav>
       <div class="flex items-center space-x-4 font-bold">
         <a href="https://github.com/Vniverse77?tab=repositories" target="_blank"
-          class="flex items-center space-x-1 text-muted hover:text-white">
+          class="flex items-center space-x-1 text-card-text hover:text-primary transition-colors">
           <span class="w-6 h-6 flex items-center justify-center">
             <i class="ri-github-fill"></i>
           </span>
@@ -680,38 +681,32 @@
         <!-- GitHub Card -->
         <div class="bg-card rounded-lg p-6 card-hover">
           <div class="flex items-center mb-6">
-            <div class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-card rounded-full mr-4">
-              <i class="ri-github-fill text-xl md:text-2xl"></i>
+            <div class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-[#333]/20 rounded-full mr-4">
+              <i class="ri-github-fill text-xl md:text-2xl text-card-text"></i>
             </div>
             <div>
-              <h3 class="text-xl font-semibold">GitHub</h3>
+              <h3 class="text-xl font-semibold text-card-text">GitHub</h3>
               <a target="_blank" rel="noopener noreferrer" href="https://github.com/Vniverse77"
-                class="text-muted hover:text-primary">@Vniverse77</a>
+                class="text-muted hover:text-primary transition-colors">@Vniverse77</a>
             </div>
           </div>
-          <div class="mb-6">
-            <div class="flex justify-between mb-2">
-              <span>Repositories</span>
-              <span>13</span>
-            </div>
-            <div class="flex justify-between mb-2">
-              <span>Followers</span>
-              <span>16</span>
-            </div>
-            <div class="flex justify-between">
-              <span>Supports (This year)</span>
-              <span>8</span>
-            </div>
+          <div class="flex justify-between mb-2">
+            <span class="text-muted">Repositories</span>
+            <span class="font-bold text-card-text">15+</span>
+          </div>
+          <div class="flex justify-between mb-6">
+            <span class="text-muted">Contributions</span>
+            <span class="font-bold text-card-text">500+</span>
           </div>
           <div class="bg-card rounded p-4 mb-4">
             <div id="githubContributions" class="w-full h-32"></div>
           </div>
-          <a href="https://github.com/Vniverse77?tab=repositories" target="_blank" rel="noopener noreferrer"
-            class="bg-card hover:bg-primary/20 text-white w-full py-2 rounded-button font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap">
+          <a target="_blank" rel="noopener noreferrer" href="https://github.com/Vniverse77"
+            class="bg-black hover:bg-gray-800 text-white w-full py-2 rounded-button font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap">
             <span class="w-5 h-5 flex items-center justify-center mr-2">
               <i class="ri-github-fill"></i>
             </span>
-            <span>View Repos</span>
+            <span>Follow on GitHub</span>
           </a>
         </div>
         <!-- LinkedIn Card -->
@@ -960,7 +955,7 @@
               <div class="max-w-sm mx-auto">
                 <div class="space-y-4">
                   <a href="/login.html"
-                    class="bg-bg/50 hover:bg-bg/70 text-white px-6 py-3 rounded-button font-medium transition-all duration-300 w-full whitespace-nowrap flex items-center justify-center border border-white/10">
+                    class="bg-primary/10 hover:bg-primary/20 text-primary px-6 py-3 rounded-button font-medium transition-all duration-300 w-full whitespace-nowrap flex items-center justify-center border border-primary/20">
                     <i class="ri-mail-line mr-2"></i>
                     Login with Email
                   </a>
@@ -972,12 +967,64 @@
                 </div>
               </div>
             </div>
+
+            <!-- Donation Section (Visible when logged in) -->
+            <div id="contact-loggedin-container" class="hidden">
+              <div class="text-center space-y-6">
+                <div class="mb-6">
+                  <i class="ri-heart-fill text-4xl text-primary mb-4 block"></i>
+                  <h3 class="text-2xl font-bold text-card-text mb-2">Support My Work</h3>
+                  <p class="text-muted">Your support helps me create more amazing content and projects!</p>
+                </div>
+
+                <!-- IBAN Section -->
+                <div class="bg-card/50 rounded-lg p-4 border border-primary/20">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm text-muted">IBAN (Bank Transfer)</span>
+                    <button onclick="navigator.clipboard.writeText('TR49 0015 7000 0000 0201 0280 50')"
+                      class="text-primary hover:text-secondary transition-colors">
+                      <i class="ri-file-copy-line"></i>
+                    </button>
+                  </div>
+                  <code class="text-sm text-card-text font-mono block">TR49 0015 7000 0000 0201 0280 50</code>
+                </div>
+
+                <!-- BTC Section -->
+                <div class="bg-card/50 rounded-lg p-4 border border-primary/20">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm text-muted">Bitcoin (BTC)</span>
+                    <button onclick="navigator.clipboard.writeText('bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh')"
+                      class="text-primary hover:text-secondary transition-colors">
+                      <i class="ri-file-copy-line"></i>
+                    </button>
+                  </div>
+                  <code
+                    class="text-xs text-card-text font-mono block break-all">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</code>
+                </div>
+
+                <!-- Donation Links -->
+                <div class="grid grid-cols-2 gap-4">
+                  <a href="https://www.buymeacoffee.com/vniverse77" target="_blank" rel="noopener noreferrer"
+                    class="bg-[#FFDD00] hover:bg-[#FFDD00]/80 text-black px-4 py-3 rounded-button font-medium transition-all duration-300 flex items-center justify-center">
+                    <i class="ri-cup-fill mr-2"></i>
+                    <span class="text-sm">Buy Me a Coffee</span>
+                  </a>
+                  <a href="https://ko-fi.com/vniverse77" target="_blank" rel="noopener noreferrer"
+                    class="bg-[#FF5E5B] hover:bg-[#FF5E5B]/80 text-white px-4 py-3 rounded-button font-medium transition-all duration-300 flex items-center justify-center">
+                    <i class="ri-heart-fill mr-2"></i>
+                    <span class="text-sm">Ko-fi</span>
+                  </a>
+                </div>
+
+                <p class="text-xs text-muted mt-4">Thank you for your generosity! 🙏</p>
+              </div>
+            </div>
           </div>
 
           <!-- Right Column: Contact Information -->
           <div class="space-y-8">
             <div class="h-full flex flex-col justify-center">
-              <h3 class="text-xl font-semibold mb-6 text-white">Contact Information</h3>
+              <h3 class="text-xl font-semibold mb-6 text-card-text">Contact Information</h3>
               <div class="space-y-6">
                 <div class="flex items-start group">
                   <div
@@ -985,7 +1032,7 @@
                     <i class="ri-mail-line text-xl text-primary"></i>
                   </div>
                   <div>
-                    <h4 class="font-medium mb-1 text-white">E-mail</h4>
+                    <h4 class="font-medium mb-1 text-card-text">E-mail</h4>
                     <a href="mailto:justforcodigs@hotmail.com"
                       class="text-muted hover:text-primary transition-colors">justforcodings@hotmail.com</a>
                   </div>
@@ -996,7 +1043,7 @@
                     <i class="ri-map-pin-line text-xl text-primary"></i>
                   </div>
                   <div>
-                    <h4 class="font-medium mb-1 text-white">Location</h4>
+                    <h4 class="font-medium mb-1 text-card-text">Location</h4>
                     <p class="text-muted">Mary, Turkmenistan</p>
                   </div>
                 </div>
@@ -1006,7 +1053,7 @@
                     <i class="ri-time-line text-xl text-primary"></i>
                   </div>
                   <div>
-                    <h4 class="font-medium mb-1 text-white">Working times</h4>
+                    <h4 class="font-medium mb-1 text-card-text">Working times</h4>
                     <p class="text-muted">Weekends: 08:00 - 19:00
                       <br />
                       Weekdays: 14:00 - 20:00
@@ -1046,7 +1093,7 @@
             </a>
             <a href="https://x.com/Vniverse77" target="_blank" rel="noopener noreferrer"
               class="w-10 h-10 flex items-center justify-center bg-card rounded-full hover:bg-[#1DA1F2]/20 transition-colors">
-              <i class="ri-twitter-x-fill text-lg text-[#ffffff]"></i>
+              <i class="ri-twitter-fill text-lg text-[#1DA1F2]"></i>
             </a>
             <a href="https://discord.gg/qSvHgfwg" target="_blank" rel="noopener noreferrer"
               class="w-10 h-10 flex items-center justify-center bg-card rounded-full hover:bg-[#485cf0]/20 transition-colors">
@@ -1517,11 +1564,13 @@
         const loggedinContainer = document.getElementById('contact-loggedin-container');
 
         if (response.ok) {
-          // User is logged in
-          // Contact section is now static, no need to toggle
+          // User is logged in - show donation section
+          if (loginContainer) loginContainer.classList.add('hidden');
+          if (loggedinContainer) loggedinContainer.classList.remove('hidden');
         } else {
-          // User is not logged in
-          // Contact section is now static, no need to toggle
+          // User is not logged in - show login buttons
+          if (loginContainer) loginContainer.classList.remove('hidden');
+          if (loggedinContainer) loggedinContainer.classList.add('hidden');
         }
 
         if (response.ok) {
@@ -1579,7 +1628,6 @@
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
-    });
     });
   </script>
 
