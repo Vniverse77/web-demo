@@ -406,7 +406,7 @@ app.get('/api/nasa-images', async (req, res) => {
   ];
 
   try {
-    const apiKey = process.env.NASA_API_KEY || '';
+    const apiKey = process.env.NASA_API_KEY || 'iLWN39EZ2q8JNeh0j5bb2bGGxZaJKc2Ah0FjSQJa';
     const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=5`, {
       timeout: 5000
     });

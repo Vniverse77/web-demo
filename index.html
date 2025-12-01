@@ -92,7 +92,7 @@
         <a href="#skills" class="text-card-text hover:text-primary transition-colors font-bold">Skills</a>
         <a href="#portfolio"
           class="text-card-text hover:text-primary transition-colors header-effect font-bold">Portfolio</a>
-        <a href="#store" class="text-card-text hover:text-primary transition-colors font-bold">Store</a>
+        <a href="store.html" class="text-card-text hover:text-primary transition-colors font-bold">Store</a>
         <a href="#news" class="text-card-text hover:text-primary transition-colors font-bold">News</a>
         <a href="#social" class="text-card-text hover:text-primary transition-colors header-effect font-bold">Social
           Media</a>
@@ -685,39 +685,7 @@
     </div>
     <!-- News Section -->
   </section>
-  <!-- Store Section -->
-  <section id="store" class="py-20 relative">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 class="text-2xl md:text-4xl font-bold mb-4">Store</h2>
-        <p class="text-gray-400 max-w-2xl mx-auto">
-          Downloadable assets.
-        </p>
-      </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="bg-card rounded-lg overflow-hidden card-hover">
-          <div class="relative">
-            <img src="images/placeholder.png" alt="Placeholder Image" class="w-full h-56 object-cover" />
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-semibold mb-2">Placeholder Image</h3>
-            <p class="text-gray-400 mb-4">
-              A simple placeholder image.
-            </p>
-            <div class="flex justify-between items-center">
-              <a href="#contact" id="download-btn" class="text-primary hover:text-primary/80 inline-flex items-center">
-                <span>Download</span>
-                <span class="w-5 h-5 flex items-center justify-center ml-1">
-                  <i class="ri-download-2-line"></i>
-                </span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
   <section id="news" class="py-20 relative gradient-bg">
     <div class="container mx-auto px-6">
       <div class="text-center mb-16 relative">
@@ -727,9 +695,10 @@
         </p>
         <!-- Refresh Button -->
         <button id="news-refresh-btn"
-          class="absolute top-0 right-0 w-10 h-10 flex items-center justify-center bg-primary/20 hover:bg-primary/30 rounded-full transition-colors"
+          class="absolute top-0 right-0 flex items-center justify-center bg-primary/20 hover:bg-primary/30 rounded-full transition-colors px-4 py-2"
           title="Refresh News">
-          <i class="ri-refresh-line text-primary"></i>
+          <i class="ri-refresh-line text-primary mr-2"></i>
+          <span class="text-primary">Refresh</span>
         </button>
       </div>
 
@@ -1049,6 +1018,11 @@
                     class="bg-[#333] hover:bg-[#444] text-white px-6 py-3 rounded-button font-medium transition-all duration-300 w-full whitespace-nowrap flex items-center justify-center">
                     <i class="ri-github-fill mr-2"></i>
                     Login with GitHub
+                  </a>
+                  <a href="/auth/apple"
+                    class="bg-[#000] hover:bg-[#111] text-white px-6 py-3 rounded-button font-medium transition-all duration-300 w-full whitespace-nowrap flex items-center justify-center">
+                    <i class="ri-apple-fill mr-2"></i>
+                    Continue with Apple
                   </a>
                 </div>
               </div>
@@ -1808,6 +1782,7 @@
       const newsGrid = document.getElementById('news-grid');
       const showMoreContainer = document.getElementById('news-show-more-container');
       const refreshBtn = document.getElementById('news-refresh-btn');
+      const refreshIcon = refreshBtn ? refreshBtn.querySelector('i') : null;
 
       try {
         // Show loading state
@@ -1820,8 +1795,8 @@
           `;
         }
 
-        // Disable refresh button during load
         if (refreshBtn) refreshBtn.disabled = true;
+        if (refreshIcon) refreshIcon.classList.add('animate-spin');
 
         const response = await fetch(`/api/tech-news?page=${page}`);
         if (!response.ok) throw new Error('Failed to fetch news');
@@ -1853,9 +1828,6 @@
           showMoreContainer.classList.add('hidden');
         }
 
-        // Re-enable refresh button
-        if (refreshBtn) refreshBtn.disabled = false;
-
       } catch (error) {
         console.error('Failed to load news:', error);
         newsGrid.innerHTML = `
@@ -1865,7 +1837,9 @@
           </div>
         `;
         showMoreContainer.classList.add('hidden');
+      } finally {
         if (refreshBtn) refreshBtn.disabled = false;
+        if (refreshIcon) refreshIcon.classList.remove('animate-spin');
       }
     }
 
@@ -1878,10 +1852,7 @@
       if (refreshBtn) {
         refreshBtn.addEventListener('click', () => {
           currentNewsPage = 1;
-          refreshBtn.querySelector('i').classList.add('animate-spin');
-          loadNews(1).then(() => {
-            refreshBtn.querySelector('i').classList.remove('animate-spin');
-          });
+          loadNews(1);
         });
       }
 

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store - Vniverse77</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "var(--primary-color)",
+            secondary: "var(--secondary-color)",
+            bg: "var(--bg-color)",
+            card: "var(--card-bg)",
+            "card-text": "var(--card-text)",
+            "menu-bg": "var(--menu-bg)",
+            "menu-text": "var(--menu-text)",
+            muted: "var(--muted-text)"
+          },
+          borderRadius: {
+            none: "0px",
+            sm: "8px",
+            DEFAULT: "12px",
+            md: "16px",
+            lg: "20px",
+            xl: "24px",
+            "2xl": "28px",
+            "3xl": "32px",
+            full: "9999px",
+            button: "12px",
+          },
+        },
+      },
+    };
+  </script>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet" />
+</head>
+
+<body class="bg-bg text-card-text">
+    <header class="bg-card/90 backdrop-blur-md shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="/" class="logo text-2xl font-bold">Vniverse77</a>
+            <a href="/" class="text-card-text hover:text-primary transition-colors font-bold">Back to Home</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-20">
+        <div class="text-center mb-16">
+            <h1 class="text-4xl font-bold mb-4">Store</h1>
+            <p class="text-gray-400 max-w-2xl mx-auto">Downloadable assets.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-card rounded-lg overflow-hidden card-hover">
+                <div class="relative">
+                    <img src="images/placeholder.png" alt="Placeholder Image" class="w-full h-56 object-cover" />
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2">Placeholder Image</h3>
+                    <p class="text-gray-400 mb-4">
+                        A simple placeholder image.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <a href="/#contact" id="download-btn" class="text-primary hover:text-primary/80 inline-flex items-center">
+                            <span>Download</span>
+                            <span class="w-5 h-5 flex items-center justify-center ml-1">
+                                <i class="ri-download-2-line"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

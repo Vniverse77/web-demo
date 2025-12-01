@@ -4,6 +4,7 @@ const session = require('express-session');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const GitHubStrategy = require('passport-github2').Strategy;
+const AppleStrategy = require('passport-apple').Strategy;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const app = express();
@@ -16,6 +17,13 @@ const GOOGLE_CLIENT_SECRET = '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';
 // GitHub OAuth Credentials (replace with your actual credentials)
 const GITHUB_CLIENT_ID = 'YOUR_GITHUB_CLIENT_ID'; // Replace with your GitHub Client ID
 const GITHUB_CLIENT_SECRET = 'YOUR_GITHUB_CLIENT_SECRET'; // Replace with your GitHub Client Secret
+
+// Apple OAuth Credentials (replace with your actual credentials)
+const APPLE_CLIENT_ID = 'YOUR_APPLE_CLIENT_ID'; // Replace with your Apple Client ID
+const APPLE_TEAM_ID = 'YOUR_APPLE_TEAM_ID'; // Replace with your Apple Team ID
+const APPLE_KEY_ID = 'YOUR_APPLE_KEY_ID'; // Replace with your Apple Key ID
+const APPLE_PRIVATE_KEY_PATH = './AuthKey_YOURKEYID.p8'; // Path to your Apple private key file
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -109,6 +117,47 @@ passport.use(new GitHubStrategy({
   }
 ));
 
+// Passport Apple Strategy
+passport.use(new AppleStrategy({
+  clientID: APPLE_CLIENT_ID,
+  teamID: APPLE_TEAM_ID,
+  keyIdentifier: APPLE_KEY_ID,
+  privateKeyPath: APPLE_PRIVATE_KEY_PATH,
+  callbackURL: 'http://localhost:3000/auth/apple/callback',
+  passReqToCallback: true // Required for receiving user profile in callback
+},
+  async (req, accessToken, refreshToken, profile, done) => {
+    try {
+      const data = await fs.readFile('db.json', 'utf8');
+      const db = JSON.parse(data);
+
+      let user = db.users.find(u => u.appleId === profile.id);
+
+      if (!user) {
+        // If user doesn't exist, create a new one
+        user = {
+          appleId: profile.id,
+          name: profile.displayName || (profile.name ? `${profile.name.givenName} ${profile.name.familyName}` : null),
+          email: profile.emails ? profile.emails[0].value : null,
+          verified: true, // Apple authenticated users are considered verified
+          downloads: []
+        };
+        db.users.push(user);
+        await fs.writeFile('db.json', JSON.stringify(db, null, 2));
+      } else {
+        // Update user's info if it changed in Apple
+        user.name = profile.displayName || (profile.name ? `${profile.name.givenName} ${profile.name.familyName}` : user.name);
+        user.email = profile.emails ? profile.emails[0].value : user.email;
+        user.verified = true;
+        await fs.writeFile('db.json', JSON.stringify(db, null, 2));
+      }
+      return done(null, user);
+    } catch (error) {
+      return done(error, null);
+    }
+  }
+));
+
 
 // Serialize and deserialize user for session management
 passport.serializeUser((user, done) => {
@@ -141,12 +190,23 @@ app.get('/auth/github/callback',
     res.redirect('/');
   });
 
+// Apple OAuth routes
+app.get('/auth/apple', passport.authenticate('apple'));
+
+app.post('/auth/apple/callback',
+  express.urlencoded({ extended: true }), // Apple sends data as x-www-form-urlencoded
+  passport.authenticate('apple', { failureRedirect: '/' }),
+  (req, res) => {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
 // API endpoint to get current user information
 app.get('/api/user', (req, res) => {
   if (req.isAuthenticated()) {
     // Only send necessary user information, not the whole user object
     const user = {
-      id: req.user.googleId || req.user.githubId, // Use appropriate ID
+      id: req.user.googleId || req.user.githubId || req.user.appleId, // Use appropriate ID
       name: req.user.name,
       email: req.user.email,
       photo: req.user.photo || null // Include photo if available
