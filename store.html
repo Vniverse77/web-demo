@@ -25,7 +25,7 @@
             sm: "8px",
             DEFAULT: "12px",
             md: "16px",
-            lg: "20px",
+            lg": "20px",
             xl: "24px",
             "2xl": "28px",
             "3xl": "32px",
@@ -37,16 +37,147 @@
     };
   </script>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" type="png" href="images/Tux.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet" />
 </head>
 
 <body class="bg-bg text-card-text">
-    <header class="bg-card/90 backdrop-blur-md shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="/" class="logo text-2xl font-bold">Vniverse77</a>
-            <a href="/" class="text-card-text hover:text-primary transition-colors font-bold">Back to Home</a>
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 header-effect" id="header">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="relative">
+        <a href="/" class="logo" id="profile-menu-button">
+          <div id="profile-picture-container"
+            class="w-[50px] h-[50px] circular-image flex items-center justify-center bg-card text-muted overflow-hidden">
+            <i class="ri-user-3-line text-3xl"></i>
+          </div>
+        </a>
+        <div id="profile-menu"
+          class="absolute left-0 mt-2 w-48 bg-menu-bg text-menu-text rounded-md shadow-lg z-50 profile-menu-hidden">
+          <a href="/login.html" class="block px-4 py-2 text-sm text-muted hover:bg-primary hover:text-white">Log In</a>
+          <a href="/login.html?mode=signup"
+            class="block px-4 py-2 text-sm text-muted hover:bg-primary hover:text-white">Sign Up</a>
+          <div class="border-t border-gray-700 my-1"></div>
+          <button id="theme-toggle"
+            class="w-full text-left block px-4 py-2 text-sm text-muted hover:bg-primary hover:text-white flex items-center transition-colors">
+            <i id="theme-icon" class="ri-moon-line mr-2"></i>
+            <span id="theme-text">Dark Mode</span>
+          </button>
         </div>
-    </header>
+      </div>
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="/#home" class="text-card-text hover:text-primary transition-colors header-effect font-bold">Home</a>
+        <a href="/#skills" class="text-card-text hover:text-primary transition-colors font-bold">Skills</a>
+        <a href="/#portfolio"
+          class="text-card-text hover:text-primary transition-colors header-effect font-bold">Portfolio</a>
+        <a href="store.html" class="text-card-text hover:text-primary transition-colors font-bold">Store</a>
+        <a href="/#news" class="text-card-text hover:text-primary transition-colors font-bold">News</a>
+        <a href="/#social" class="text-card-text hover:text-primary transition-colors header-effect font-bold">Social
+          Media</a>
+        <a href="/#contact" class="text-card-text hover:text-primary transition-colors font-bold">Contact</a>
+      </nav>
+      <div class="flex items-center space-x-4 font-bold">
+        <a href="https://github.com/Vniverse77?tab=repositories" target="_blank"
+          class="flex items-center space-x-1 text-card-text hover:text-primary transition-colors">
+          <span class="w-6 h-6 flex items-center justify-center">
+            <i class="ri-github-fill"></i>
+          </span>
+          <span>GitHub Star</span>
+        </a>
+
+        <!-- Donation Heart Button -->
+        <div class="relative inline-block">
+          <button id="donation-heart-btn"
+            class="flex items-center space-x-1 text-card-text hover:text-primary transition-colors">
+            <span class="w-6 h-6 flex items-center justify-center">
+              <i class="ri-heart-fill text-red-500"></i>
+            </span>
+            <span>Support</span>
+          </button>
+
+          <!-- Donation Dropdown Menu -->
+          <div id="donation-menu"
+            class="profile-menu-hidden absolute right-0 mt-2 w-80 bg-menu-bg rounded-lg shadow-lg border border-white/10 overflow-hidden z-50">
+            <div class="p-4">
+              <h3 class="text-sm font-semibold text-card-text mb-3 flex items-center">
+                <i class="ri-heart-fill text-red-500 mr-2"></i>
+                Support My Work
+              </h3>
+
+              <!-- IBAN -->
+              <div class="bg-card/50 rounded-lg p-3 mb-3 border border-primary/20">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-xs text-muted">IBAN (Bank Transfer)</span>
+                  <button
+                    onclick="navigator.clipboard.writeText('TR49 0015 7000 0000 0201 0280 50'); this.innerHTML='<i class=&quot;ri-check-line&quot;></i>'; setTimeout(() => this.innerHTML='<i class=&quot;ri-file-copy-line&quot;></i>', 2000)"
+                    class="text-primary hover:text-secondary transition-colors">
+                    <i class="ri-file-copy-line"></i>
+                  </button>
+                </div>
+                <code class="text-xs text-card-text font-mono block">TR49 0015 7000 0000 0201 0280 50</code>
+              </div>
+
+              <!-- BTC -->
+              <div class="bg-card/50 rounded-lg p-3 mb-3 border border-primary/20">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-xs text-muted">Bitcoin (BTC)</span>
+                  <button
+                    onclick="navigator.clipboard.writeText('bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh'); this.innerHTML='<i class=&quot;ri-check-line&quot;></i>'; setTimeout(() => this.innerHTML='<i class=&quot;ri-file-copy-line&quot;></i>', 2000)"
+                    class="text-primary hover:text-secondary transition-colors">
+                    <i class="ri-file-copy-line"></i>
+                  </button>
+                </div>
+                <code
+                  class="text-xs text-card-text font-mono block break-all">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</code>
+              </div>
+
+              <!-- Donation Links -->
+              <div class="grid grid-cols-2 gap-2">
+                <a href="https://www.buymeacoffee.com/vniverse77" target="_blank" rel="noopener noreferrer"
+                  class="bg-[#FFDD00] hover:bg-[#FFDD00]/80 text-black px-3 py-2 rounded-button text-xs font-medium transition-all duration-300 flex items-center justify-center">
+                  <i class="ri-cup-fill mr-1"></i>
+                  Coffee
+                </a>
+                <a href="https://ko-fi.com/vniverse77" target="_blank" rel="noopener noreferrer"
+                  class="bg-[#FF5E5B] hover:bg-[#FF5E5B]/80 text-white px-3 py-2 rounded-button text-xs font-medium transition-all duration-300 flex items-center justify-center">
+                  <i class="ri-heart-fill mr-1"></i>
+                  Ko-fi
+                </a>
+              </div>
+
+              <p class="text-xs text-muted mt-3 text-center">Thank you! 🙏</p>
+            </div>
+          </div>
+        </div>
+
+        <button class="md:hidden w-10 h-10 rounded-full flex items-center justify-center bg-card text-card-text"
+          id="mobileMenuToggle">
+          <span class="w-6 h-6 flex items-center justify-center">
+            <i class="ri-menu-line"></i>
+          </span>
+        </button>
+      </div>
+    </div>
+    <!-- !!! Do not touch here Mobile toggle section is HERE -->
+    <div class="md:hidden bg-card absolute w-full transition-all duration-300 overflow-hidden" id="mobileMenu"
+      style="max-height: 0;">
+      <div class="container mx-auto px-6 py-4">
+        <nav class="flex flex-col space-y-4">
+          <a href="/#home" class="text-muted hover:text-white transition-colors py-2">Home</a>
+          <a href="/#skills" class="text-muted hover:text-white transition-colors py-2">Skills</a>
+          <a href="/#portfolio" class="text-muted hover:text-white transition-colors py-2">Portfolio</a>
+          <a href="store.html" class="text-muted hover:text-white transition-colors py-2">Store</a>
+          <a href="/#news" class="text-muted hover:text-white transition-colors">News</a>
+          <a href="/#social" class="text-muted hover:text-white transition-colors py-2">Social Media</a>
+          <a href="/#contact" class="text-muted hover:text-white transition-colors py-2">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
 
     <main class="container mx-auto px-6 py-20">
         <div class="text-center mb-16">
@@ -65,7 +196,7 @@
                         A simple placeholder image.
                     </p>
                     <div class="flex justify-between items-center">
-                        <a href="/#contact" id="download-btn" class="text-primary hover:text-primary/80 inline-flex items-center">
+                        <a href="/api/download/placeholder.png" id="download-btn" class="text-primary hover:text-primary/80 inline-flex items-center">
                             <span>Download</span>
                             <span class="w-5 h-5 flex items-center justify-center ml-1">
                                 <i class="ri-download-2-line"></i>
@@ -76,6 +207,353 @@
             </div>
         </div>
     </main>
+
+    <footer class="py-12 bg-card">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div>
+          <!-- Replace the text logo with your footer PNG -->
+          <a target="_blank" href="https://tmstart.me/face_of_dreams" class="logo mb-4 inline-block">
+            <!-- Replace 'your-footer-logo.png' with your PNG file path -->
+            <img src="images/Tux.png" alt="Footer Logo" class="w-32">
+          </a>
+          <p class="text-muted mb-6">
+            I serve creative software solutions & modern 3D designs.
+            Ready to bring your ideas to life with cutting-edge technology and design.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a target="_blank" rel="noopener noreferrer" href="https://github.com/Vniverse77"
+              class="w-10 h-10 flex items-center justify-center bg-card rounded-full hover:bg-primary/20 transition-colors">
+              <i class="ri-github-fill text-lg"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/berdimuhammet-yslamow-b7900a319/" target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 flex items-center justify-center bg-card rounded-full hover:bg-[#0077B5]/20 transition-colors">
+              <i class="ri-linkedin-fill text-lg text-[#0077B5]"></i>
+            </a>
+            <a href="https://x.com/Vniverse77" target="_blank" rel="noopener noreferrer"
+              class="w-10 h-10 flex items-center justify-center bg-card rounded-full hover:bg-[#1DA1F2]/20 transition-colors">
+              <i class="ri-twitter-fill text-lg text-[#1DA1F2]"></i>
+            </a>
+            <a href="https://discord.gg/qSvHgfwg" target="_blank" rel="noopener noreferrer"
+              class="w-10 h-10 flex items-center justify-center bg-card rounded-full hover:bg-[#485cf0]/20 transition-colors">
+              <i class="ri-discord-fill text-lg text-[#1f38ee]"></i>
+            </a>
+            <a href="https://t.me/linux_community_by_vniverse77" target="_blank" rel="noopener noreferrer"
+              class="w-10 h-10 flex items-center justify-center bg-card rounded-full hover:bg-[#004677]/20 transition-colors">
+              <i class="ri-telegram-fill text-lg text-[#0984dc]"></i>
+            </a>
+            <a href="https://open.spotify.com/playlist/2Nrn8p6wkoZH2IUDbVIEnl" target="_blank" rel="noopener noreferrer"
+              class="w-10 h-10 flex items-center justify-center bg-card rounded-full hover:bg-[#1DB954]/20 transition-colors">
+              <i class="ri-spotify-fill text-lg text-[#1DB954]"></i>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+          <ul class="space-y-3">
+            <li>
+              <a href="/#home" class="text-muted hover:text-white transition-colors">Home</a>
+            </li>
+            <li>
+              <a href="/#skills" class="text-muted hover:text-white transition-colors">Skills</a>
+            </li>
+            <li>
+              <a href="/#portfolio" class="text-muted hover:text-white transition-colors">Portfolio</a>
+            </li>
+            <li>
+              <a href="/#news" class="text-muted hover:text-white transition-colors">News</a>
+            </li>
+            <li>
+              <a href="/#social" class="text-muted hover:text-white transition-colors">Social Media</a>
+            </li>
+
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-6">Services</h4>
+          <ul class="space-y-3">
+            <li>
+              <a href="#" class="text-muted hover:text-white transition-colors">Web Development</a>
+            </li>
+            <li>
+              <a href="#" class="text-muted hover:text-white transition-colors">Mobile Application</a>
+            </li>
+            <li>
+              <a href="#" class="text-muted hover:text-white transition-colors">3D Modelling</a>
+            </li>
+            <li>
+              <a href="#" class="text-muted hover:text-white transition-colors">UI/UX Design</a>
+            </li>
+            <li>
+              <a href="mailto:berdimuhammet0770@outlook.com"
+                  class="text-muted hover:text-white transition-colors">Consultancy</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-6">Contact</h4>
+          <ul class="space-y-3">
+            <li class="flex items-center">
+              <span class="w-5 h-5 flex items-center justify-center mr-2">
+                <i class="ri-mail-line"></i>
+              </span>
+              <a target="_blank" rel="noopener noreferrer" href="mailto:justforcodings@hotmail.com"
+                class="text-muted hover:text-white transition-colors">justforcodings@hotmail.com</a>
+            </li>
+            <li class="flex items-center">
+              <span class="w-5 h-5 flex items-center justify-center mr-2">
+                <i class="ri-map-pin-line"></i>
+              </span>
+              <span class="text-muted hover:text-white transition-colors"><a target="_blank" rel="noopener noreferrer"
+                  href="https://www.google.com/maps/place/Mary,+Turkmenistan/@37.6041845,61.7990462,13z/data=!4m6!3m5!1s0x3f418e242a6088b7:0x945f91c717829ac3!8m2!3d37.6092461!4d61.8643252!16zL2m/MDN3ZDMx?entry=ttu&g_ep=EgoyMDI1MDUyOC4wIKXMDSoASAFQAw%3D%3D">Mary,
+                  Turkmenistan</a></span>
+            </li>
+            <li class="flex items-center">
+              <span class="w-5 h-5 flex items-center justify-center mr-2">
+                <i class="ri-time-line"></i>
+              </span>
+              <span class="text-muted">UTC+05 (Ashgabat)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-muted text-sm mb-4 md:mb-0 text-center md:text-left">
+          &copy; 2025 Face of Dreams. All rights reserved.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 md:gap-6">
+          <a href="#" class="text-muted hover:text-white text-sm">Privacy Policy</a>
+          <a href="#" class="text-muted hover:text-white text-sm">Terms of Use</a>
+          <a href="#" class="text-muted hover:text-white text-sm">Cookie Policy</a>
+          <a href="mailto:justforcodings@hotmail.com" class="text-muted hover:text-white text-sm">Feedback</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script id="headerScript">
+    document.addEventListener("DOMContentLoaded", function () {
+      const header = document.getElementById("header");
+      const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+      const mobileMenu = document.getElementById("mobileMenu");
+
+      // Profile Menu Logic
+      const profileMenuButton = document.getElementById("profile-menu-button");
+      const profileMenu = document.getElementById("profile-menu");
+
+      if (profileMenuButton && profileMenu) {
+        profileMenuButton.addEventListener("click", function (e) {
+          e.preventDefault();
+          profileMenu.classList.toggle("profile-menu-hidden");
+        });
+
+        document.addEventListener("click", function (e) {
+          if (!profileMenu.contains(e.target) && !profileMenuButton.contains(e.target)) {
+            profileMenu.classList.add("profile-menu-hidden");
+          }
+        });
+      }
+
+      // Scroll event for header
+      window.addEventListener("scroll", function () {
+        if (window.scrollY > 50) {
+          header.classList.add("bg-card/90", "backdrop-blur-md", "shadow-lg");
+        } else {
+          header.classList.remove(
+            "bg-card/90",
+            "backdrop-blur-md",
+            "shadow-lg"
+          );
+        }
+      });
+      // Mobile menu toggle
+      mobileMenuToggle.addEventListener("click", function () {
+        if (
+          mobileMenu.style.maxHeight === "0px" ||
+          mobileMenu.style.maxHeight === ""
+        ) {
+          mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
+          mobileMenuToggle.querySelector("i").classList.remove("ri-menu-line");
+          mobileMenuToggle.querySelector("i").classList.add("ri-close-line");
+        } else {
+          mobileMenu.style.maxHeight = "0px";
+          mobileMenuToggle.querySelector("i").classList.remove("ri-close-line");
+          mobileMenuToggle.querySelector("i").classList.add("ri-menu-line");
+        }
+      });
+      // Close mobile menu on link click
+      const mobileMenuLinks = mobileMenu.querySelectorAll("a");
+      mobileMenuLinks.forEach((link) => {
+        link.addEventListener("click", function () {
+          mobileMenu.style.maxHeight = "0px";
+          mobileMenuToggle.querySelector("i").classList.remove("ri-close-line");
+          mobileMenuToggle.querySelector("i").classList.add("ri-menu-line");
+        });
+      });
+    });
+  </script>
+  <script id="smoothScrollScript">
+    document.addEventListener("DOMContentLoaded", function () {
+      // Smooth scroll for navigation links
+      const navLinks = document.querySelectorAll('a[href^="#"]');
+      navLinks.forEach((link) => {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute("href");
+          if (targetId === "#") return;
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            const headerHeight = document.getElementById("header").offsetHeight;
+            const targetPosition =
+              targetElement.getBoundingClientRect().top +
+              window.pageYOffset -
+              headerHeight;
+            window.scrollTo({
+              top: targetPosition,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+    });
+  </script>
+  <script id="user-profile-script">
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Theme Toggle Logic
+      const body = document.body;
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        body.classList.add('light-mode');
+      }
+
+      const toggleTheme = () => {
+        body.classList.toggle('light-mode');
+        const isLight = body.classList.contains('light-mode');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        updateThemeIcon(isLight);
+      };
+
+      const updateThemeIcon = (isLight) => {
+        const themeIcon = document.getElementById('theme-icon');
+        const themeText = document.getElementById('theme-text');
+        if (themeIcon) {
+          themeIcon.className = isLight ? 'ri-moon-line mr-2' : 'ri-sun-line mr-2';
+        }
+        if (themeText) {
+          themeText.textContent = isLight ? 'Dark Mode' : 'Light Mode';
+        }
+      };
+
+      try {
+        const response = await fetch('/api/user');
+        const profileMenu = document.getElementById('profile-menu');
+
+        // Common Theme Toggle Button HTML
+        const themeToggleHtml = `
+          <button id="theme-toggle" class="w-full text-left block px-4 py-2 text-sm text-muted hover:bg-primary hover:text-white flex items-center transition-colors">
+            <i id="theme-icon" class="${body.classList.contains('light-mode') ? 'ri-moon-line' : 'ri-sun-line'} mr-2"></i>
+            <span id="theme-text">${body.classList.contains('light-mode') ? 'Dark Mode' : 'Light Mode'}</span>
+          </button>
+        `;
+
+        // Handle Contact Section Visibility
+        const loginContainer = document.getElementById('contact-login-container');
+        const loggedinContainer = document.getElementById('contact-loggedin-container');
+
+        if (response.ok) {
+          // User is logged in - show donation section
+          if (loginContainer) loginContainer.classList.add('hidden');
+          if (loggedinContainer) loggedinContainer.classList.remove('hidden');
+        } else {
+          // User is not logged in - show login buttons
+          if (loginContainer) loginContainer.classList.remove('hidden');
+          if (loggedinContainer) loggedinContainer.classList.add('hidden');
+        }
+
+        if (response.ok) {
+          const user = await response.json();
+          const profileContainer = document.getElementById('profile-picture-container');
+          if (profileContainer && user.photo) {
+            profileContainer.innerHTML = `<img src="${user.photo}" alt="Profile" class="w-full h-full object-cover">`;
+          } else if (profileContainer) {
+            if (user.photo) {
+              profileContainer.innerHTML = `<img src="${user.photo}" alt="Profile" class="w-full h-full object-cover">`;
+            } else {
+              profileContainer.innerHTML = `<img src="images/Tux.png" alt="Profile" class="w-full h-full object-cover">`;
+            }
+          }
+
+          // User is logged in, show Log Out + Theme Toggle
+          if (profileMenu) {
+            profileMenu.innerHTML = `
+                <div class="px-4 py-2 text-sm text-muted border-b border-gray-700">
+                  ${user.name || 'User'}
+                </div>
+                <a href="/logout" class="block px-4 py-2 text-sm text-muted hover:bg-primary hover:text-white">Log Out</a>
+                <div class="border-t border-gray-700 my-1"></div>
+                ${themeToggleHtml}
+              `;
+          }
+        } else {
+          // User is not logged in, show Log In / Sign Up + Theme Toggle
+          if (profileMenu) {
+            profileMenu.innerHTML = `
+                <a href="/login.html" class="block px-4 py-2 text-sm text-muted hover:bg-primary hover:text-white">Log In</a>
+                <a href="/login.html?mode=signup" class="block px-4 py-2 text-sm text-muted hover:bg-primary hover:text-white">Sign Up</a>
+                <div class="border-t border-gray-700 my-1"></div>
+                ${themeToggleHtml}
+              `;
+          }
+        }
+
+        // Event Delegation for Theme Toggle
+        if (profileMenu) {
+          profileMenu.addEventListener('click', (e) => {
+            const toggleBtn = e.target.closest('#theme-toggle');
+            if (toggleBtn) {
+              e.preventDefault();
+              e.stopPropagation();
+              toggleTheme();
+            }
+          });
+        }
+
+        // Initial Icon Update
+        const isLight = body.classList.contains('light-mode');
+        updateThemeIcon(isLight);
+
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    });
+  </script>
+  <script id="donation-menu-toggle-script">
+    document.addEventListener('DOMContentLoaded', function () {
+      const donationBtn = document.getElementById('donation-heart-btn');
+      const donationMenu = document.getElementById('donation-menu');
+
+      if (donationBtn && donationMenu) {
+        // Toggle menu on button click
+        donationBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          donationMenu.classList.toggle('profile-menu-hidden');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function (e) {
+          if (!donationMenu.contains(e.target) && !donationBtn.contains(e.target)) {
+            donationMenu.classList.add('profile-menu-hidden');
+          }
+        });
+
+        // Prevent menu from closing when clicking inside it
+        donationMenu.addEventListener('click', function (e) {
+          e.stopPropagation();
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>

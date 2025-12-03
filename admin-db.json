@@ -1,1 +1,8 @@
-{}
+{
+  "admins": [
+    {
+      "username": "admin",
+      "password": "$2b$10$RUOjuJzrxAv74AVG58dlZeNXGadbJRxSXiEF8A3jhK5XY19KpZeae"
+    }
+  ]
+}

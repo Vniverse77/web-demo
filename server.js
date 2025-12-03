@@ -6,6 +6,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const GitHubStrategy = require('passport-github2').Strategy;
 const AppleStrategy = require('passport-apple').Strategy;
 const jwt = require('jsonwebtoken');
+// Parolaları güvenli bir şekilde şifrelemek (hash'lemek) için bcrypt kütüphanesini dahil et
 const bcrypt = require('bcrypt');
 const app = express();
 const port = 3000;
@@ -173,10 +174,11 @@ app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/' }),
+  passport.authenticate('google', { failureRedirect: '/login.html?error=auth_failed' }),
   (req, res) => {
-    // Successful authentication, redirect to a success page or directly download
-    res.redirect('/download-success'); // We'll create this page
+    const returnTo = req.session.returnTo;
+    delete req.session.returnTo;
+    res.redirect(returnTo || '/');
   });
 
 // GitHub OAuth routes
@@ -184,10 +186,11 @@ app.get('/auth/github',
   passport.authenticate('github', { scope: ['user:email'] }));
 
 app.get('/auth/github/callback',
-  passport.authenticate('github', { failureRedirect: '/' }),
+  passport.authenticate('github', { failureRedirect: '/login.html?error=auth_failed' }),
   (req, res) => {
-    // Successful authentication, redirect home.
-    res.redirect('/');
+    const returnTo = req.session.returnTo;
+    delete req.session.returnTo;
+    res.redirect(returnTo || '/');
   });
 
 // Apple OAuth routes
@@ -195,10 +198,11 @@ app.get('/auth/apple', passport.authenticate('apple'));
 
 app.post('/auth/apple/callback',
   express.urlencoded({ extended: true }), // Apple sends data as x-www-form-urlencoded
-  passport.authenticate('apple', { failureRedirect: '/' }),
+  passport.authenticate('apple', { failureRedirect: '/login.html?error=auth_failed' }),
   (req, res) => {
-    // Successful authentication, redirect home.
-    res.redirect('/');
+    const returnTo = req.session.returnTo;
+    delete req.session.returnTo;
+    res.redirect(returnTo || '/');
   });
 
 // API endpoint to get current user information
@@ -251,17 +255,27 @@ app.get('/api/download/:itemId', async (req, res) => {
   const { itemId } = req.params;
 
   if (!req.isAuthenticated()) {
-    return res.status(403).send('You must be logged in with Google to download this file.');
+    // Save the original URL to redirect back after login
+    req.session.returnTo = req.originalUrl;
+    // Redirect to the login page
+    return res.redirect('/login.html');
   }
 
   try {
     const data = await fs.readFile('db.json', 'utf8');
     const db = JSON.parse(data);
 
-    const user = db.users.find(u => u.googleId === req.user.googleId);
+    let user;
+    if (req.user.googleId) {
+      user = db.users.find(u => u.googleId === req.user.googleId);
+    } else if (req.user.githubId) {
+        user = db.users.find(u => u.githubId === req.user.githubId);
+    } else if (req.user.appleId) {
+        user = db.users.find(u => u.appleId === req.user.appleId);
+    }
 
     if (!user || !user.verified) {
-      return res.status(403).send('Your Google account is not verified (this should not happen with Google login).');
+      return res.status(403).send('Your account is not verified.');
     }
 
     if (user.downloads.includes(itemId)) {
@@ -295,10 +309,12 @@ eval(`import('lowdb')`).then(({ Low, JSONFileSync }) => {
 
 
   // Create a default admin user if one doesn't exist
-  if (!db.data.admins.find(admin => admin.username === 'admin')) {
+  if (!db.data.admins.find(admin => admin.username === 'Muhammet')) {
+    // Parolayı şifrelemek için bir "salt" (rastgele bir veri) oluştur. Bu, aynı parolaların bile farklı şifrelenmiş sonuçlar vermesini sağlar.
     const salt = bcrypt.genSaltSync(10);
-    const hashedPassword = bcrypt.hashSync('admin', salt);
-    db.data.admins.push({ username: 'admin', password: hashedPassword });
+    // Parolayı 'salt' ile birleştirip şifrele (hash'le).
+    const hashedPassword = bcrypt.hashSync('CachyOS', salt);
+    db.data.admins.push({ username: 'Muhammet', password: hashedPassword });
     db.write();
   }
 
@@ -309,6 +325,7 @@ eval(`import('lowdb')`).then(({ Low, JSONFileSync }) => {
     const { username, password } = req.body;
     const admin = db.data.admins.find(admin => admin.username === username);
 
+    // Kullanıcının girdiği parolayı (password) veritabanındaki şifrelenmiş parola (admin.password) ile karşılaştır.
     if (admin && bcrypt.compareSync(password, admin.password)) {
       const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '1h' });
       res.json({ token });
