@@ -87,7 +87,7 @@
           </button>
         </div>
       </div>
-      <nav class="hidden md:flex items-center space-x-8">
+      <nav class="hidden md:flex items-center space-x-8 adaptive-text">
         <a href="#home" class="text-card-text hover:text-primary transition-colors header-effect font-bold">Home</a>
         <a href="#skills" class="text-card-text hover:text-primary transition-colors font-bold">Skills</a>
         <a href="#portfolio"
@@ -100,7 +100,7 @@
       </nav>
       <div class="flex items-center space-x-4 font-bold">
         <a href="https://github.com/Vniverse77?tab=repositories" target="_blank"
-          class="flex items-center space-x-1 text-card-text hover:text-primary transition-colors">
+          class="flex items-center space-x-1 text-card-text hover:text-primary transition-colors adaptive-text">
           <span class="w-6 h-6 flex items-center justify-center">
             <i class="ri-github-fill"></i>
           </span>
@@ -110,7 +110,7 @@
         <!-- Donation Heart Button -->
         <div class="relative inline-block">
           <button id="donation-heart-btn"
-            class="flex items-center space-x-1 text-card-text hover:text-primary transition-colors">
+            class="flex items-center space-x-1 text-card-text hover:text-primary transition-colors adaptive-text">
             <span class="w-6 h-6 flex items-center justify-center">
               <i class="ri-heart-fill text-red-500"></i>
             </span>
@@ -153,13 +153,34 @@
                   class="text-xs text-card-text font-mono block break-all">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</code>
               </div>
 
+              <!-- USD IBAN -->
+              <div class="bg-card/50 rounded-lg p-3 mb-3 border border-primary/20">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-xs text-muted">USD (Transfer)</span>
+                  <button
+                    onclick="navigator.clipboard.writeText('TR16 0015 7000 0000 0201 2220 62'); this.innerHTML='<i class=&quot;ri-check-line&quot;></i>'; setTimeout(() => this.innerHTML='<i class=&quot;ri-file-copy-line&quot;></i>', 2000)"
+                    class="text-primary hover:text-secondary transition-colors">
+                    <i class="ri-file-copy-line"></i>
+                  </button>
+                </div>
+                <code class="text-xs text-card-text font-mono block">TR16 0015 7000 0000 0201 2220 62</code>
+              </div>
+
+              <!-- EUR IBAN -->
+              <div class="bg-card/50 rounded-lg p-3 mb-3 border border-primary/20">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-xs text-muted">EUR (Transfer)</span>
+                  <button
+                    onclick="navigator.clipboard.writeText('TR04 0015 7000 0000 0201 2220 84'); this.innerHTML='<i class=&quot;ri-check-line&quot;></i>'; setTimeout(() => this.innerHTML='<i class=&quot;ri-file-copy-line&quot;></i>', 2000)"
+                    class="text-primary hover:text-secondary transition-colors">
+                    <i class="ri-file-copy-line"></i>
+                  </button>
+                </div>
+                <code class="text-xs text-card-text font-mono block">TR04 0015 7000 0000 0201 2220 84</code>
+              </div>
+
               <!-- Donation Links -->
-              <div class="grid grid-cols-2 gap-2">
-                <a href="https://www.buymeacoffee.com/vniverse77" target="_blank" rel="noopener noreferrer"
-                  class="bg-[#FFDD00] hover:bg-[#FFDD00]/80 text-black px-3 py-2 rounded-button text-xs font-medium transition-all duration-300 flex items-center justify-center">
-                  <i class="ri-cup-fill mr-1"></i>
-                  Coffee
-                </a>
+              <div class="grid grid-cols-1 gap-2">
                 <a href="https://ko-fi.com/vniverse77" target="_blank" rel="noopener noreferrer"
                   class="bg-[#FF5E5B] hover:bg-[#FF5E5B]/80 text-white px-3 py-2 rounded-button text-xs font-medium transition-all duration-300 flex items-center justify-center">
                   <i class="ri-heart-fill mr-1"></i>
@@ -172,7 +193,8 @@
           </div>
         </div>
 
-        <button class="md:hidden w-10 h-10 rounded-full flex items-center justify-center bg-card text-card-text"
+        <button
+          class="md:hidden w-10 h-10 rounded-full flex items-center justify-center bg-card text-card-text adaptive-text"
           id="mobileMenuToggle">
           <span class="w-6 h-6 flex items-center justify-center">
             <i class="ri-menu-line"></i>
@@ -209,18 +231,18 @@
       <!-- Add Navigation (Removed) -->
     </div>
     <!-- Overlay for readability -->
-    <div class="absolute inset-0 z-0 bg-black/60 pointer-events-none"></div>
+    <div class="absolute inset-0 z-0 bg-black/10 pointer-events-none"></div>
     <div class="container mx-auto px-6 z-10">
       <div class="flex flex-col md:flex-row items-center">
         <div class="w-full  md:w-1/2 mb-10 md:mb-0">
           <div class="mb-4 inline-block">
             <span class="bg-primary/25 text-primary px-7 py-3 rounded-full text-sm font-medium">Hello, I'm</span>
           </div>
-          <h1 class="text-3xl md:text-6xl font-bold mb-4">Vniverse77</h1>
-          <h2 class="text-xl md:text-3xl font-semibold mb-6 gradient-text">
+          <h1 class="text-3xl md:text-6xl font-bold mb-4 adaptive-text">Vniverse77</h1>
+          <h2 class="text-xl md:text-3xl font-semibold mb-6 gradient-text adaptive-text">
             Creative Developer & 3D Designer
           </h2>
-          <p class="text-gray-400  mb-8 max-w-lg">
+          <p class="text-gray-400  mb-8 max-w-lg adaptive-text">
             With 3 years of software development experience and a passion for
             3D modeling, I create innovative solutions in the digital world.
             I'm ready to transform your vision into reality using
@@ -690,13 +712,13 @@
     <div class="container mx-auto px-6">
       <div class="text-center mb-16">
         <div class="relative flex flex-col md:flex-row justify-center items-center mb-4">
-            <h2 class="text-2xl md:text-4xl font-bold mb-2 md:mb-0">Latest Technology News</h2>
-            <button id="news-refresh-btn"
-              class="md:absolute md:top-0 md:right-0 flex items-center justify-center bg-primary/20 hover:bg-primary/30 rounded-full transition-colors px-4 py-2"
-              title="Refresh News">
-              <i class="ri-refresh-line text-primary mr-2"></i>
-              <span class="text-primary">Refresh</span>
-            </button>
+          <h2 class="text-2xl md:text-4xl font-bold mb-2 md:mb-0">Latest Technology News</h2>
+          <button id="news-refresh-btn"
+            class="md:absolute md:top-0 md:right-0 flex items-center justify-center bg-primary/20 hover:bg-primary/30 rounded-full transition-colors px-4 py-2"
+            title="Refresh News">
+            <i class="ri-refresh-line text-primary mr-2"></i>
+            <span class="text-primary">Refresh</span>
+          </button>
         </div>
         <p class="text-muted max-w-2xl mx-auto">
           Stay updated with the latest news and trends in technology
@@ -1799,10 +1821,26 @@
         if (refreshBtn) refreshBtn.disabled = true;
         if (refreshIcon) refreshIcon.classList.add('animate-spin');
 
-        const response = await fetch(`/api/tech-news?page=${page}`);
+        // Artificial minimum delay for better UX
+        const delayPromise = new Promise(resolve => setTimeout(resolve, 800));
+
+        // Add timestamp to prevent caching
+        const responsePromise = fetch(`/api/tech-news?page=${page}&t=${Date.now()}`);
+
+        const [_, response] = await Promise.all([delayPromise, responsePromise]);
+
         if (!response.ok) throw new Error('Failed to fetch news');
 
         const data = await response.json();
+
+        // Shuffle articles to simulate "refresh" if the content is static
+        // This is a requested feature to make the refresh button feel more responsive
+        if (data.articles && data.articles.length > 0) {
+          for (let i = data.articles.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [data.articles[i], data.articles[j]] = [data.articles[j], data.articles[i]];
+          }
+        }
 
         if (append) {
           allNewsArticles = [...allNewsArticles, ...data.articles];

@@ -6,7 +6,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const GitHubStrategy = require('passport-github2').Strategy;
 const AppleStrategy = require('passport-apple').Strategy;
 const jwt = require('jsonwebtoken');
-// Parolaları güvenli bir şekilde şifrelemek (hash'lemek) için bcrypt kütüphanesini dahil et
+
 const bcrypt = require('bcrypt');
 const app = express();
 const port = 3000;
@@ -223,7 +223,7 @@ app.get('/api/user', (req, res) => {
 
 // Logout route
 app.get('/logout', (req, res, next) => {
-  req.logout(function(err) {
+  req.logout(function (err) {
     if (err) { return next(err); }
     res.redirect('/');
   });
@@ -269,9 +269,9 @@ app.get('/api/download/:itemId', async (req, res) => {
     if (req.user.googleId) {
       user = db.users.find(u => u.googleId === req.user.googleId);
     } else if (req.user.githubId) {
-        user = db.users.find(u => u.githubId === req.user.githubId);
+      user = db.users.find(u => u.githubId === req.user.githubId);
     } else if (req.user.appleId) {
-        user = db.users.find(u => u.appleId === req.user.appleId);
+      user = db.users.find(u => u.appleId === req.user.appleId);
     }
 
     if (!user || !user.verified) {
@@ -299,70 +299,6 @@ app.get('/api/download/:itemId', async (req, res) => {
 });
 
 
-// Admin Database
-eval(`import('lowdb')`).then(({ Low, JSONFileSync }) => {
-  const adapter = new JSONFileSync('admin-db.json');
-  const db = new Low(adapter);
-  db.read();
-  db.data = db.data || { admins: [] };
-  db.write();
-
-
-  // Create a default admin user if one doesn't exist
-  if (!db.data.admins.find(admin => admin.username === 'Muhammet')) {
-    // Parolayı şifrelemek için bir "salt" (rastgele bir veri) oluştur. Bu, aynı parolaların bile farklı şifrelenmiş sonuçlar vermesini sağlar.
-    const salt = bcrypt.genSaltSync(10);
-    // Parolayı 'salt' ile birleştirip şifrele (hash'le).
-    const hashedPassword = bcrypt.hashSync('CachyOS', salt);
-    db.data.admins.push({ username: 'Muhammet', password: hashedPassword });
-    db.write();
-  }
-
-  const JWT_SECRET = 'your_jwt_secret'; // Replace with a strong secret
-
-  // Admin login route
-  app.post('/login', (req, res) => {
-    const { username, password } = req.body;
-    const admin = db.data.admins.find(admin => admin.username === username);
-
-    // Kullanıcının girdiği parolayı (password) veritabanındaki şifrelenmiş parola (admin.password) ile karşılaştır.
-    if (admin && bcrypt.compareSync(password, admin.password)) {
-      const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '1h' });
-      res.json({ token });
-    } else {
-      res.status(401).send('Invalid credentials');
-    }
-  });
-
-  // Middleware to verify token
-  const verifyToken = (req, res, next) => {
-    const token = req.headers['authorization'];
-    if (token) {
-      jwt.verify(token, JWT_SECRET, (err, decoded) => {
-        if (err) {
-          return res.status(401).send('Invalid token');
-        }
-        req.decoded = decoded;
-        next();
-      });
-    } else {
-      res.status(401).send('No token provided');
-    }
-  };
-
-  // Protected admin route
-  app.get('/api/admin/users', verifyToken, async (req, res) => {
-    try {
-      const data = await fs.readFile('db.json', 'utf8');
-      const db = JSON.parse(data);
-      res.json(db.users);
-    } catch (error) {
-      res.status(500).send('An error occurred.');
-    }
-  });
-
-  app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`);
-  });
-
+app.listen(port, () => {
+  console.log(`Server listening at http://localhost:${port}`);
 });

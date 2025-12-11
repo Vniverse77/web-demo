@@ -309,65 +309,7 @@ app.get('/api/download/:itemId', async (req, res) => {
   }
 });
 
-// Admin Database
-const adminDbPath = 'admin-db.json';
 
-async function initializeAdminDb() {
-  try {
-    await fs.access(adminDbPath);
-  } catch (error) {
-    const salt = bcrypt.genSaltSync(10);
-    const hashedPassword = bcrypt.hashSync('admin', salt);
-    const defaultAdmin = { admins: [{ username: 'admin', password: hashedPassword }] };
-    await fs.writeFile(adminDbPath, JSON.stringify(defaultAdmin, null, 2));
-  }
-}
-
-initializeAdminDb();
-
-const JWT_SECRET = 'your_jwt_secret'; // Replace with a strong secret
-
-// Admin login route
-app.post('/login', async (req, res) => {
-  const { username, password } = req.body;
-  const adminDbRaw = await fs.readFile(adminDbPath, 'utf8');
-  const adminDb = JSON.parse(adminDbRaw);
-  const admin = adminDb.admins.find(admin => admin.username === username);
-
-  if (admin && bcrypt.compareSync(password, admin.password)) {
-    const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '1h' });
-    res.json({ token });
-  } else {
-    res.status(401).send('Invalid credentials');
-  }
-});
-
-// Middleware to verify token
-const verifyToken = (req, res, next) => {
-  const token = req.headers['authorization'];
-  if (token) {
-    jwt.verify(token, JWT_SECRET, (err, decoded) => {
-      if (err) {
-        return res.status(401).send('Invalid token');
-      }
-      req.decoded = decoded;
-      next();
-    });
-  } else {
-    res.status(401).send('No token provided');
-  }
-};
-
-// Protected admin route
-app.get('/api/admin/users', verifyToken, async (req, res) => {
-  try {
-    const data = await fs.readFile('db.json', 'utf8');
-    const db = JSON.parse(data);
-    res.json(db.users);
-  } catch (error) {
-    res.status(500).send('An error occurred.');
-  }
-});
 
 // NASA API Route with Fallback
 app.get('/api/nasa-images', async (req, res) => {

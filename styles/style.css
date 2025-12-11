@@ -88,11 +88,16 @@
   }
 
   /* Mobile adjustments for donation menu */
+
   #donation-menu {
-    left: 5%;
-    right: auto;
+    position: fixed;
+    top: 85px;
+    left: 0;
+    right: 0;
     width: 90%;
-    transform: none;
+    max-width: 400px;
+    margin: 0 auto;
+    z-index: 60;
   }
 
   /* Reduce padding and margins on cards */
@@ -124,6 +129,7 @@
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -131,6 +137,7 @@
 .line-clamp-3 {
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -580,6 +587,19 @@ input[type="number"]::-webkit-outer-spin-button {
 
   .h-80 {
     height: 16rem;
+  }
+
+  /* Adaptive Text Utility */
+  .adaptive-text {
+    color: #9ca3af !important;
+    /* Light Gray (Gray-400) visible on both dark/light to some extent */
+    transition: color 0.3s ease;
+  }
+
+  /* Ensure adaptive text applies to icons inside */
+  .adaptive-text i {
+    color: #9ca3af !important;
+    transition: color 0.3s ease;
   }
 
   .md\:w-96 {
